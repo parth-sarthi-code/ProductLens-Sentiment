@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import re
 import time
 from typing import List, Optional, Union
-from pathlib import Path
 
 from productlens.schemas import (
     AspectMention,
@@ -14,10 +14,46 @@ from productlens.aspects.extractor import AspectExtractor
 from productlens.sentiment.pipeline import ProductLensMoEPipeline
 
 
+def extract_evidence_snippet(text: str, start_char: int, end_char: int, max_length: int = 160) -> str:
+    """
+    Self-extracts the surrounding sentence, line, or clause containing the target aspect.
+    """
+    delimiters = [".", "!", "?", "\n", ";"]
+
+    # Locate sentence left boundary
+    left = 0
+    for d in delimiters:
+        pos = text.rfind(d, 0, start_char)
+        if pos != -1 and pos + 1 > left:
+            left = pos + 1
+
+    # Locate sentence right boundary
+    right = len(text)
+    for d in delimiters:
+        pos = text.find(d, end_char)
+        if pos != -1 and pos + 1 < right:
+            right = pos + 1
+
+    snippet = text[left:right].strip()
+
+    # Fallback to local window if snippet is empty or excessively long
+    if not snippet:
+        snippet = text[max(0, start_char - 40) : min(len(text), end_char + 40)].strip()
+    elif len(snippet) > max_length:
+        s_local = max(0, start_char - 60)
+        e_local = min(len(text), end_char + 60)
+        prefix = "..." if s_local > 0 else ""
+        suffix = "..." if e_local < len(text) else ""
+        snippet = f"{prefix}{text[s_local:e_local].strip()}{suffix}"
+
+    return snippet
+
+
 class ProductLensEngine:
     """
     Unified Production Facade for ProductLens.
-    Coordinates aspect extraction, MoE routing, and aspect-targeted sentiment analysis.
+    Coordinates aspect extraction, evidence snippet extraction,
+    MoE routing, and aspect-targeted sentiment analysis.
     """
 
     def __init__(
@@ -40,28 +76,27 @@ class ProductLensEngine:
         aspects: Optional[List[str]] = None,
     ) -> ReviewAnalysisReport:
         """
-        Analyzes a customer review text end-to-end.
-
-        Args:
-            text: Raw customer review text.
-            category: Optional Amazon/e-commerce category (e.g. 'Electronics', 'Clothing').
-            aspects: Optional list of explicit aspect terms to evaluate (if pre-extracted).
-
-        Returns:
-            ReviewAnalysisReport with per-aspect sentiment, confidence, and expert routing.
+        Analyzes a customer review text end-to-end, extracting aspect terms,
+        evidence clauses, and routed sentiment predictions.
         """
         start_time = time.perf_counter()
 
         # Step 1: Aspect extraction (if not explicitly provided)
         if aspects:
-            aspect_mentions = [
-                AspectMention(aspect=asp, start_char=0, end_char=len(asp), confidence=1.0)
-                for asp in aspects
-            ]
+            aspect_mentions: List[AspectMention] = []
+            for asp in aspects:
+                match = re.search(r"\b" + re.escape(asp) + r"\b", text, re.IGNORECASE)
+                if match:
+                    s_c, e_c = match.start(), match.end()
+                else:
+                    idx = text.lower().find(asp.lower())
+                    s_c = idx if idx != -1 else 0
+                    e_c = s_c + len(asp) if idx != -1 else len(text)
+                aspect_mentions.append(AspectMention(aspect=asp, start_char=s_c, end_char=e_c, confidence=1.0))
         else:
             aspect_mentions = self.extractor.extract_aspects(text)
 
-        # Fallback if no specific aspect detected: evaluate the entire review as an overarching aspect
+        # Fallback if no specific aspect detected
         if not aspect_mentions:
             aspect_mentions = [
                 AspectMention(
@@ -72,7 +107,7 @@ class ProductLensEngine:
                 )
             ]
 
-        # Step 2: Predict sentiment for each aspect
+        # Step 2: Predict sentiment & extract evidence for each aspect
         results: List[AspectSentimentResult] = []
         pos_count, neg_count, neu_count = 0, 0, 0
 
@@ -84,6 +119,9 @@ class ProductLensEngine:
                 aspect_start=mention.start_char,
                 aspect_end=mention.end_char,
             )
+
+            # Self-extract evidence snippet
+            evidence = extract_evidence_snippet(text, mention.start_char, mention.end_char)
 
             if pred.sentiment == "positive":
                 pos_count += 1
@@ -97,6 +135,7 @@ class ProductLensEngine:
                     aspect=mention.aspect,
                     start_char=mention.start_char,
                     end_char=mention.end_char,
+                    evidence_snippet=evidence,
                     sentiment=pred.sentiment,
                     confidence=pred.confidence,
                     probabilities=pred.probabilities,

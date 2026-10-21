@@ -22,10 +22,11 @@ class SentimentPrediction(BaseModel):
 
 
 class AspectSentimentResult(BaseModel):
-    """Coupled aspect mention and its predicted sentiment."""
+    """Coupled aspect mention, self-extracted evidence clause, and predicted sentiment."""
     aspect: str
     start_char: int
     end_char: int
+    evidence_snippet: str = Field(default="", description="Self-extracted sentence or clause providing evidence for this aspect")
     sentiment: str
     confidence: float
     probabilities: Dict[str, float]

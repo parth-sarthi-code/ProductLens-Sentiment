@@ -1,0 +1,248 @@
+[
+  {
+    "database": "Tech Hardware (Laptop14)",
+    "category": "Electronics",
+    "review_text": "Boot time is super fast , around anywhere from 35 seconds to 1 minute . The keyboard is backlit and keys have good travel , but the touchpad feels sticky .",
+    "summary_sentiment": "mixed",
+    "execution_time_ms": 1084.34,
+    "aspect_results": [
+      {
+        "aspect": "Boot time",
+        "start_char": 0,
+        "end_char": 9,
+        "evidence_snippet": "Boot time is super fast , around anywhere from 35 seconds to 1 minute .",
+        "sentiment": "positive",
+        "confidence": 0.9980929493904114,
+        "probabilities": {
+          "positive": 0.9980929493904114,
+          "neutral": 0.001229703426361084,
+          "negative": 0.0006773762288503349
+        },
+        "routed_expert": "tech",
+        "routing_reason": "metadata_match:tech"
+      },
+      {
+        "aspect": "keyboard",
+        "start_char": 76,
+        "end_char": 84,
+        "evidence_snippet": "The keyboard is backlit and keys have good travel , but the touchpad feels sticky .",
+        "sentiment": "positive",
+        "confidence": 0.9952184557914734,
+        "probabilities": {
+          "positive": 0.9952184557914734,
+          "neutral": 0.00392296863719821,
+          "negative": 0.0008585592731833458
+        },
+        "routed_expert": "tech",
+        "routing_reason": "metadata_match:tech"
+      },
+      {
+        "aspect": "touchpad",
+        "start_char": 132,
+        "end_char": 140,
+        "evidence_snippet": "The keyboard is backlit and keys have good travel , but the touchpad feels sticky .",
+        "sentiment": "negative",
+        "confidence": 0.99089115858078,
+        "probabilities": {
+          "positive": 0.005938985850661993,
+          "neutral": 0.003169809700921178,
+          "negative": 0.99089115858078
+        },
+        "routed_expert": "tech",
+        "routing_reason": "metadata_match:tech"
+      }
+    ]
+  },
+  {
+    "database": "Home Electronics (Television)",
+    "category": "Home_and_Kitchen",
+    "review_text": "very good, cast screen working properly, best sound and picture quality. Remote sensor has slight lag though.",
+    "summary_sentiment": "mixed",
+    "execution_time_ms": 1311.58,
+    "aspect_results": [
+      {
+        "aspect": "cast screen",
+        "start_char": 11,
+        "end_char": 22,
+        "evidence_snippet": "very good, cast screen working properly, best sound and picture quality.",
+        "sentiment": "positive",
+        "confidence": 0.9976416826248169,
+        "probabilities": {
+          "positive": 0.9976416826248169,
+          "neutral": 0.0015165306394919753,
+          "negative": 0.0008417243952862918
+        },
+        "routed_expert": "home",
+        "routing_reason": "metadata_match:home"
+      },
+      {
+        "aspect": "sound",
+        "start_char": 46,
+        "end_char": 51,
+        "evidence_snippet": "very good, cast screen working properly, best sound and picture quality.",
+        "sentiment": "positive",
+        "confidence": 0.9971370697021484,
+        "probabilities": {
+          "positive": 0.9971370697021484,
+          "neutral": 0.001832650974392891,
+          "negative": 0.0010302490554749966
+        },
+        "routed_expert": "home",
+        "routing_reason": "metadata_match:home"
+      },
+      {
+        "aspect": "picture quality",
+        "start_char": 56,
+        "end_char": 71,
+        "evidence_snippet": "very good, cast screen working properly, best sound and picture quality.",
+        "sentiment": "positive",
+        "confidence": 0.9978740215301514,
+        "probabilities": {
+          "positive": 0.9978740215301514,
+          "neutral": 0.0014705059584230185,
+          "negative": 0.000655394745990634
+        },
+        "routed_expert": "home",
+        "routing_reason": "metadata_match:home"
+      },
+      {
+        "aspect": "Remote sensor",
+        "start_char": 73,
+        "end_char": 86,
+        "evidence_snippet": "Remote sensor has slight lag though.",
+        "sentiment": "negative",
+        "confidence": 0.9973917007446289,
+        "probabilities": {
+          "positive": 0.0011888946173712611,
+          "neutral": 0.0014193888055160642,
+          "negative": 0.9973917007446289
+        },
+        "routed_expert": "home",
+        "routing_reason": "metadata_match:home"
+      }
+    ]
+  },
+  {
+    "database": "Apparel & Fashion (T-Shirt)",
+    "category": "Clothing_Shoes_and_Jewelry",
+    "review_text": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
+    "summary_sentiment": "mixed",
+    "execution_time_ms": 885.87,
+    "aspect_results": [
+      {
+        "aspect": "cloth",
+        "start_char": 0,
+        "end_char": 5,
+        "evidence_snippet": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
+        "sentiment": "positive",
+        "confidence": 0.9627572894096375,
+        "probabilities": {
+          "positive": 0.9627572894096375,
+          "neutral": 0.014097344130277634,
+          "negative": 0.023145370185375214
+        },
+        "routed_expert": "apparel",
+        "routing_reason": "metadata_match:apparel"
+      },
+      {
+        "aspect": "colored dye",
+        "start_char": 69,
+        "end_char": 80,
+        "evidence_snippet": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
+        "sentiment": "negative",
+        "confidence": 0.980888307094574,
+        "probabilities": {
+          "positive": 0.003506582463160157,
+          "neutral": 0.015605141408741474,
+          "negative": 0.980888307094574
+        },
+        "routed_expert": "apparel",
+        "routing_reason": "metadata_match:apparel"
+      },
+      {
+        "aspect": "collar",
+        "start_char": 97,
+        "end_char": 103,
+        "evidence_snippet": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
+        "sentiment": "negative",
+        "confidence": 0.97675621509552,
+        "probabilities": {
+          "positive": 0.003514722688123584,
+          "neutral": 0.019729088991880417,
+          "negative": 0.97675621509552
+        },
+        "routed_expert": "apparel",
+        "routing_reason": "metadata_match:apparel"
+      }
+    ]
+  },
+  {
+    "database": "MAMS Challenge (Universal Multi-Aspect)",
+    "category": null,
+    "review_text": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
+    "summary_sentiment": "mixed",
+    "execution_time_ms": 682.76,
+    "aspect_results": [
+      {
+        "aspect": "food",
+        "start_char": 4,
+        "end_char": 8,
+        "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
+        "sentiment": "positive",
+        "confidence": 0.9771585464477539,
+        "probabilities": {
+          "positive": 0.9771585464477539,
+          "neutral": 0.01920592039823532,
+          "negative": 0.003635588800534606
+        },
+        "routed_expert": "fallback",
+        "routing_reason": "mams_foundation_fallback"
+      },
+      {
+        "aspect": "appetizers",
+        "start_char": 33,
+        "end_char": 43,
+        "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
+        "sentiment": "positive",
+        "confidence": 0.9902979731559753,
+        "probabilities": {
+          "positive": 0.9902979731559753,
+          "neutral": 0.007140045054256916,
+          "negative": 0.0025619524531066418
+        },
+        "routed_expert": "fallback",
+        "routing_reason": "mams_foundation_fallback"
+      },
+      {
+        "aspect": "wait staff",
+        "start_char": 66,
+        "end_char": 76,
+        "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
+        "sentiment": "negative",
+        "confidence": 0.9972847700119019,
+        "probabilities": {
+          "positive": 0.0016916765598580241,
+          "neutral": 0.001023622346110642,
+          "negative": 0.9972847700119019
+        },
+        "routed_expert": "fallback",
+        "routing_reason": "mams_foundation_fallback"
+      },
+      {
+        "aspect": "noise level",
+        "start_char": 101,
+        "end_char": 112,
+        "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
+        "sentiment": "negative",
+        "confidence": 0.9965788722038269,
+        "probabilities": {
+          "positive": 0.0020210882648825645,
+          "neutral": 0.0014000965747982264,
+          "negative": 0.9965788722038269
+        },
+        "routed_expert": "fallback",
+        "routing_reason": "mams_foundation_fallback"
+      }
+    ]
+  }
+]
