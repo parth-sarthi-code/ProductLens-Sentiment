@@ -1,0 +1,26 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Test caches
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Model Checkpoints (>100MB blocked by GitHub without LFS)
+*.pt
+*.bin
+*.safetensors
+models/checkpoints/
+models/category_experts/*/*.pt
+
+# Logs & temp
+*.log
+.DS_Store

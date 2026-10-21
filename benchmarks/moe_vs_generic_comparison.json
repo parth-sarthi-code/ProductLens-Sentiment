@@ -1,0 +1,113 @@
+{
+  "Generic Foundation (MAMS)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 71.79,
+      "macro_f1": 70.03,
+      "ece": 15.49
+    },
+    "Television (Home)": {
+      "accuracy": 79.09,
+      "macro_f1": 66.44,
+      "ece": 11.55
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 87.5,
+      "macro_f1": 65.27,
+      "ece": 5.86
+    },
+    "MAMS Challenge": {
+      "accuracy": 84.21,
+      "macro_f1": 83.79,
+      "ece": 8.83
+    },
+    "E-Commerce Composite": 79.46
+  },
+  "Tech Specialist (Laptop14)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 84.17,
+      "macro_f1": 81.14,
+      "ece": 11.98
+    },
+    "Television (Home)": {
+      "accuracy": 88.85,
+      "macro_f1": 69.49,
+      "ece": 9.16
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 93.22,
+      "macro_f1": 69.33,
+      "ece": 5.98
+    },
+    "MAMS Challenge": {
+      "accuracy": 73.43,
+      "macro_f1": 73.57,
+      "ece": 21.67
+    },
+    "E-Commerce Composite": 88.75
+  },
+  "Home Specialist (Television)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 80.88,
+      "macro_f1": 76.98,
+      "ece": 14.38
+    },
+    "Television (Home)": {
+      "accuracy": 89.81,
+      "macro_f1": 76.48,
+      "ece": 7.9
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 93.01,
+      "macro_f1": 71.77,
+      "ece": 5.42
+    },
+    "MAMS Challenge": {
+      "accuracy": 68.26,
+      "macro_f1": 68.08,
+      "ece": 25.35
+    },
+    "E-Commerce Composite": 87.9
+  },
+  "Apparel Specialist (T-Shirt)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 78.68,
+      "macro_f1": 75.59,
+      "ece": 8.71
+    },
+    "Television (Home)": {
+      "accuracy": 87.26,
+      "macro_f1": 69.67,
+      "ece": 4.93
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 94.07,
+      "macro_f1": 70.38,
+      "ece": 2.56
+    },
+    "MAMS Challenge": {
+      "accuracy": 77.92,
+      "macro_f1": 77.94,
+      "ece": 12.12
+    },
+    "E-Commerce Composite": 86.67
+  },
+  "ProductLens MoE Unified System": {
+    "Laptop14 (Tech)": {
+      "accuracy": 84.17,
+      "macro_f1": 81.14
+    },
+    "Television (Home)": {
+      "accuracy": 89.81,
+      "macro_f1": 76.48
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 94.07,
+      "macro_f1": 70.38
+    },
+    "MAMS Challenge": {
+      "accuracy": 82.71,
+      "macro_f1": 82.38
+    },
+    "E-Commerce Composite": 89.35
+  }
+}

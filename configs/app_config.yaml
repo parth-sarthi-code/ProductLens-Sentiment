@@ -1,0 +1,27 @@
+# ProductLens Sentiment Analysis Platform Configuration
+
+environment: production
+device: auto  # 'auto', 'cuda', or 'cpu'
+
+models:
+  backbone: "roberta-base"
+  aspect_boost: 3.5
+  lazy_load: true
+  checkpoints:
+    tech: "models/category_experts/expert_tech/best_model.pt"
+    home: "models/category_experts/expert_home/best_model.pt"
+    apparel: "models/category_experts/expert_apparel/best_model.pt"
+    beauty: "models/category_experts/foundation_mams/best_model.pt"
+    fallback: "models/category_experts/foundation_mams/best_model.pt"
+
+aspect_extraction:
+  min_length: 2
+  max_length: 35
+  max_candidates_per_review: 15
+  confidence_threshold: 0.50
+
+api:
+  title: "ProductLens Aspect-Based Sentiment Analysis Engine"
+  version: "1.0.0"
+  host: "0.0.0.0"
+  port: 8000
