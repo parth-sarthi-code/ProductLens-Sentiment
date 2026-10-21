@@ -1,0 +1,828 @@
+{
+  "review_text": "Good laptop at this price range\n\n1.Gaming (8/10)\nI played\nGenshin (max graphics 60fps)\nElden ring (max + rtx off 60fps)\nDying light 1 (max+rtx on 70+fps)\nWitcher 3 (max+rtx low 70-75 fps, max + rtx high 50-60 fps)\nValorant (max 144-200fps)\nOverwatch 2 (max 70+fps)\n\n2.Display is very great and video quality at peak beacuse of 2k res , but mine has more screen bleeding and i got one dead pixel (my fault because I didn't notice before).\n\n3.speaker (7/10)\nAverage speaker\n\n4.Heating (7/10)\nHeat management is average\nWhen I play games at high graphics it goes upto 90-95\u00b0 sometimes at max fan speed. (Not a big deal,heating in normal in all gaming laptops)\n\n5.keyboard and touch pad (4/10)\nTbh worst keyboard and touch pad at this price and low quality.\nNow some keys are already started to not work.\n\nMAIN THING\n\n6.battery (4/10)\nWorst battery life not even 90 minutes of playing or streaming videos. (Not a big problem because gaming laptops need active charging)\n\nConclusion : good laptop at this price (8/10)\n\n*IF YOU ARE GOING TO BUY* Then don't forget to check if it has more screen bleeding. (All LCD displays have screen bleeding and it's common but buy which has the slightest screen bleeding)\nMine has more screen bleeding in all four sides but only noticeable in dark room",
+  "auto_extracted_aspects": [
+    {
+      "aspect": "graphics",
+      "start_char": 71,
+      "end_char": 79,
+      "sentiment": "neutral",
+      "confidence": 0.9412811398506165,
+      "probabilities": {
+        "positive": 0.03317142277956009,
+        "neutral": 0.9412811398506165,
+        "negative": 0.025547415018081665
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "Display",
+      "start_char": 268,
+      "end_char": 275,
+      "sentiment": "positive",
+      "confidence": 0.9711601138114929,
+      "probabilities": {
+        "positive": 0.9711601138114929,
+        "neutral": 0.014655103906989098,
+        "negative": 0.014184746891260147
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "screen",
+      "start_char": 354,
+      "end_char": 360,
+      "sentiment": "negative",
+      "confidence": 0.9403831362724304,
+      "probabilities": {
+        "positive": 0.010300948284566402,
+        "neutral": 0.0493159182369709,
+        "negative": 0.9403831362724304
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "Heat",
+      "start_char": 490,
+      "end_char": 494,
+      "sentiment": "negative",
+      "confidence": 0.6314871311187744,
+      "probabilities": {
+        "positive": 0.037388548254966736,
+        "neutral": 0.3311242461204529,
+        "negative": 0.6314871311187744
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "graphics",
+      "start_char": 543,
+      "end_char": 551,
+      "sentiment": "neutral",
+      "confidence": 0.9061614871025085,
+      "probabilities": {
+        "positive": 0.02882763184607029,
+        "neutral": 0.9061614871025085,
+        "negative": 0.06501085311174393
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "fan",
+      "start_char": 589,
+      "end_char": 592,
+      "sentiment": "neutral",
+      "confidence": 0.4924381971359253,
+      "probabilities": {
+        "positive": 0.026895932853221893,
+        "neutral": 0.4924381971359253,
+        "negative": 0.4806658625602722
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "speed",
+      "start_char": 593,
+      "end_char": 598,
+      "sentiment": "negative",
+      "confidence": 0.6411657929420471,
+      "probabilities": {
+        "positive": 0.02925199270248413,
+        "neutral": 0.32958218455314636,
+        "negative": 0.6411657929420471
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "keyboard",
+      "start_char": 660,
+      "end_char": 668,
+      "sentiment": "negative",
+      "confidence": 0.9080103039741516,
+      "probabilities": {
+        "positive": 0.012179652228951454,
+        "neutral": 0.07981003075838089,
+        "negative": 0.9080103039741516
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "keyboard",
+      "start_char": 700,
+      "end_char": 708,
+      "sentiment": "negative",
+      "confidence": 0.9752838015556335,
+      "probabilities": {
+        "positive": 0.010407466441392899,
+        "neutral": 0.014308684505522251,
+        "negative": 0.9752838015556335
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "battery",
+      "start_char": 816,
+      "end_char": 823,
+      "sentiment": "neutral",
+      "confidence": 0.5184462666511536,
+      "probabilities": {
+        "positive": 0.21750499308109283,
+        "neutral": 0.5184462666511536,
+        "negative": 0.2640487551689148
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "battery life",
+      "start_char": 837,
+      "end_char": 849,
+      "sentiment": "neutral",
+      "confidence": 0.5184462666511536,
+      "probabilities": {
+        "positive": 0.21750499308109283,
+        "neutral": 0.5184462666511536,
+        "negative": 0.2640487551689148
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "screen",
+      "start_char": 1082,
+      "end_char": 1088,
+      "sentiment": "neutral",
+      "confidence": 0.5184462666511536,
+      "probabilities": {
+        "positive": 0.21750499308109283,
+        "neutral": 0.5184462666511536,
+        "negative": 0.2640487551689148
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "screen",
+      "start_char": 1122,
+      "end_char": 1128,
+      "sentiment": "neutral",
+      "confidence": 0.5184462666511536,
+      "probabilities": {
+        "positive": 0.21750499308109283,
+        "neutral": 0.5184462666511536,
+        "negative": 0.2640487551689148
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "screen",
+      "start_char": 1186,
+      "end_char": 1192,
+      "sentiment": "neutral",
+      "confidence": 0.5184462666511536,
+      "probabilities": {
+        "positive": 0.21750499308109283,
+        "neutral": 0.5184462666511536,
+        "negative": 0.2640487551689148
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    },
+    {
+      "aspect": "screen",
+      "start_char": 1217,
+      "end_char": 1223,
+      "sentiment": "neutral",
+      "confidence": 0.5184462666511536,
+      "probabilities": {
+        "positive": 0.21750499308109283,
+        "neutral": 0.5184462666511536,
+        "negative": 0.2640487551689148
+      },
+      "routed_expert": "tech",
+      "routing_reason": "metadata_match:tech"
+    }
+  ],
+  "summary_sentiment": "mixed",
+  "target_aspect_comparison": [
+    {
+      "aspect": "Gaming",
+      "expected_human": "positive",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "neutral",
+          "confidence": 0.9502,
+          "probabilities": {
+            "positive": 0.023,
+            "neutral": 0.9502,
+            "negative": 0.0268
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "neutral",
+          "confidence": 0.5518,
+          "probabilities": {
+            "positive": 0.4302,
+            "neutral": 0.5518,
+            "negative": 0.018
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "positive",
+          "confidence": 0.9389,
+          "probabilities": {
+            "positive": 0.9389,
+            "neutral": 0.0423,
+            "negative": 0.0188
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "neutral",
+          "confidence": 0.5447,
+          "probabilities": {
+            "positive": 0.3336,
+            "neutral": 0.5447,
+            "negative": 0.1216
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "neutral",
+          "confidence": 0.5518,
+          "probabilities": {
+            "positive": 0.4302,
+            "neutral": 0.5518,
+            "negative": 0.018
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "Display",
+      "expected_human": "positive",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "positive",
+          "confidence": 0.933,
+          "probabilities": {
+            "positive": 0.933,
+            "neutral": 0.0375,
+            "negative": 0.0296
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "positive",
+          "confidence": 0.9712,
+          "probabilities": {
+            "positive": 0.9712,
+            "neutral": 0.0147,
+            "negative": 0.0142
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "positive",
+          "confidence": 0.9641,
+          "probabilities": {
+            "positive": 0.9641,
+            "neutral": 0.0205,
+            "negative": 0.0154
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "positive",
+          "confidence": 0.7762,
+          "probabilities": {
+            "positive": 0.7762,
+            "neutral": 0.0914,
+            "negative": 0.1325
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "positive",
+          "confidence": 0.9712,
+          "probabilities": {
+            "positive": 0.9712,
+            "neutral": 0.0147,
+            "negative": 0.0142
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "screen bleeding",
+      "expected_human": "negative",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "negative",
+          "confidence": 0.8848,
+          "probabilities": {
+            "positive": 0.0116,
+            "neutral": 0.1035,
+            "negative": 0.8848
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "negative",
+          "confidence": 0.9536,
+          "probabilities": {
+            "positive": 0.0082,
+            "neutral": 0.0381,
+            "negative": 0.9536
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "negative",
+          "confidence": 0.9845,
+          "probabilities": {
+            "positive": 0.0031,
+            "neutral": 0.0124,
+            "negative": 0.9845
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.9171,
+          "probabilities": {
+            "positive": 0.0106,
+            "neutral": 0.0723,
+            "negative": 0.9171
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "negative",
+          "confidence": 0.9536,
+          "probabilities": {
+            "positive": 0.0082,
+            "neutral": 0.0381,
+            "negative": 0.9536
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "dead pixel",
+      "expected_human": "negative",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "negative",
+          "confidence": 0.9527,
+          "probabilities": {
+            "positive": 0.0073,
+            "neutral": 0.04,
+            "negative": 0.9527
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "negative",
+          "confidence": 0.9597,
+          "probabilities": {
+            "positive": 0.0067,
+            "neutral": 0.0336,
+            "negative": 0.9597
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "negative",
+          "confidence": 0.9859,
+          "probabilities": {
+            "positive": 0.003,
+            "neutral": 0.0111,
+            "negative": 0.9859
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.9279,
+          "probabilities": {
+            "positive": 0.0087,
+            "neutral": 0.0634,
+            "negative": 0.9279
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "negative",
+          "confidence": 0.9597,
+          "probabilities": {
+            "positive": 0.0067,
+            "neutral": 0.0336,
+            "negative": 0.9597
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "speaker",
+      "expected_human": "neutral",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "neutral",
+          "confidence": 0.7598,
+          "probabilities": {
+            "positive": 0.0255,
+            "neutral": 0.7598,
+            "negative": 0.2148
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "neutral",
+          "confidence": 0.7471,
+          "probabilities": {
+            "positive": 0.0409,
+            "neutral": 0.7471,
+            "negative": 0.2119
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "neutral",
+          "confidence": 0.8481,
+          "probabilities": {
+            "positive": 0.0319,
+            "neutral": 0.8481,
+            "negative": 0.12
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.7563,
+          "probabilities": {
+            "positive": 0.0247,
+            "neutral": 0.219,
+            "negative": 0.7563
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "neutral",
+          "confidence": 0.7471,
+          "probabilities": {
+            "positive": 0.0409,
+            "neutral": 0.7471,
+            "negative": 0.2119
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "Heating",
+      "expected_human": "neutral",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "negative",
+          "confidence": 0.5313,
+          "probabilities": {
+            "positive": 0.029,
+            "neutral": 0.4397,
+            "negative": 0.5313
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "neutral",
+          "confidence": 0.5334,
+          "probabilities": {
+            "positive": 0.0339,
+            "neutral": 0.5334,
+            "negative": 0.4327
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "neutral",
+          "confidence": 0.7888,
+          "probabilities": {
+            "positive": 0.0164,
+            "neutral": 0.7888,
+            "negative": 0.1948
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.8063,
+          "probabilities": {
+            "positive": 0.0232,
+            "neutral": 0.1705,
+            "negative": 0.8063
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "neutral",
+          "confidence": 0.5334,
+          "probabilities": {
+            "positive": 0.0339,
+            "neutral": 0.5334,
+            "negative": 0.4327
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "keyboard",
+      "expected_human": "negative",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "negative",
+          "confidence": 0.6132,
+          "probabilities": {
+            "positive": 0.0377,
+            "neutral": 0.3491,
+            "negative": 0.6132
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "negative",
+          "confidence": 0.908,
+          "probabilities": {
+            "positive": 0.0122,
+            "neutral": 0.0798,
+            "negative": 0.908
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "negative",
+          "confidence": 0.9847,
+          "probabilities": {
+            "positive": 0.0063,
+            "neutral": 0.009,
+            "negative": 0.9847
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.8967,
+          "probabilities": {
+            "positive": 0.0163,
+            "neutral": 0.087,
+            "negative": 0.8967
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "negative",
+          "confidence": 0.908,
+          "probabilities": {
+            "positive": 0.0122,
+            "neutral": 0.0798,
+            "negative": 0.908
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "touch pad",
+      "expected_human": "negative",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "negative",
+          "confidence": 0.7801,
+          "probabilities": {
+            "positive": 0.0307,
+            "neutral": 0.1892,
+            "negative": 0.7801
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "negative",
+          "confidence": 0.9589,
+          "probabilities": {
+            "positive": 0.0089,
+            "neutral": 0.0322,
+            "negative": 0.9589
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "negative",
+          "confidence": 0.9878,
+          "probabilities": {
+            "positive": 0.0056,
+            "neutral": 0.0065,
+            "negative": 0.9878
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.9214,
+          "probabilities": {
+            "positive": 0.0144,
+            "neutral": 0.0643,
+            "negative": 0.9214
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "negative",
+          "confidence": 0.9589,
+          "probabilities": {
+            "positive": 0.0089,
+            "neutral": 0.0322,
+            "negative": 0.9589
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "battery",
+      "expected_human": "negative",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "neutral",
+          "confidence": 0.51,
+          "probabilities": {
+            "positive": 0.1758,
+            "neutral": 0.51,
+            "negative": 0.3143
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "neutral",
+          "confidence": 0.5184,
+          "probabilities": {
+            "positive": 0.2175,
+            "neutral": 0.5184,
+            "negative": 0.264
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "neutral",
+          "confidence": 0.4808,
+          "probabilities": {
+            "positive": 0.1685,
+            "neutral": 0.4808,
+            "negative": 0.3506
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "negative",
+          "confidence": 0.4486,
+          "probabilities": {
+            "positive": 0.158,
+            "neutral": 0.3934,
+            "negative": 0.4486
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "neutral",
+          "confidence": 0.5184,
+          "probabilities": {
+            "positive": 0.2175,
+            "neutral": 0.5184,
+            "negative": 0.264
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    },
+    {
+      "aspect": "price",
+      "expected_human": "positive",
+      "predictions": {
+        "Generic Foundation (MAMS)": {
+          "sentiment": "neutral",
+          "confidence": 0.914,
+          "probabilities": {
+            "positive": 0.0269,
+            "neutral": 0.914,
+            "negative": 0.0591
+          },
+          "routed_expert": "fallback",
+          "routing_reason": "forced:fallback"
+        },
+        "Tech Specialist (Laptop14)": {
+          "sentiment": "positive",
+          "confidence": 0.8079,
+          "probabilities": {
+            "positive": 0.8079,
+            "neutral": 0.1703,
+            "negative": 0.0218
+          },
+          "routed_expert": "tech",
+          "routing_reason": "forced:tech"
+        },
+        "Home Specialist (Television)": {
+          "sentiment": "positive",
+          "confidence": 0.7907,
+          "probabilities": {
+            "positive": 0.7907,
+            "neutral": 0.1812,
+            "negative": 0.0281
+          },
+          "routed_expert": "home",
+          "routing_reason": "forced:home"
+        },
+        "Apparel Specialist (T-Shirt)": {
+          "sentiment": "neutral",
+          "confidence": 0.61,
+          "probabilities": {
+            "positive": 0.2479,
+            "neutral": 0.61,
+            "negative": 0.1421
+          },
+          "routed_expert": "apparel",
+          "routing_reason": "forced:apparel"
+        },
+        "ProductLens MoE (Auto Routed)": {
+          "sentiment": "positive",
+          "confidence": 0.8079,
+          "probabilities": {
+            "positive": 0.8079,
+            "neutral": 0.1703,
+            "negative": 0.0218
+          },
+          "routed_expert": "tech",
+          "routing_reason": "metadata_match:tech"
+        }
+      }
+    }
+  ]
+}
