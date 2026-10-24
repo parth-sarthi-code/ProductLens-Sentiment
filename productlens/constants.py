@@ -23,3 +23,8 @@ DEFAULT_CHECKPOINT_PATHS: dict[str, Path] = {
     "apparel": BASE_DIR / "models/category_experts/expert_apparel/best_model.pt",
     "fallback": BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
 }
+
+# Canonical label ↔ id mappings shared by training (dataset.py) and inference (pipeline.py).
+# Defined once here to prevent silent train/inference label-order mismatches.
+LABEL2ID: dict[str, int] = {"positive": 0, "neutral": 1, "negative": 2}
+ID2LABEL: dict[int, str] = {0: "positive", 1: "neutral", 2: "negative"}

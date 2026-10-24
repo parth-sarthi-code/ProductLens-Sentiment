@@ -18,6 +18,7 @@ from productlens.sentiment.router import MoERouter
 from productlens.sentiment.pipeline import ProductLensMoEPipeline
 from productlens.aspects.extractor import AspectExtractor
 from productlens.engine import ProductLensEngine
+from productlens.utils import find_aspect_span
 
 __all__ = [
     "AspectMention",
@@ -29,4 +30,5 @@ __all__ = [
     "ProductLensMoEPipeline",
     "AspectExtractor",
     "ProductLensEngine",
+    "find_aspect_span",
 ]

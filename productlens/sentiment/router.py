@@ -16,10 +16,6 @@ CATEGORY_TAXONOMY_MAP: Dict[str, List[str]] = {
         "clothing_shoes_and_jewelry", "clothing", "apparel", "shoes",
         "fashion", "t_shirts", "tshirt", "mens_clothing", "womens_clothing"
     ],
-    "beauty": [
-        "all_beauty", "beauty", "personal_care", "cosmetics", "skincare",
-        "haircare", "fragrance"
-    ],
 }
 
 # Keywords used for Level 2 lexical routing.
@@ -45,10 +41,6 @@ LEXICAL_DOMAIN_KEYWORDS: Dict[str, List[str]] = {
         "shirt", "t-shirt", "fabric", "cotton", "material", "size", "sizing",
         "sleeve", "collar", "wash", "shrink", "color", "stitching", "seam", "pants",
         "jeans", "dress", "jacket", "shoes", "sneakers", "boots", "comfort", "wear",
-    ],
-    "beauty": [
-        "lotion", "cream", "skin", "scent", "fragrance", "smell", "serum", "moisturizer",
-        "lipstick", "mascara", "makeup", "shampoo", "conditioner", "face", "wrinkles",
     ],
 }
 
@@ -85,7 +77,7 @@ class MoERouter:
 
         Returns:
             (expert_key, routing_reason)
-            expert_key in {'tech', 'home', 'apparel', 'beauty', 'fallback'}
+            expert_key in {'tech', 'home', 'apparel', 'fallback'}
         """
         # --- Level 1: Metadata Routing ---
         if category:

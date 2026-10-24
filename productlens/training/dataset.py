@@ -6,12 +6,10 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
-from productlens.constants import MAX_SEQ_LEN
+from productlens.constants import ID2LABEL, LABEL2ID, MAX_SEQ_LEN
 
 logger = logging.getLogger("productlens.training.dataset")
 
-LABEL2ID = {"positive": 0, "neutral": 1, "negative": 2}
-ID2LABEL = {0: "positive", 1: "neutral", 2: "negative"}
 
 
 class AspectSentimentDataset(Dataset):

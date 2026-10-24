@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 class SupervisedContrastiveLoss(nn.Module):
     """
-    Supervised Contrastive Loss (Khslosla et al., 2020) with temperature scaling.
+    Supervised Contrastive Loss (Khosla et al., 2020) with temperature scaling.
     Pulls representations of identical sentiment classes closer in the 128-dim
     projection manifold while pushing opposing sentiment representations apart.
     """

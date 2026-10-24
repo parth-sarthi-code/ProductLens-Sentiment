@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import re
 import time
 from typing import List, Optional, Union
 
@@ -12,6 +11,7 @@ from productlens.schemas import (
 )
 from productlens.aspects.extractor import AspectExtractor
 from productlens.sentiment.pipeline import ProductLensMoEPipeline
+from productlens.utils import find_aspect_span
 
 
 def extract_evidence_snippet(text: str, start_char: int, end_char: int, max_length: int = 160) -> str:
@@ -85,13 +85,7 @@ class ProductLensEngine:
         if aspects:
             aspect_mentions: List[AspectMention] = []
             for asp in aspects:
-                match = re.search(r"\b" + re.escape(asp) + r"\b", text, re.IGNORECASE)
-                if match:
-                    s_c, e_c = match.start(), match.end()
-                else:
-                    idx = text.lower().find(asp.lower())
-                    s_c = idx if idx != -1 else 0
-                    e_c = s_c + len(asp) if idx != -1 else len(text)
+                s_c, e_c = find_aspect_span(text, asp)
                 aspect_mentions.append(AspectMention(aspect=asp, start_char=s_c, end_char=e_c, confidence=1.0))
         else:
             aspect_mentions = self.extractor.extract_aspects(text)
@@ -145,9 +139,15 @@ class ProductLensEngine:
             )
 
         # Step 3: Compute overall summary sentiment
-        if pos_count > 0 and neg_count > 0:
+        total_polar = pos_count + neg_count
+        if (
+            pos_count > 0
+            and neg_count > 0
+            and total_polar > 0
+            and abs(pos_count - neg_count) / total_polar <= 0.25
+        ):
             summary = "mixed"
-        elif pos_count > neg_count and pos_count >= neu_count:
+        elif pos_count >= neg_count and pos_count >= neu_count and pos_count > 0:
             summary = "positive"
         elif neg_count > pos_count and neg_count >= neu_count:
             summary = "negative"

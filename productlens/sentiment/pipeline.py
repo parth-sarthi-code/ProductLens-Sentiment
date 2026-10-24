@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
@@ -10,17 +9,13 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer
 
-from productlens.constants import DEFAULT_BACKBONE, DEFAULT_CHECKPOINT_PATHS, MAX_SEQ_LEN
+from productlens.constants import DEFAULT_BACKBONE, DEFAULT_CHECKPOINT_PATHS, ID2LABEL, LABEL2ID, MAX_SEQ_LEN
 from productlens.schemas import SentimentPrediction
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.sentiment.router import MoERouter
+from productlens.utils import find_aspect_span
 
 logger = logging.getLogger("productlens.sentiment")
-
-LABEL2ID = {"positive": 0, "neutral": 1, "negative": 2}
-ID2LABEL = {0: "positive", 1: "neutral", 2: "negative"}
-
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 def checkpoints_exist(
@@ -168,7 +163,6 @@ class ProductLensMoEPipeline:
 
         encoding = self.tokenizer(
             text,
-            padding=True,
             truncation=True,
             max_length=MAX_SEQ_LEN,
             return_offsets_mapping=True,
@@ -184,13 +178,7 @@ class ProductLensMoEPipeline:
         if aspect_start is not None and aspect_end is not None:
             s_char, e_char = aspect_start, aspect_end
         else:
-            match = re.search(r"\b" + re.escape(aspect) + r"\b", text, re.IGNORECASE)
-            if match:
-                s_char, e_char = match.start(), match.end()
-            else:
-                idx = text.lower().find(aspect.lower())
-                s_char = idx if idx != -1 else 0
-                e_char = s_char + len(aspect) if idx != -1 else len(text)
+            s_char, e_char = find_aspect_span(text, aspect)
 
         for i, (tok_start, tok_end) in enumerate(offset_mapping):
             if tok_start == tok_end:

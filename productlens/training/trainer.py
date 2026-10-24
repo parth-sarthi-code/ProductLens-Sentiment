@@ -80,6 +80,7 @@ class AspectSentimentTrainer:
         logger.info("Starting training: total_samples=%d, batch_size=%d, epochs=%d, total_steps=%d", len(train_dataset), batch_size, epochs, total_steps)
 
         scaler = torch.amp.GradScaler("cuda", enabled=(self.device == "cuda"))
+        device_type = self.device.split(":")[0]  # handles "cuda:0", "mps", "cpu"
 
         for epoch in range(1, epochs + 1):
             self.model.train()
@@ -93,7 +94,7 @@ class AspectSentimentTrainer:
                 labels = batch["label"].to(self.device)
 
                 optimizer.zero_grad()
-                with torch.amp.autocast("cuda", enabled=(self.device == "cuda")):
+                with torch.amp.autocast(device_type, enabled=(device_type == "cuda")):
                     logits, features = self.model(input_ids, attention_mask, aspect_mask, return_features=True)
                     loss, _, _ = self.criterion(logits, features, labels)
 
@@ -113,7 +114,13 @@ class AspectSentimentTrainer:
                     val_metrics = self.evaluate(val_dataset, batch_size=batch_size)
                     val_acc = val_metrics["accuracy"]
                     val_f1 = val_metrics["macro_f1"]
-                    logger.info("Step %d (Epoch %.2f): Val Acc=%.4f, Val Macro F1=%.4f", global_step, epoch + (global_step % len(train_loader)) / len(train_loader), val_acc, val_f1)
+                    logger.info(
+                        "Step %d (Epoch %.2f): Val Acc=%.4f, Val Macro F1=%.4f",
+                        global_step,
+                        global_step / len(train_loader),
+                        val_acc,
+                        val_f1,
+                    )
 
                     if val_f1 > best_val_f1:
                         best_val_f1 = val_f1
@@ -140,6 +147,7 @@ class AspectSentimentTrainer:
         loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
         all_preds, all_labels = [], []
 
+        device_type = self.device.split(":")[0]  # handles "cuda:0", "mps", "cpu"
         with torch.no_grad():
             for batch in loader:
                 input_ids = batch["input_ids"].to(self.device)
@@ -147,7 +155,7 @@ class AspectSentimentTrainer:
                 aspect_mask = batch["aspect_mask"].to(self.device)
                 labels = batch["label"].to(self.device)
 
-                with torch.amp.autocast("cuda", enabled=(self.device == "cuda")):
+                with torch.amp.autocast(device_type, enabled=(device_type == "cuda")):
                     logits, _ = self.model(input_ids, attention_mask, aspect_mask)
                 preds = torch.argmax(logits, dim=-1).cpu().numpy()
                 all_preds.extend(preds)

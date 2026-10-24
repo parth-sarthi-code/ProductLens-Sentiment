@@ -6,6 +6,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 from transformers import AutoConfig, AutoModel
 
+from productlens.constants import DEFAULT_BACKBONE
+
 
 class AspectTargetedAttentionPooler(nn.Module):
     """
@@ -51,8 +53,6 @@ class AspectTargetedAttentionPooler(nn.Module):
 
         return final_rep
 
-
-from productlens.constants import DEFAULT_BACKBONE
 
 
 class AspectTargetedSentimentModel(nn.Module):
