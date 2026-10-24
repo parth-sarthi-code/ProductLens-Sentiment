@@ -10,14 +10,25 @@ Usage:
 """
 
 import argparse
+import random
 from pathlib import Path
+import numpy as np
 import pandas as pd
 import torch
+from sklearn.model_selection import GroupShuffleSplit
 from transformers import AutoTokenizer
 
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.training.dataset import AspectSentimentDataset
 from productlens.training.trainer import AspectSentimentTrainer
+
+
+def set_seed(seed: int = 42) -> None:
+    """Set all random seeds for reproducibility."""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
 
 DATA_MAP = {
     "generic": "data/benchmarks/multi_aspect_mams",
@@ -42,7 +53,10 @@ def main():
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--eval_steps", type=int, default=150)
     parser.add_argument("--patience", type=int, default=4)
+    parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()
+
+    set_seed(args.seed)
 
     data_dir = Path(DATA_MAP[args.domain])
     out_dir = Path(OUTPUT_MAP[args.domain])
@@ -56,9 +70,14 @@ def main():
     if val_path.exists():
         val_df = pd.read_parquet(val_path)
     else:
-        # Split train set for validation if no separate val set
-        val_df = train_df.iloc[: min(len(train_df) // 10, 100)]
-        train_df = train_df.iloc[len(val_df) :]
+        # Seeded, stratified, group-aware split (groups on 'text' to prevent
+        # multi-aspect reviews from appearing on both sides of the split).
+        splitter = GroupShuffleSplit(n_splits=1, test_size=0.10, random_state=args.seed)
+        train_idx, val_idx = next(
+            splitter.split(train_df, train_df["sentiment"], groups=train_df["text"])
+        )
+        val_df   = train_df.iloc[val_idx].reset_index(drop=True)
+        train_df = train_df.iloc[train_idx].reset_index(drop=True)
 
     tokenizer = AutoTokenizer.from_pretrained(args.backbone)
     train_ds = AspectSentimentDataset(train_df, tokenizer)

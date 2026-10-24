@@ -49,13 +49,13 @@ The MoE system dynamically routes reviews to domain-specialist models using a 3-
 flowchart TD
     Review["Customer Review + Target Aspect"] --> Router{"MoERouter Dispatch Engine"}
     
-    Router -->|"Level 1: Category Tag (Electronics/Computers)"| Tech["Tech Specialist (Laptop14)<br/>Acc: 84.17% | Pos F1: 80.5%"]
-    Router -->|"Level 1: Category Tag (Home/Kitchen/Appliances)"| Home["Home Specialist (Television)<br/>Acc: 89.81% | Pos F1: 88.2%"]
-    Router -->|"Level 1: Category Tag (Clothing/Apparel/Shoes)"| Apparel["Apparel Specialist (T-Shirt)<br/>Acc: 94.07% | Pos F1: 92.3%"]
+    Router -->|"Level 1: Category Tag (Electronics/Computers)"| Tech["Tech Specialist (Laptop14)<br/>Acc: 81.97%"]
+    Router -->|"Level 1: Category Tag (Home/Kitchen/Appliances)"| Home["Home Specialist (Television)<br/>Acc: 90.87%"]
+    Router -->|"Level 1: Category Tag (Clothing/Apparel/Shoes)"| Apparel["Apparel Specialist (T-Shirt)<br/>Acc: 92.37%"]
     
     Router -.->|"Level 2: Lexical Keyword Fallback"| Tech
     Router -.->|"Level 2: Lexical Keyword Fallback"| Apparel
-    Router -.->|"Level 3: Universal Fallback (Uncertain/General)"| MAMS["Generic Foundation Expert<br/>Challenge Acc: 84.21%"]
+    Router -.->|"Level 3: Universal Fallback (Uncertain/General)"| MAMS["Generic Foundation Expert<br/>Challenge Acc: 82.49%"]
 
     Tech --> Output["Final Predicted Sentiment + Calibrated Confidence"]
     Home --> Output
@@ -86,27 +86,28 @@ Located in [`productlens/sentiment/pipeline.py`](../productlens/sentiment/pipeli
 ### 3.1 The Generic Foundation Model (`foundation_mams`)
 * **Training Data**: 11,186 multi-aspect review sentences from the MAMS Challenge benchmark.
 * **Objective**: Universal, domain-agnostic aspect sentiment classification.
-* **Strengths**: Robust across syntactically complex multi-aspect sentences (achieves **84.21%** on MAMS challenge).
-* **Limitation**: Drops to **71.79%** on Tech Hardware and **79.09%** on Home Electronics because domain-specific technical jargon is underrepresented in generic corpora.
+* **Strengths**: Robust across syntactically complex multi-aspect sentences (achieves **83.83%** on MAMS challenge).
+* **Limitation**: Drops to **73.04%** on Tech Hardware and **78.56%** on Home Electronics because domain-specific technical jargon is underrepresented in generic corpora.
 
 ### 3.2 Category Specialist Models
-* **Tech Hardware Specialist (`expert_tech`)**: Fine-tuned on SemEval Laptop14 hardware reviews. Reaches **84.17%** (+12.38% over generic).
-* **Home Electronics Specialist (`expert_home`)**: Fine-tuned on television/appliance reviews. Reaches **89.81%** (+10.72% over generic).
-* **Apparel Specialist (`expert_apparel`)**: Fine-tuned on clothing and garment reviews. Reaches **94.07%** (+6.57% over generic).
+* **Tech Hardware Specialist (`expert_tech`)**: Fine-tuned on SemEval Laptop14 hardware reviews. Reaches **81.97%** (+8.93% over generic).
+* **Home Electronics Specialist (`expert_home`)**: Fine-tuned on television/appliance reviews. Reaches **90.87%** (+12.31% over generic).
+* **Apparel Specialist (`expert_apparel`)**: Fine-tuned on clothing and garment reviews. Reaches **92.37%** (+4.23% over generic).
 
 ---
 
 ## 4. Master Empirical Benchmark Comparison
 
-All models were evaluated across the 4 held-out benchmark test sets (3,388 total samples):
+All models were evaluated across the 4 held-out benchmark test sets (3,388 total samples) using sample-weighted composite accuracy:
 
 | Model Architecture (Rows) \ Domain (Cols) | Laptop14 (Tech, 638) | Television (Home, 942) | T-Shirt (Apparel, 472) | MAMS Challenge (1,336) | E-Commerce Composite (2,052) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Generic Foundation (MAMS)** | 71.79% | 79.09% | 87.50% | **84.21% 🏆** | 78.65% |
-| **Tech Specialist (`Laptop14`)** | **84.17% 🏆** | 88.85% | 93.22% | 73.43% | 88.35% |
-| **Home Specialist (`Television`)** | 80.89% | **89.81% 🏆** | 93.01% | 68.34% | 87.77% |
-| **Apparel Specialist (`T-Shirt`)** | 78.68% | 87.29% | **94.07% 🏆** | 77.92% | 86.11% |
-| **ProductLens MoE Unified System** | **84.17% 🏆** | **89.81% 🏆** | **94.07% 🏆** | **82.71%** | **89.04% 🏆 (+10.39% Net Lift)** |
+| **Generic Foundation (MAMS)** | 73.04% | 78.56% | 88.14% | **83.83% 🏆** | 79.05% |
+| **Tech Specialist (`Laptop14`)** | **81.97% 🏆** | 88.54% | 91.95% | 58.83% | 87.28% |
+| **Home Specialist (`Television`)** | 75.71% | **90.87% 🏆** | 89.83% | 49.93% | 85.92% |
+| **Apparel Specialist (`T-Shirt`)** | 67.40% | 89.17% | **92.37% 🏆** | 47.23% | 83.14% |
+| **ProductLens MoE (no category)** | 75.08% | 83.44% | 88.98% | 82.49% | **82.12% (+3.07% Net Lift)** |
+| **ProductLens MoE (with category)** | **81.97% 🏆** | **90.87% 🏆** | **92.37% 🏆** | 82.49% | **88.45% 🏆 (+9.40% Net Lift)** |
 
 ---
 
@@ -118,9 +119,9 @@ In the transfer matrix, the maximum value in every column lies strictly along th
 $$\max_i T_{i,j} = T_{j,j} \quad \forall j \in \{\text{Tech}, \text{Home}, \text{Apparel}, \text{MAMS}\}$$
 
 Every vertical is best served by its dedicated specialist:
-* Tech: Specialist achieves **84.17%** vs Generic **71.79%** (**+12.38% lift**).
-* Home: Specialist achieves **89.81%** vs Generic **79.09%** (**+10.72% lift**).
-* Apparel: Specialist achieves **94.07%** vs Generic **87.50%** (**+6.57% lift**).
+* Tech: Specialist achieves **81.97%** vs Generic **73.04%** (**+8.93% lift**).
+* Home: Specialist achieves **90.87%** vs Generic **78.56%** (**+12.31% lift**).
+* Apparel: Specialist achieves **92.37%** vs Generic **88.14%** (**+4.23% lift**).
 
 ### 5.2 Negative Cross-Domain Gradient Interference
 In a monolithic model, the loss gradient is a composite across disparate domains:

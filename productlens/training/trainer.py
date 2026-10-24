@@ -79,6 +79,8 @@ class AspectSentimentTrainer:
 
         logger.info("Starting training: total_samples=%d, batch_size=%d, epochs=%d, total_steps=%d", len(train_dataset), batch_size, epochs, total_steps)
 
+        scaler = torch.amp.GradScaler("cuda", enabled=(self.device == "cuda"))
+
         for epoch in range(1, epochs + 1):
             self.model.train()
             running_loss = 0.0
@@ -91,12 +93,19 @@ class AspectSentimentTrainer:
                 labels = batch["label"].to(self.device)
 
                 optimizer.zero_grad()
-                logits, features = self.model(input_ids, attention_mask, aspect_mask, return_features=True)
-                loss, _, _ = self.criterion(logits, features, labels)
-                loss.backward()
+                with torch.amp.autocast("cuda", enabled=(self.device == "cuda")):
+                    logits, features = self.model(input_ids, attention_mask, aspect_mask, return_features=True)
+                    loss, _, _ = self.criterion(logits, features, labels)
+
+                scaler.scale(loss).backward()
+                scaler.unscale_(optimizer)
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-                optimizer.step()
-                scheduler.step()
+                scale = scaler.get_scale()
+                scaler.step(optimizer)
+                scaler.update()
+                skip_lr_sched = (scale > scaler.get_scale())
+                if not skip_lr_sched:
+                    scheduler.step()
 
                 running_loss += loss.item()
 
@@ -122,7 +131,7 @@ class AspectSentimentTrainer:
 
         # Load best weights before returning
         if best_model_path.exists():
-            self.model.load_state_dict(torch.load(best_model_path, map_location=self.device))
+            self.model.load_state_dict(torch.load(best_model_path, map_location=self.device, weights_only=True))
 
         return {"best_val_macro_f1": best_val_f1, "best_checkpoint": str(best_model_path)}
 
@@ -138,7 +147,8 @@ class AspectSentimentTrainer:
                 aspect_mask = batch["aspect_mask"].to(self.device)
                 labels = batch["label"].to(self.device)
 
-                logits, _ = self.model(input_ids, attention_mask, aspect_mask)
+                with torch.amp.autocast("cuda", enabled=(self.device == "cuda")):
+                    logits, _ = self.model(input_ids, attention_mask, aspect_mask)
                 preds = torch.argmax(logits, dim=-1).cpu().numpy()
                 all_preds.extend(preds)
                 all_labels.extend(labels.cpu().numpy())

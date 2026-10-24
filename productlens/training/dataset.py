@@ -6,6 +6,10 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
+from productlens.constants import MAX_SEQ_LEN
+
+logger = logging.getLogger("productlens.training.dataset")
+
 LABEL2ID = {"positive": 0, "neutral": 1, "negative": 2}
 ID2LABEL = {0: "positive", 1: "neutral", 2: "negative"}
 
@@ -17,7 +21,7 @@ class AspectSentimentDataset(Dataset):
     input_ids, attention_mask, aspect_mask, and class label tensors.
     """
 
-    def __init__(self, df: pd.DataFrame, tokenizer: Any, max_length: int = 128):
+    def __init__(self, df: pd.DataFrame, tokenizer: Any, max_length: int = MAX_SEQ_LEN):
         self.samples = []
         for _, row in df.iterrows():
             text = str(row["text"])
@@ -64,6 +68,12 @@ class AspectSentimentDataset(Dataset):
                             break
 
             if not found_aspect_token:
+                logger.warning(
+                    "Aspect '%s' not found in tokens (possibly truncated beyond max_length=%d). "
+                    "Falling back to CLS token as aspect anchor.",
+                    aspect,
+                    max_length,
+                )
                 aspect_mask[0] = 1.0
 
             self.samples.append({

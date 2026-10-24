@@ -1,0 +1,35 @@
+{
+  "version": "v2.0.0",
+  "backbone": "yangheng/deberta-v3-base-absa-v1.1",
+  "description": "Production DeBERTa-v3 ABSA Domain Specialists & MoE Pipeline",
+  "weights": {
+    "expert_tech": {
+      "filename": "deberta_v3_expert_tech.pt",
+      "size_bytes": 744081251,
+      "size_mb": 709.61,
+      "sha256": "096c97436e2e3292d7e8e61ba87527c7c666d3b9a2c38103ef2349699139ea0e",
+      "original_path": "models/category_experts_deberta/expert_tech/best_model.pt"
+    },
+    "expert_home": {
+      "filename": "deberta_v3_expert_home.pt",
+      "size_bytes": 744081251,
+      "size_mb": 709.61,
+      "sha256": "f2e93401dcbc3afde119de9fb0c427c3206164f7172989018a83fa30aa9bdf03",
+      "original_path": "models/category_experts_deberta/expert_home/best_model.pt"
+    },
+    "expert_apparel": {
+      "filename": "deberta_v3_expert_apparel.pt",
+      "size_bytes": 744081251,
+      "size_mb": 709.61,
+      "sha256": "e29f8e7fad2f3290df86ff0c49b4edd588ea51970dd59789b930aacaa02c0c26",
+      "original_path": "models/category_experts_deberta/expert_apparel/best_model.pt"
+    },
+    "foundation_mams": {
+      "filename": "deberta_v3_foundation_mams.pt",
+      "size_bytes": 744081251,
+      "size_mb": 709.61,
+      "sha256": "fad6bbb72b0d2affa5accfeda6e34b0a726b12f5c9558a643a5ebb6065f637a0",
+      "original_path": "models/comparison/deberta_v3_mams/best_model.pt"
+    }
+  }
+}

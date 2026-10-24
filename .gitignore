@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.egg-info/
+
 
 # Environments
 .venv/
@@ -20,6 +22,9 @@ htmlcov/
 *.safetensors
 models/checkpoints/
 models/category_experts/*/*.pt
+models/category_experts_deberta/*/*.pt
+models/comparison/*/*.pt
+release/*.pt
 
 # Logs & temp
 *.log

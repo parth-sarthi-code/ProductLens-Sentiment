@@ -10,12 +10,12 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer
 
+from productlens.constants import MAX_SEQ_LEN
 from productlens.schemas import SentimentPrediction
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.sentiment.router import MoERouter
 
 logger = logging.getLogger("productlens.sentiment")
-logging.basicConfig(level=logging.INFO, format="[%(asctime)s] [%(levelname)s] %(message)s")
 
 LABEL2ID = {"positive": 0, "neutral": 1, "negative": 2}
 ID2LABEL = {0: "positive", 1: "neutral", 2: "negative"}
@@ -28,6 +28,15 @@ DEFAULT_CHECKPOINT_PATHS = {
     "beauty": BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
     "fallback": BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
 }
+
+
+def checkpoints_exist(
+    checkpoint_paths: Optional[Dict[str, Path]] = None,
+) -> bool:
+    """Returns True if at least the fallback checkpoint exists on disk."""
+    paths = checkpoint_paths or DEFAULT_CHECKPOINT_PATHS
+    fallback = paths.get("fallback")
+    return fallback is not None and Path(fallback).exists()
 
 
 class ProductLensMoEPipeline:
@@ -43,6 +52,7 @@ class ProductLensMoEPipeline:
         backbone_name: str = "roberta-base",
         device: Optional[str] = None,
         lazy_load: bool = True,
+        single_active_expert: bool = False,
     ):
         self.backbone_name = backbone_name
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
@@ -50,6 +60,8 @@ class ProductLensMoEPipeline:
         self.tokenizer = AutoTokenizer.from_pretrained(backbone_name)
         self.router = MoERouter()
         self.lazy_load = lazy_load
+        self.single_active_expert = single_active_expert
+        self.active_expert = None
 
         self.experts: Dict[str, AspectTargetedSentimentModel] = {}
         if not self.lazy_load:
@@ -57,25 +69,78 @@ class ProductLensMoEPipeline:
 
         logger.info("Initialized ProductLens MoE Pipeline on device=%s (backbone=%s)", self.device, self.backbone_name)
 
-    def _get_expert(self, expert_key: str) -> AspectTargetedSentimentModel:
-        """Loads and caches the requested domain expert."""
-        if expert_key not in self.experts:
-            ckpt_path = self.checkpoint_paths.get(expert_key)
+    def _get_expert(self, expert_key: str) -> Tuple[AspectTargetedSentimentModel, str]:
+        """
+        Loads and caches the requested domain expert.
+
+        Returns:
+            (model, resolved_key) — resolved_key is the expert that actually ran,
+            which may differ from expert_key when a fallback is used.
+
+        Raises:
+            FileNotFoundError: If neither the requested checkpoint nor the fallback
+                checkpoint exists on disk. Never runs with random/unloaded weights.
+        """
+        resolved_key = expert_key
+
+        if resolved_key not in self.experts:
+            ckpt_path = self.checkpoint_paths.get(resolved_key)
+
             if not ckpt_path or not ckpt_path.exists():
-                logger.warning("Checkpoint for '%s' not found at %s. Falling back to 'fallback' expert.", expert_key, ckpt_path)
-                expert_key = "fallback"
+                logger.warning(
+                    "Checkpoint for '%s' not found at %s. Attempting fallback expert.",
+                    expert_key,
+                    ckpt_path,
+                )
+                resolved_key = "fallback"
                 ckpt_path = self.checkpoint_paths.get("fallback")
 
-            logger.info("Loading expert '%s' from %s...", expert_key, ckpt_path)
-            model = AspectTargetedSentimentModel(backbone_name=self.backbone_name, num_labels=3, aspect_boost=3.5)
-            if ckpt_path and ckpt_path.exists():
-                state_dict = torch.load(ckpt_path, map_location="cpu")
-                model.load_state_dict(state_dict)
-            model.to(self.device)
-            model.eval()
-            self.experts[expert_key] = model
+                if not ckpt_path or not ckpt_path.exists():
+                    raise FileNotFoundError(
+                        f"Checkpoint for expert '{expert_key}' not found, and the fallback "
+                        f"checkpoint is also missing at '{ckpt_path}'. "
+                        "Download model weights before running inference. "
+                        "See README.md § 'Download Weights' for instructions."
+                    )
 
-        return self.experts[expert_key]
+            logger.info("Loading expert '%s' from %s...", resolved_key, ckpt_path)
+            model = AspectTargetedSentimentModel(backbone_name=self.backbone_name, num_labels=3, aspect_boost=3.5)
+            state_dict = torch.load(ckpt_path, map_location="cpu", weights_only=True)
+            model.load_state_dict(state_dict)
+            model.eval()
+
+            if self.single_active_expert:
+                if self.active_expert is not None and self.active_expert in self.experts:
+                    self.experts[self.active_expert].to("cpu")
+                    if torch.cuda.is_available():
+                        torch.cuda.empty_cache()
+                model.to(self.device)
+                self.active_expert = resolved_key
+            else:
+                model.to(self.device)
+
+            # Cache under resolved_key so subsequent calls for the same expert
+            # (or fallback) do not reload roberta-base from disk.
+            self.experts[resolved_key] = model
+        else:
+            if self.single_active_expert and self.active_expert != resolved_key:
+                if self.active_expert is not None and self.active_expert in self.experts:
+                    self.experts[self.active_expert].to("cpu")
+                    if torch.cuda.is_available():
+                        torch.cuda.empty_cache()
+                self.experts[resolved_key].to(self.device)
+                self.active_expert = resolved_key
+
+        return self.experts[resolved_key], resolved_key
+
+    def unload_all(self):
+        """Unloads all expert weights to CPU and empties CUDA cache."""
+        for model in self.experts.values():
+            model.to("cpu")
+        self.experts.clear()
+        self.active_expert = None
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
 
     def _load_all_experts(self):
         for key in self.checkpoint_paths.keys():
@@ -94,18 +159,25 @@ class ProductLensMoEPipeline:
         Predicts sentiment for a target aspect in a review using the routed expert.
         """
         if force_expert:
-            expert_key = force_expert
+            routed_key = force_expert
             reason = f"forced:{force_expert}"
         else:
-            expert_key, reason = self.router.route(category=category, text=text, aspect=aspect)
+            routed_key, reason = self.router.route(category=category, text=text, aspect=aspect)
 
-        model = self._get_expert(expert_key)
+        model, resolved_key = self._get_expert(routed_key)
+
+        if resolved_key != routed_key:
+            logger.warning(
+                "Router selected '%s' but it ran under fallback expert '%s'.",
+                routed_key,
+                resolved_key,
+            )
 
         encoding = self.tokenizer(
             text,
             padding=True,
             truncation=True,
-            max_length=256,
+            max_length=MAX_SEQ_LEN,
             return_offsets_mapping=True,
             return_tensors="pt",
         )
@@ -134,6 +206,12 @@ class ProductLensMoEPipeline:
                 aspect_mask[i] = 1.0
 
         if aspect_mask.sum() == 0:
+            logger.warning(
+                "Aspect '%s' not found in token offsets (possibly truncated beyond max_length=%d). "
+                "Falling back to CLS token as aspect anchor.",
+                aspect,
+                MAX_SEQ_LEN,
+            )
             aspect_mask[0] = 1.0
 
         aspect_mask = aspect_mask.unsqueeze(0).to(self.device)
@@ -156,6 +234,6 @@ class ProductLensMoEPipeline:
             sentiment=pred_label,
             confidence=confidence,
             probabilities=prob_dict,
-            routed_expert=expert_key,
+            routed_expert=resolved_key,   # reflects the expert that actually ran
             routing_reason=reason,
         )

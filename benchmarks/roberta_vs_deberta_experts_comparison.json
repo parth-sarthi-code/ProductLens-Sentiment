@@ -1,0 +1,874 @@
+{
+  "metadata": {
+    "device": "cuda",
+    "seed": 42,
+    "roberta_backbone": "roberta-base",
+    "deberta_backbone": "yangheng/deberta-v3-base-absa-v1.1",
+    "test_sample_counts": {
+      "Laptop14 (Tech)": 638,
+      "Television (Home)": 942,
+      "T-Shirt (Apparel)": 472,
+      "MAMS Challenge": 1336
+    }
+  },
+  "roberta_suite": {
+    "Generic Foundation (MAMS)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 73.04,
+        "macro_f1": 70.23,
+        "per_class_f1": {
+          "positive": 82.69,
+          "neutral": 63.36,
+          "negative": 64.63
+        },
+        "accuracy_ci95": [
+          69.59,
+          76.8
+        ],
+        "macro_f1_ci95": [
+          66.36,
+          74.17
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 78.56,
+        "macro_f1": 65.33,
+        "per_class_f1": {
+          "positive": 88.28,
+          "neutral": 26.56,
+          "negative": 81.16
+        },
+        "accuracy_ci95": [
+          75.8,
+          81.0
+        ],
+        "macro_f1_ci95": [
+          62.4,
+          68.35
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 88.14,
+        "macro_f1": 64.46,
+        "per_class_f1": {
+          "positive": 91.25,
+          "neutral": 9.52,
+          "negative": 92.6
+        },
+        "accuracy_ci95": [
+          85.17,
+          91.1
+        ],
+        "macro_f1_ci95": [
+          60.61,
+          69.65
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 83.76,
+        "macro_f1": 83.12,
+        "per_class_f1": {
+          "positive": 83.68,
+          "neutral": 86.05,
+          "negative": 79.63
+        },
+        "accuracy_ci95": [
+          81.74,
+          85.7
+        ],
+        "macro_f1_ci95": [
+          81.01,
+          85.22
+        ]
+      },
+      "E-Commerce Composite": 79.05
+    },
+    "Tech Specialist (Laptop14)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 81.97,
+        "macro_f1": 78.75,
+        "per_class_f1": {
+          "positive": 90.03,
+          "neutral": 67.51,
+          "negative": 78.7
+        },
+        "accuracy_ci95": [
+          79.31,
+          84.8
+        ],
+        "macro_f1_ci95": [
+          75.33,
+          82.08
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 88.54,
+        "macro_f1": 68.56,
+        "per_class_f1": {
+          "positive": 94.09,
+          "neutral": 24.0,
+          "negative": 87.59
+        },
+        "accuracy_ci95": [
+          86.52,
+          90.45
+        ],
+        "macro_f1_ci95": [
+          64.68,
+          72.87
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 91.95,
+        "macro_f1": 74.68,
+        "per_class_f1": {
+          "positive": 93.84,
+          "neutral": 37.04,
+          "negative": 93.15
+        },
+        "accuracy_ci95": [
+          89.41,
+          94.28
+        ],
+        "macro_f1_ci95": [
+          66.55,
+          82.24
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 58.83,
+        "macro_f1": 58.07,
+        "per_class_f1": {
+          "positive": 66.86,
+          "neutral": 43.05,
+          "negative": 64.29
+        },
+        "accuracy_ci95": [
+          56.29,
+          61.45
+        ],
+        "macro_f1_ci95": [
+          55.61,
+          60.71
+        ]
+      },
+      "E-Commerce Composite": 87.28
+    },
+    "Home Specialist (Television)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 75.71,
+        "macro_f1": 68.42,
+        "per_class_f1": {
+          "positive": 85.22,
+          "neutral": 41.88,
+          "negative": 78.17
+        },
+        "accuracy_ci95": [
+          72.41,
+          79.0
+        ],
+        "macro_f1_ci95": [
+          64.27,
+          72.33
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 90.76,
+        "macro_f1": 73.5,
+        "per_class_f1": {
+          "positive": 95.66,
+          "neutral": 34.95,
+          "negative": 89.88
+        },
+        "accuracy_ci95": [
+          89.07,
+          92.36
+        ],
+        "macro_f1_ci95": [
+          69.28,
+          77.88
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 89.83,
+        "macro_f1": 68.14,
+        "per_class_f1": {
+          "positive": 93.29,
+          "neutral": 21.43,
+          "negative": 89.71
+        },
+        "accuracy_ci95": [
+          87.08,
+          92.37
+        ],
+        "macro_f1_ci95": [
+          61.17,
+          75.88
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 49.93,
+        "macro_f1": 46.71,
+        "per_class_f1": {
+          "positive": 62.98,
+          "neutral": 18.9,
+          "negative": 58.26
+        },
+        "accuracy_ci95": [
+          47.16,
+          52.62
+        ],
+        "macro_f1_ci95": [
+          44.2,
+          49.16
+        ]
+      },
+      "E-Commerce Composite": 85.87
+    },
+    "Apparel Specialist (T-Shirt)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 67.4,
+        "macro_f1": 49.63,
+        "per_class_f1": {
+          "positive": 84.85,
+          "neutral": 0.0,
+          "negative": 64.04
+        },
+        "accuracy_ci95": [
+          63.79,
+          71.0
+        ],
+        "macro_f1_ci95": [
+          47.15,
+          51.8
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 89.07,
+        "macro_f1": 60.78,
+        "per_class_f1": {
+          "positive": 94.32,
+          "neutral": 0.0,
+          "negative": 88.03
+        },
+        "accuracy_ci95": [
+          87.15,
+          90.98
+        ],
+        "macro_f1_ci95": [
+          59.55,
+          61.91
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 92.37,
+        "macro_f1": 62.49,
+        "per_class_f1": {
+          "positive": 95.05,
+          "neutral": 0.0,
+          "negative": 92.43
+        },
+        "accuracy_ci95": [
+          89.83,
+          94.7
+        ],
+        "macro_f1_ci95": [
+          61.04,
+          63.82
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 47.16,
+        "macro_f1": 40.55,
+        "per_class_f1": {
+          "positive": 62.18,
+          "neutral": 0.0,
+          "negative": 59.48
+        },
+        "accuracy_ci95": [
+          44.38,
+          49.78
+        ],
+        "macro_f1_ci95": [
+          38.73,
+          42.23
+        ]
+      },
+      "E-Commerce Composite": 83.09
+    }
+  },
+  "deberta_suite": {
+    "Generic Foundation (MAMS)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 81.66,
+        "macro_f1": 79.01,
+        "per_class_f1": {
+          "positive": 89.63,
+          "neutral": 70.59,
+          "negative": 76.81
+        },
+        "accuracy_ci95": [
+          78.68,
+          84.8
+        ],
+        "macro_f1_ci95": [
+          75.53,
+          82.5
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 87.47,
+        "macro_f1": 73.24,
+        "per_class_f1": {
+          "positive": 93.79,
+          "neutral": 36.05,
+          "negative": 89.9
+        },
+        "accuracy_ci95": [
+          85.35,
+          89.49
+        ],
+        "macro_f1_ci95": [
+          69.46,
+          76.98
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 90.47,
+        "macro_f1": 66.23,
+        "per_class_f1": {
+          "positive": 93.14,
+          "neutral": 11.76,
+          "negative": 93.8
+        },
+        "accuracy_ci95": [
+          87.71,
+          92.8
+        ],
+        "macro_f1_ci95": [
+          61.74,
+          71.65
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 82.93,
+        "macro_f1": 82.4,
+        "per_class_f1": {
+          "positive": 82.08,
+          "neutral": 85.07,
+          "negative": 80.06
+        },
+        "accuracy_ci95": [
+          80.76,
+          84.96
+        ],
+        "macro_f1_ci95": [
+          80.23,
+          84.49
+        ]
+      },
+      "E-Commerce Composite": 86.35
+    },
+    "Tech Specialist (Laptop14)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 82.76,
+        "macro_f1": 79.47,
+        "per_class_f1": {
+          "positive": 90.38,
+          "neutral": 67.33,
+          "negative": 80.69
+        },
+        "accuracy_ci95": [
+          79.78,
+          85.74
+        ],
+        "macro_f1_ci95": [
+          76.19,
+          82.78
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 91.83,
+        "macro_f1": 75.34,
+        "per_class_f1": {
+          "positive": 95.78,
+          "neutral": 37.25,
+          "negative": 92.98
+        },
+        "accuracy_ci95": [
+          90.02,
+          93.52
+        ],
+        "macro_f1_ci95": [
+          70.98,
+          79.28
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 94.07,
+        "macro_f1": 73.55,
+        "per_class_f1": {
+          "positive": 96.0,
+          "neutral": 30.0,
+          "negative": 94.65
+        },
+        "accuracy_ci95": [
+          91.95,
+          96.19
+        ],
+        "macro_f1_ci95": [
+          63.83,
+          83.04
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 77.47,
+        "macro_f1": 77.44,
+        "per_class_f1": {
+          "positive": 78.62,
+          "neutral": 77.18,
+          "negative": 76.52
+        },
+        "accuracy_ci95": [
+          75.22,
+          79.79
+        ],
+        "macro_f1_ci95": [
+          75.17,
+          79.74
+        ]
+      },
+      "E-Commerce Composite": 89.53
+    },
+    "Home Specialist (Television)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 80.56,
+        "macro_f1": 76.08,
+        "per_class_f1": {
+          "positive": 89.71,
+          "neutral": 61.92,
+          "negative": 76.61
+        },
+        "accuracy_ci95": [
+          77.43,
+          83.54
+        ],
+        "macro_f1_ci95": [
+          72.32,
+          79.57
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 91.08,
+        "macro_f1": 76.74,
+        "per_class_f1": {
+          "positive": 95.24,
+          "neutral": 42.28,
+          "negative": 92.72
+        },
+        "accuracy_ci95": [
+          89.28,
+          92.78
+        ],
+        "macro_f1_ci95": [
+          72.58,
+          80.57
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 94.07,
+        "macro_f1": 74.77,
+        "per_class_f1": {
+          "positive": 96.35,
+          "neutral": 33.33,
+          "negative": 94.62
+        },
+        "accuracy_ci95": [
+          91.74,
+          96.19
+        ],
+        "macro_f1_ci95": [
+          66.16,
+          83.21
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 63.55,
+        "macro_f1": 63.39,
+        "per_class_f1": {
+          "positive": 70.59,
+          "neutral": 50.57,
+          "negative": 69.03
+        },
+        "accuracy_ci95": [
+          60.93,
+          66.02
+        ],
+        "macro_f1_ci95": [
+          60.73,
+          65.8
+        ]
+      },
+      "E-Commerce Composite": 88.5
+    },
+    "Apparel Specialist (T-Shirt)": {
+      "Laptop14 (Tech)": {
+        "accuracy": 76.49,
+        "macro_f1": 68.28,
+        "per_class_f1": {
+          "positive": 88.21,
+          "neutral": 42.48,
+          "negative": 74.16
+        },
+        "accuracy_ci95": [
+          73.19,
+          79.94
+        ],
+        "macro_f1_ci95": [
+          64.34,
+          72.09
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 92.04,
+        "macro_f1": 71.67,
+        "per_class_f1": {
+          "positive": 96.04,
+          "neutral": 25.88,
+          "negative": 93.08
+        },
+        "accuracy_ci95": [
+          90.23,
+          93.63
+        ],
+        "macro_f1_ci95": [
+          67.34,
+          75.76
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 94.07,
+        "macro_f1": 75.26,
+        "per_class_f1": {
+          "positive": 95.78,
+          "neutral": 34.78,
+          "negative": 95.21
+        },
+        "accuracy_ci95": [
+          91.94,
+          96.19
+        ],
+        "macro_f1_ci95": [
+          66.49,
+          84.2
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 51.72,
+        "macro_f1": 46.31,
+        "per_class_f1": {
+          "positive": 67.1,
+          "neutral": 9.11,
+          "negative": 62.74
+        },
+        "accuracy_ci95": [
+          48.95,
+          54.27
+        ],
+        "macro_f1_ci95": [
+          44.11,
+          48.43
+        ]
+      },
+      "E-Commerce Composite": 87.67
+    }
+  },
+  "moe_roberta": {
+    "with_category": {
+      "Laptop14 (Tech)": {
+        "accuracy": 81.97,
+        "macro_f1": 78.75,
+        "per_class_f1": {
+          "positive": 90.03,
+          "neutral": 67.51,
+          "negative": 78.7
+        },
+        "accuracy_ci95": [
+          79.31,
+          84.8
+        ],
+        "macro_f1_ci95": [
+          75.33,
+          82.08
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 90.87,
+        "macro_f1": 73.68,
+        "per_class_f1": {
+          "positive": 95.66,
+          "neutral": 35.29,
+          "negative": 90.1
+        },
+        "accuracy_ci95": [
+          89.07,
+          92.46
+        ],
+        "macro_f1_ci95": [
+          69.56,
+          77.99
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 92.37,
+        "macro_f1": 62.49,
+        "per_class_f1": {
+          "positive": 95.05,
+          "neutral": 0.0,
+          "negative": 92.43
+        },
+        "accuracy_ci95": [
+          89.83,
+          94.7
+        ],
+        "macro_f1_ci95": [
+          61.04,
+          63.82
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 82.49,
+        "macro_f1": 81.93,
+        "per_class_f1": {
+          "positive": 83.37,
+          "neutral": 84.39,
+          "negative": 78.03
+        },
+        "accuracy_ci95": [
+          80.39,
+          84.51
+        ],
+        "macro_f1_ci95": [
+          79.77,
+          84.05
+        ]
+      },
+      "E-Commerce Composite": 88.45
+    },
+    "no_category": {
+      "Laptop14 (Tech)": {
+        "accuracy": 75.08,
+        "macro_f1": 72.15,
+        "per_class_f1": {
+          "positive": 84.31,
+          "neutral": 63.54,
+          "negative": 68.6
+        },
+        "accuracy_ci95": [
+          71.79,
+          78.53
+        ],
+        "macro_f1_ci95": [
+          68.55,
+          75.9
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 83.44,
+        "macro_f1": 69.19,
+        "per_class_f1": {
+          "positive": 91.11,
+          "neutral": 30.93,
+          "negative": 85.54
+        },
+        "accuracy_ci95": [
+          81.21,
+          85.56
+        ],
+        "macro_f1_ci95": [
+          65.91,
+          72.56
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 88.98,
+        "macro_f1": 63.34,
+        "per_class_f1": {
+          "positive": 92.19,
+          "neutral": 5.88,
+          "negative": 91.94
+        },
+        "accuracy_ci95": [
+          85.81,
+          91.95
+        ],
+        "macro_f1_ci95": [
+          60.42,
+          68.54
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 82.49,
+        "macro_f1": 81.93,
+        "per_class_f1": {
+          "positive": 83.37,
+          "neutral": 84.39,
+          "negative": 78.03
+        },
+        "accuracy_ci95": [
+          80.39,
+          84.51
+        ],
+        "macro_f1_ci95": [
+          79.77,
+          84.05
+        ]
+      },
+      "E-Commerce Composite": 82.12
+    }
+  },
+  "moe_deberta": {
+    "with_category": {
+      "Laptop14 (Tech)": {
+        "accuracy": 82.76,
+        "macro_f1": 79.47,
+        "per_class_f1": {
+          "positive": 90.38,
+          "neutral": 67.33,
+          "negative": 80.69
+        },
+        "accuracy_ci95": [
+          79.78,
+          85.74
+        ],
+        "macro_f1_ci95": [
+          76.19,
+          82.78
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 91.08,
+        "macro_f1": 76.74,
+        "per_class_f1": {
+          "positive": 95.24,
+          "neutral": 42.28,
+          "negative": 92.72
+        },
+        "accuracy_ci95": [
+          89.28,
+          92.78
+        ],
+        "macro_f1_ci95": [
+          72.58,
+          80.57
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 94.07,
+        "macro_f1": 75.26,
+        "per_class_f1": {
+          "positive": 95.78,
+          "neutral": 34.78,
+          "negative": 95.21
+        },
+        "accuracy_ci95": [
+          91.94,
+          96.19
+        ],
+        "macro_f1_ci95": [
+          66.49,
+          84.2
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 81.96,
+        "macro_f1": 81.48,
+        "per_class_f1": {
+          "positive": 81.87,
+          "neutral": 83.82,
+          "negative": 78.74
+        },
+        "accuracy_ci95": [
+          79.79,
+          84.21
+        ],
+        "macro_f1_ci95": [
+          79.22,
+          83.7
+        ]
+      },
+      "E-Commerce Composite": 89.18
+    },
+    "no_category": {
+      "Laptop14 (Tech)": {
+        "accuracy": 81.5,
+        "macro_f1": 78.73,
+        "per_class_f1": {
+          "positive": 89.49,
+          "neutral": 68.8,
+          "negative": 77.9
+        },
+        "accuracy_ci95": [
+          78.37,
+          84.49
+        ],
+        "macro_f1_ci95": [
+          74.98,
+          82.03
+        ]
+      },
+      "Television (Home)": {
+        "accuracy": 89.28,
+        "macro_f1": 74.46,
+        "per_class_f1": {
+          "positive": 94.53,
+          "neutral": 37.76,
+          "negative": 91.09
+        },
+        "accuracy_ci95": [
+          87.26,
+          91.19
+        ],
+        "macro_f1_ci95": [
+          70.62,
+          78.26
+        ]
+      },
+      "T-Shirt (Apparel)": {
+        "accuracy": 91.74,
+        "macro_f1": 70.74,
+        "per_class_f1": {
+          "positive": 94.05,
+          "neutral": 23.53,
+          "negative": 94.62
+        },
+        "accuracy_ci95": [
+          88.98,
+          94.07
+        ],
+        "macro_f1_ci95": [
+          64.25,
+          77.51
+        ]
+      },
+      "MAMS Challenge": {
+        "accuracy": 81.96,
+        "macro_f1": 81.48,
+        "per_class_f1": {
+          "positive": 81.87,
+          "neutral": 83.82,
+          "negative": 78.74
+        },
+        "accuracy_ci95": [
+          79.79,
+          84.21
+        ],
+        "macro_f1_ci95": [
+          79.22,
+          83.7
+        ]
+      },
+      "E-Commerce Composite": 87.43
+    }
+  }
+}

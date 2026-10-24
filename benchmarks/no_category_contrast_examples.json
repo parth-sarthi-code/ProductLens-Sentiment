@@ -1,0 +1,4422 @@
+[
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Did not enjoy the new Windows 8 and touchscreen functions .",
+    "aspect": "touchscreen functions",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.7118,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.7118,
+        "neutral": 0.0582,
+        "negative": 0.23
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9974,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0024,
+        "negative": 0.9974
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Everything is so easy and intuitive to setup or configure .",
+    "aspect": "setup",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9866,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0112,
+        "neutral": 0.9866,
+        "negative": 0.0023
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9935,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9935,
+        "neutral": 0.0057,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Everything is so easy and intuitive to setup or configure .",
+    "aspect": "configure",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9921,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0067,
+        "neutral": 0.9921,
+        "negative": 0.0012
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.8591,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.8591,
+        "neutral": 0.137,
+        "negative": 0.0039
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "From the speed to the multi touch gestures this operating system beats Windows easily .",
+    "aspect": "Windows",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9937,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.9937,
+        "neutral": 0.0043,
+        "negative": 0.002
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9933,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0044,
+        "neutral": 0.0023,
+        "negative": 0.9933
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I opted for the SquareTrade 3-Year Computer Accidental Protection Warranty -LRB- $ 1500-2000 -RRB- which also support `` accidents '' like drops and spills that are NOT covered by AppleCare .",
+    "aspect": "SquareTrade 3-Year Computer Accidental Protection Warranty",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6721,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2951,
+        "neutral": 0.6721,
+        "negative": 0.0328
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9956,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9956,
+        "neutral": 0.0039,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I opted for the SquareTrade 3-Year Computer Accidental Protection Warranty -LRB- $ 1500-2000 -RRB- which also support `` accidents '' like drops and spills that are NOT covered by AppleCare .",
+    "aspect": "AppleCare",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.713,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0238,
+        "neutral": 0.713,
+        "negative": 0.2632
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9554,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0086,
+        "neutral": 0.0361,
+        "negative": 0.9554
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "It 's been time for a new laptop , and the only debate was which size of the Mac laptops , and whether to spring for the retina display .",
+    "aspect": "size",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9251,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0476,
+        "neutral": 0.0272,
+        "negative": 0.9251
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.4377,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.1556,
+        "neutral": 0.4377,
+        "negative": 0.4067
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "And the fact that Apple is driving the 13 '' RMBP with the Intel4000 graphic chip seems underpowered -LRB- to me .",
+    "aspect": "Intel4000 graphic chip",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.679,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0513,
+        "neutral": 0.679,
+        "negative": 0.2697
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9952,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0045,
+        "negative": 0.9952
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I had the same reasons as most PC users : the price , the overbearing restrictions of OSX and lack of support for games .",
+    "aspect": "OSX",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.606,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0504,
+        "neutral": 0.606,
+        "negative": 0.3436
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9985,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0014,
+        "negative": 0.9985
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Starts up in a hurry and everything is ready to go .",
+    "aspect": "Starts up",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9491,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0359,
+        "neutral": 0.9491,
+        "negative": 0.015
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9847,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9847,
+        "neutral": 0.0144,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Quick and has built in virus control .",
+    "aspect": "built in virus control",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8115,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1746,
+        "neutral": 0.8115,
+        "negative": 0.0139
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.8938,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.8938,
+        "neutral": 0.1048,
+        "negative": 0.0015
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "HOWEVER I chose two day shipping and it took over a week to arrive .",
+    "aspect": "shipping",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9684,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0288,
+        "neutral": 0.9684,
+        "negative": 0.0028
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.897,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0054,
+        "neutral": 0.0975,
+        "negative": 0.897
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "On start up it asks endless questions just so itune can sell you more of their products .",
+    "aspect": "itune",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.466,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.466,
+        "neutral": 0.4601,
+        "negative": 0.0739
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9395,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.001,
+        "neutral": 0.0594,
+        "negative": 0.9395
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I Have been a Pc user for a very long time now but I will get used to this new OS .",
+    "aspect": "OS",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.4932,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4932,
+        "neutral": 0.111,
+        "negative": 0.3958
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8339,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1637,
+        "neutral": 0.8339,
+        "negative": 0.0024
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "One more thing , this mac does NOT come with restore disks and I am not sure if you can make them direct from the mac like you can with newer PC 's , also the charging cables are made of the same cheap material as the iPhone/iPod touch cables .",
+    "aspect": "restore disks",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6175,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0144,
+        "neutral": 0.6175,
+        "negative": 0.3681
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.8701,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0009,
+        "neutral": 0.1289,
+        "negative": 0.8701
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The MAC Mini , wireless keyboard / mouse and a HDMI cable is all I need to get some real work done .",
+    "aspect": "HDMI cable",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9929,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.9929,
+        "neutral": 0.0068,
+        "negative": 0.0003
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.896,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0763,
+        "neutral": 0.896,
+        "negative": 0.0277
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "it has all the features that we expected and the price was good , working well so far .",
+    "aspect": "features",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9392,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0596,
+        "neutral": 0.9392,
+        "negative": 0.0012
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9981,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9981,
+        "neutral": 0.0016,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The only issue came when I tried scanning to the mac .",
+    "aspect": "scanning",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9668,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0131,
+        "neutral": 0.9668,
+        "negative": 0.0201
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9979,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0001,
+        "neutral": 0.0019,
+        "negative": 0.9979
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Apple \"Help\" is a mixed bag .",
+    "aspect": "Apple \"Help\"",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6738,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1273,
+        "neutral": 0.6738,
+        "negative": 0.199
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9966,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0031,
+        "negative": 0.9966
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The only task that this computer would not be good enough for would be gaming , otherwise the integrated Intel 4000 graphics work well for other tasks .",
+    "aspect": "gaming",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9333,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0236,
+        "neutral": 0.9333,
+        "negative": 0.043
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9914,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0027,
+        "neutral": 0.0059,
+        "negative": 0.9914
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .",
+    "aspect": "Audio",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9425,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0522,
+        "neutral": 0.9425,
+        "negative": 0.0053
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9989,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9989,
+        "neutral": 0.0008,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .",
+    "aspect": "video",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9749,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0225,
+        "neutral": 0.9749,
+        "negative": 0.0026
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9941,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9941,
+        "neutral": 0.0052,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I use it mostly for content creation -LRB- Audio , video , photo editing -RRB- and its reliable .",
+    "aspect": "photo editing",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9378,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0582,
+        "neutral": 0.9378,
+        "negative": 0.004
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9982,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9982,
+        "neutral": 0.0016,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Web browsing is very quick with Safari browser .",
+    "aspect": "Safari browser",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9964,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.003,
+        "neutral": 0.9964,
+        "negative": 0.0006
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9353,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9353,
+        "neutral": 0.064,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "! Excelent performance , usability , presentation and time response .",
+    "aspect": "presentation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8826,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0968,
+        "neutral": 0.8826,
+        "negative": 0.0206
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9983,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9983,
+        "neutral": 0.0014,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "! Excelent performance , usability , presentation and time response .",
+    "aspect": "time response",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8037,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1663,
+        "neutral": 0.8037,
+        "negative": 0.03
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9942,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9942,
+        "neutral": 0.005,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "In fact I still use many Legacy programs -LRB- Appleworks , FileMaker Pro , Quicken , Photoshop etc -RRB- !",
+    "aspect": "Legacy programs",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.8944,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.8944,
+        "neutral": 0.0898,
+        "negative": 0.0158
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.999,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0009,
+        "neutral": 0.999,
+        "negative": 0.0001
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "First off , I really do like my MBP ... once used to the OS it is pretty easy to get around , and the overall build is great ... eg the keyboard is one of the best to type on .",
+    "aspect": "OS",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9931,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0053,
+        "neutral": 0.9931,
+        "negative": 0.0016
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.989,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.989,
+        "neutral": 0.0102,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I 'm overall pleased with the interface and the portability of this product .",
+    "aspect": "portability",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5767,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4126,
+        "neutral": 0.5767,
+        "negative": 0.0107
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9951,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9951,
+        "neutral": 0.0036,
+        "negative": 0.0014
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "It 's silent and has a very small footprint on my desk .",
+    "aspect": "footprint",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9105,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0825,
+        "neutral": 0.007,
+        "negative": 0.9105
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9993,
+        "neutral": 0.0003,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "And as for all the fancy finger swipes -- I just gave up and attached a mouse .",
+    "aspect": "finger swipes",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.5511,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.5511,
+        "neutral": 0.0072,
+        "negative": 0.4417
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9866,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0115,
+        "neutral": 0.0019,
+        "negative": 0.9866
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "There were small problems with Mac office .",
+    "aspect": "Mac office",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7875,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0174,
+        "neutral": 0.7875,
+        "negative": 0.1951
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9976,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0001,
+        "neutral": 0.0022,
+        "negative": 0.9976
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "It still works and it 's extremely user friendly , so I would recommend it for new computer user and also for those who are just looking for a more efficient way to do things",
+    "aspect": "works",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.484,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4837,
+        "neutral": 0.484,
+        "negative": 0.0324
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9797,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9797,
+        "neutral": 0.0194,
+        "negative": 0.0009
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I will not be using that slot again .",
+    "aspect": "slot",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5185,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0437,
+        "neutral": 0.5185,
+        "negative": 0.4378
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.997,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0027,
+        "negative": 0.997
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Also , in using the built-in camera , my voice recording for my vlog sounds like the interplanetary transmissions in the `` Star Wars '' saga .",
+    "aspect": "voice recording",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5141,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1091,
+        "neutral": 0.5141,
+        "negative": 0.3768
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0005,
+        "negative": 0.9993
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Here are the things that made me confident with my purchase : Build Quality - Seriously , you ca n't beat a unibody construction .",
+    "aspect": "unibody construction",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5936,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.389,
+        "neutral": 0.5936,
+        "negative": 0.0175
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9957,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9957,
+        "neutral": 0.0038,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The sound was crappy even when you turn up the volume still the same results .",
+    "aspect": "volume",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5527,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0903,
+        "neutral": 0.5527,
+        "negative": 0.357
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9908,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0025,
+        "neutral": 0.0066,
+        "negative": 0.9908
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "OSX Lion is a great performer . . extremely fast and reliable .",
+    "aspect": "OSX Lion",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.615,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.3772,
+        "neutral": 0.615,
+        "negative": 0.0079
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9979,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9979,
+        "neutral": 0.0019,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "3D rendering slows it down considerably .",
+    "aspect": "3D rendering",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8563,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0369,
+        "neutral": 0.8563,
+        "negative": 0.1068
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0004,
+        "negative": 0.9994
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "fast , great screen , beautiful apps for a laptop ; priced at 1100 on the apple website ; amazon had it for 1098 + tax - plus i had a 10 % off coupon from amazon - cost me 998 plus tax - 1070 - OTD !",
+    "aspect": "cost",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.708,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.708,
+        "neutral": 0.049,
+        "negative": 0.243
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7128,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.2832,
+        "neutral": 0.7128,
+        "negative": 0.004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The Like New condition of the iMac MC309LL/A on Amazon is at $ 900 + level only , and it is a Quad-Core 2.5 GHz CPU -LRB- similar to the $ 799 Mini -RRB- , with Radeon HD 6750M 512MB graphic card -LRB- this mini is integrated Intel 4000 card -RRB- , and it even comes with wireless Apple Keyboard and Mouse , all put together in neat and nice package .",
+    "aspect": "Quad-Core 2.5 GHz CPU",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.5471,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.5471,
+        "neutral": 0.4507,
+        "negative": 0.0022
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9904,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0091,
+        "neutral": 0.9904,
+        "negative": 0.0006
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The 2.9ghz dual-core i7 chip really out does itself .",
+    "aspect": "2.9ghz dual-core i7 chip",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.758,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1795,
+        "neutral": 0.758,
+        "negative": 0.0625
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.96,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.96,
+        "neutral": 0.0387,
+        "negative": 0.0013
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "It is pretty snappy and starts up in about 30 seconds which is good enough for me .",
+    "aspect": "starts up",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8532,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1011,
+        "neutral": 0.8532,
+        "negative": 0.0457
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9984,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9984,
+        "neutral": 0.0013,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Not sure on Windows 8 .",
+    "aspect": "Windows 8",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9592,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.002,
+        "neutral": 0.0388,
+        "negative": 0.9592
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9996,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.9996,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I like the Mini Mac it was easy to setup and install , but I am learning as I go and could use a tutorial to learn how to use some of the features I was use to on the PC especially the right mouse click menu .",
+    "aspect": "features",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.7583,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.7583,
+        "neutral": 0.2211,
+        "negative": 0.0207
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9948,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0024,
+        "neutral": 0.9948,
+        "negative": 0.0029
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The SD card reader is slightly recessed and upside down -LRB- the nail slot on the card can not be accessed -RRB- , if this was a self ejecting slot this would not be an issue , but its not .",
+    "aspect": "nail slot on the card",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8291,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0164,
+        "neutral": 0.8291,
+        "negative": 0.1545
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9953,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0045,
+        "negative": 0.9953
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Soft touch , anodized aluminum with laser cut precision and no flaws .",
+    "aspect": "anodized aluminum",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8277,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1661,
+        "neutral": 0.8277,
+        "negative": 0.0061
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.994,
+        "neutral": 0.0056,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "The power plug has to be connected to the power adaptor to charge the battery but wo n't stay connected .",
+    "aspect": "power plug",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8926,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0259,
+        "neutral": 0.8926,
+        "negative": 0.0816
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9879,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0119,
+        "negative": 0.9879
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I tried several monitors and several HDMI cables and this was the case each time .",
+    "aspect": "HDMI cables",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9838,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.9838,
+        "neutral": 0.0158,
+        "negative": 0.0004
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8961,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0592,
+        "neutral": 0.8961,
+        "negative": 0.0447
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "There is no \"tools\" menu .",
+    "aspect": "\"tools\" menu",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.6507,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0227,
+        "neutral": 0.3265,
+        "negative": 0.6507
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8986,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0008,
+        "neutral": 0.8986,
+        "negative": 0.1006
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "It is very fast and has everything that I need except for a word program .",
+    "aspect": "word program",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6807,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0117,
+        "neutral": 0.6807,
+        "negative": 0.3076
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9963,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0006,
+        "neutral": 0.0032,
+        "negative": 0.9963
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Needs a CD/DVD drive and a bigger power switch .",
+    "aspect": "power switch",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9851,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9851,
+        "neutral": 0.0054,
+        "negative": 0.0095
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9501,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.046,
+        "neutral": 0.0039,
+        "negative": 0.9501
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Easy to install also small to leave anywhere at your bedroom also very easy to configure for ADSl cable or wifi .",
+    "aspect": "configure for ADSl cable or wifi",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7829,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.2151,
+        "neutral": 0.7829,
+        "negative": 0.002
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9916,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.9916,
+        "neutral": 0.0081,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Apple no longer includes iDVD with the computer and furthermore , Apple does n't even offer it anymore !",
+    "aspect": "iDVD",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8275,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0297,
+        "neutral": 0.8275,
+        "negative": 0.1427
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9971,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0027,
+        "negative": 0.9971
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "At first , I feel a little bit uncomfortable in using the Mac system .",
+    "aspect": "Mac system",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9678,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0075,
+        "neutral": 0.9678,
+        "negative": 0.0247
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9976,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0021,
+        "negative": 0.9976
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "It just works out of the box and you have a lot of cool software included with the OS .",
+    "aspect": "works",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.526,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4024,
+        "neutral": 0.526,
+        "negative": 0.0716
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9986,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9986,
+        "neutral": 0.001,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Instead , I 'll focus more on the actual performance and feature set of the hardware itself so you can make an educated decision on which Mac to buy .",
+    "aspect": "performance and feature set of the hardware",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.7014,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.7014,
+        "neutral": 0.2772,
+        "negative": 0.0215
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9298,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0689,
+        "neutral": 0.9298,
+        "negative": 0.0013
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Many people complain about the new OS , and it 's urgent for Apple to fix it asap !",
+    "aspect": "OS",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7926,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0494,
+        "neutral": 0.7926,
+        "negative": 0.1579
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.7303,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0016,
+        "neutral": 0.2681,
+        "negative": 0.7303
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Now that I have upgraded to Lion I am much happier about MAC OS and have just bought an iMac for office .",
+    "aspect": "Lion",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9957,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0037,
+        "neutral": 0.9957,
+        "negative": 0.0006
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9984,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9984,
+        "neutral": 0.0013,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "With the softwares supporting the use of other OS makes it much better .",
+    "aspect": "OS",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9763,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9763,
+        "neutral": 0.0221,
+        "negative": 0.0016
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9566,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0427,
+        "neutral": 0.9566,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "Just beware no DVD slot so when I went to install software I had on CD I could n't .",
+    "aspect": "install software",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9489,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0034,
+        "neutral": 0.9489,
+        "negative": 0.0476
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9996,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0002,
+        "negative": 0.9996
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I had to buy a wireless mouse to go with it , as I am old school and hate the pad , but knew that before I bought it , now it works great , need to get adjusted to the key board , as I am used to a bigger one and pounding .",
+    "aspect": "key board",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.8826,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.8826,
+        "neutral": 0.0959,
+        "negative": 0.0215
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0005,
+        "neutral": 0.9994,
+        "negative": 0.0001
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "working with Mac is so much easier , so many cool features .",
+    "aspect": "working",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7832,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2143,
+        "neutral": 0.7832,
+        "negative": 0.0024
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.999,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.999,
+        "neutral": 0.0006,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "A veryimportant feature is Firewire 800 which in my experience works better then USB3 -LRB- in PC enabled with USB3 -RRB- I was not originally sold on the MAC OS I felt it was inferior in many ways To Windows 7 .",
+    "aspect": "Windows 7",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9202,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.069,
+        "neutral": 0.0108,
+        "negative": 0.9202
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.7106,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.7106,
+        "neutral": 0.2826,
+        "negative": 0.0068
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I like iTunes , the apparent security , the Mini form factor , all the nice graphics stuff .",
+    "aspect": "iTunes",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7091,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2687,
+        "neutral": 0.7091,
+        "negative": 0.0221
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9917,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9917,
+        "neutral": 0.008,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "I like iTunes , the apparent security , the Mini form factor , all the nice graphics stuff .",
+    "aspect": "Mini form factor",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9311,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0677,
+        "neutral": 0.9311,
+        "negative": 0.0013
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9504,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9504,
+        "neutral": 0.0469,
+        "negative": 0.0027
+      }
+    }
+  },
+  {
+    "domain": "Laptop14 (Tech)",
+    "text": "packing and everything was perfect",
+    "aspect": "packing",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9195,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0787,
+        "neutral": 0.9195,
+        "negative": 0.0018
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9993,
+        "neutral": 0.0004,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "cons: - casting from android has lag and seems a little unreliable.",
+    "aspect": "casting from android",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5914,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0212,
+        "neutral": 0.5914,
+        "negative": 0.3875
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9722,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0005,
+        "neutral": 0.0273,
+        "negative": 0.9722
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "installation and service is very poor no sign of them yet, keeps on rescheduling from past 3 days.",
+    "aspect": "installation",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9887,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0055,
+        "neutral": 0.9887,
+        "negative": 0.0059
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0005,
+        "negative": 0.9993
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "very good features and sound and hd quality and supported all multimedia features and affordable costing awesome product provide Flipkart unbelievable.",
+    "aspect": "multimedia features",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9852,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0139,
+        "neutral": 0.9852,
+        "negative": 0.0009
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9907,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9907,
+        "neutral": 0.009,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "picture clarity - 4k( youtube & other sources) - awestruck, hds in prime & blueray movies etc were great to watch trying to check the hdr10 & Dolby visions",
+    "aspect": "picture clarity",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6598,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2414,
+        "neutral": 0.6598,
+        "negative": 0.0988
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9993,
+        "neutral": 0.0005,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "he reported that remote may be replaced.",
+    "aspect": "remote",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9925,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0019,
+        "neutral": 0.0056,
+        "negative": 0.9925
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5952,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0132,
+        "neutral": 0.5952,
+        "negative": 0.3916
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "everything is fine accept volume .",
+    "aspect": "volume",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9609,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0246,
+        "neutral": 0.9609,
+        "negative": 0.0145
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9674,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0058,
+        "neutral": 0.0267,
+        "negative": 0.9674
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "hi i got tv last week and in 1 week observation this is my review tv clarity is good if you are using hd setup box wireless connectivity is good because i am using 10 mbps internet within 10 mts range problem is sound clarity is very poor to have good clarity volume no should be more than 50 and remote air mouse is avg",
+    "aspect": "remote air mouse",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9052,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0107,
+        "neutral": 0.0841,
+        "negative": 0.9052
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6273,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.1921,
+        "neutral": 0.6273,
+        "negative": 0.1806
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "superb in installation and demo within stipulated time.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7581,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.235,
+        "neutral": 0.7581,
+        "negative": 0.0068
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9984,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9984,
+        "neutral": 0.0012,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "hi all, this product was in offer for big billion day and i purchased it at very nominal price , very less as compared to their competitors.",
+    "aspect": "price",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9479,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0379,
+        "neutral": 0.0142,
+        "negative": 0.9479
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9968,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9968,
+        "neutral": 0.001,
+        "negative": 0.0022
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "m much fulfilled with the product( lg 42lb5510) and its delivery by Flipkart on 3rd day of booking as promised.",
+    "aspect": "delivery",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6062,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.3859,
+        "neutral": 0.6062,
+        "negative": 0.0079
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9981,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9981,
+        "neutral": 0.0017,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "good in this price and better choice.",
+    "aspect": "price",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8318,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1657,
+        "neutral": 0.8318,
+        "negative": 0.0024
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9929,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9929,
+        "neutral": 0.0063,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "i will post exact review wall mount is too cheep.",
+    "aspect": "wall mount",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9863,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9863,
+        "neutral": 0.002,
+        "negative": 0.0117
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9991,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0006,
+        "negative": 0.9991
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "first of all, thanks for the quick service from Flipkart, booked in the midnight and got it delivered the next day evening, and even Toshiba service was good, installation was done the 2nd day.",
+    "aspect": "delivered",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9415,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0557,
+        "neutral": 0.9415,
+        "negative": 0.0028
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9974,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9974,
+        "neutral": 0.0024,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "first of all, thanks for the quick service from Flipkart, booked in the midnight and got it delivered the next day evening, and even Toshiba service was good, installation was done the 2nd day.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.995,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0029,
+        "neutral": 0.995,
+        "negative": 0.0021
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.8118,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.8118,
+        "neutral": 0.1774,
+        "negative": 0.0108
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "and i get the one day installation .",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9182,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0521,
+        "neutral": 0.9182,
+        "negative": 0.0297
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.987,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.987,
+        "neutral": 0.0123,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "i give this product 10 on 10 for viewing experience and wish a slight improvement require on user interface design.",
+    "aspect": "viewing experience",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7561,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2407,
+        "neutral": 0.7561,
+        "negative": 0.0033
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9992,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9992,
+        "neutral": 0.0005,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "good product, good job with regards to delivery and even installation .",
+    "aspect": "delivery",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9961,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0032,
+        "neutral": 0.9961,
+        "negative": 0.0007
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.999,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.999,
+        "neutral": 0.0008,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "good product, good job with regards to delivery and even installation .",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9936,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0042,
+        "neutral": 0.9936,
+        "negative": 0.0021
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.999,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.999,
+        "neutral": 0.0007,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "and even the frame of the tv is so thin that it looks like a premium tv.",
+    "aspect": "frame",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9782,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0159,
+        "neutral": 0.0059,
+        "negative": 0.9782
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9801,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9801,
+        "neutral": 0.0095,
+        "negative": 0.0104
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "amazing picture quality also very good installation and demo by Flipkart.",
+    "aspect": "demo",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9945,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0051,
+        "neutral": 0.9945,
+        "negative": 0.0004
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9982,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9982,
+        "neutral": 0.0013,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "they deliver my mi led in the given time period,but Jeeves service for installation is very bad.",
+    "aspect": "installation",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9088,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0038,
+        "neutral": 0.9088,
+        "negative": 0.0874
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9987,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0006,
+        "neutral": 0.0008,
+        "negative": 0.9987
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "it's picture quality 9/10, sound 4/10 .",
+    "aspect": "picture quality",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6077,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2666,
+        "neutral": 0.6077,
+        "negative": 0.1257
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9991,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9991,
+        "neutral": 0.0005,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "picture clarity and sound is great.",
+    "aspect": "picture clarity",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9271,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0662,
+        "neutral": 0.9271,
+        "negative": 0.0067
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9994,
+        "neutral": 0.0004,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "color reproduction was too good ( owe that to the a + grade panel).",
+    "aspect": "color reproduction",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9854,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0062,
+        "neutral": 0.0084,
+        "negative": 0.9854
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9988,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.9988,
+        "neutral": 0.0007,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "worst worst worst delivery and installation service from Flipkart.",
+    "aspect": "installation",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9849,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0018,
+        "neutral": 0.9849,
+        "negative": 0.0133
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0005,
+        "negative": 0.9993
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "the computer ( laptop)can be connected via hdmi .",
+    "aspect": "hdmi",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.544,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.544,
+        "neutral": 0.453,
+        "negative": 0.003
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9488,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0181,
+        "neutral": 0.9488,
+        "negative": 0.0332
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "sound clarity and display quality is average.",
+    "aspect": "display quality",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9351,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0558,
+        "neutral": 0.0091,
+        "negative": 0.9351
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9974,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0023,
+        "neutral": 0.9974,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "picture quality is easy on the eyes & i ran it on standard video cables( 480p),no idea about hd quality .",
+    "aspect": "hd quality",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9313,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0147,
+        "neutral": 0.054,
+        "negative": 0.9313
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9927,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0032,
+        "neutral": 0.9927,
+        "negative": 0.0041
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "pros - its a ips panel of lg so no doubt on picture clarity .",
+    "aspect": "picture clarity",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.5303,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1369,
+        "neutral": 0.3328,
+        "negative": 0.5303
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9991,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9991,
+        "neutral": 0.0006,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "there is lot of issues with installation procedure n process adopted.",
+    "aspect": "installation",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8758,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0086,
+        "neutral": 0.8758,
+        "negative": 0.1157
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9996,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0001,
+        "neutral": 0.0003,
+        "negative": 0.9996
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "good in this price need improvement in sound .",
+    "aspect": "sound",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5767,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.2448,
+        "neutral": 0.5767,
+        "negative": 0.1785
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9516,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0232,
+        "neutral": 0.0252,
+        "negative": 0.9516
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "they cancelled installation themself.",
+    "aspect": "installation",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8712,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0049,
+        "neutral": 0.8712,
+        "negative": 0.1239
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9967,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0031,
+        "negative": 0.9967
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "so please improve packing quality both in & out of the box.",
+    "aspect": "packing quality",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9324,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9324,
+        "neutral": 0.0088,
+        "negative": 0.0588
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9991,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0007,
+        "neutral": 0.0003,
+        "negative": 0.9991
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "best performance mi smart led tv picture quality 4k clarity bluetooth remote all rounder working with mi remote set top box connect to ir blaster.",
+    "aspect": "4k clarity",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5527,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4255,
+        "neutral": 0.5527,
+        "negative": 0.0218
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9985,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9985,
+        "neutral": 0.0012,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "only drawback i see is Netflix support but vu can't do anything about it since it is between Google and Netflix.",
+    "aspect": "Netflix support",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.8043,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.8043,
+        "neutral": 0.1335,
+        "negative": 0.0622
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9988,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0009,
+        "negative": 0.9988
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "picture quality is very good , doesn't support all video types .",
+    "aspect": "video types",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9413,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0166,
+        "neutral": 0.9413,
+        "negative": 0.0421
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9423,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0013,
+        "neutral": 0.0564,
+        "negative": 0.9423
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "even i have got problem in motherboard .",
+    "aspect": "motherboard",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6256,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0084,
+        "neutral": 0.6256,
+        "negative": 0.366
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9992,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0001,
+        "neutral": 0.0006,
+        "negative": 0.9992
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "same day installation .",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9601,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0301,
+        "neutral": 0.9601,
+        "negative": 0.0097
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9949,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9949,
+        "neutral": 0.0042,
+        "negative": 0.0009
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "compare to vu visuals also not good sound quality is better video quality is too bad.",
+    "aspect": "visuals",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9573,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0148,
+        "neutral": 0.9573,
+        "negative": 0.0279
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9979,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0019,
+        "negative": 0.9979
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "compare to vu visuals also not good sound quality is better video quality is too bad.",
+    "aspect": "video quality",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9024,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9024,
+        "neutral": 0.0106,
+        "negative": 0.0869
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9984,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0008,
+        "neutral": 0.0007,
+        "negative": 0.9984
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "as far as sound quality is concerned then everybody who is going to purchase led tv of any brand any model must bear one thing in mind that due to the slim design of led tvs it is practically not possible to incorporate good quality speakers into them because good quality speakers consume space and are always wide ( voluminous).",
+    "aspect": "quality speakers",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6208,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.3222,
+        "neutral": 0.6208,
+        "negative": 0.057
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.8996,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0302,
+        "neutral": 0.0702,
+        "negative": 0.8996
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "shipment was on time - on same day with an hr or 2 installation guy installed and showed the demo .",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9942,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0053,
+        "neutral": 0.9942,
+        "negative": 0.0005
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9991,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9991,
+        "neutral": 0.0007,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "nice audio and video clarity, good and quick response from installation team.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9122,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0862,
+        "neutral": 0.9122,
+        "negative": 0.0016
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.7361,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.7361,
+        "neutral": 0.2619,
+        "negative": 0.002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "video quality and sound quality is also good.",
+    "aspect": "video quality",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5643,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4286,
+        "neutral": 0.5643,
+        "negative": 0.0071
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9994,
+        "neutral": 0.0004,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "thanks to vu for the tv, Flipkart for the fast delivery and Jeeves for even quicker service for installation .",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9953,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0042,
+        "neutral": 0.9953,
+        "negative": 0.0004
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.996,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.996,
+        "neutral": 0.0036,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "tv remote is not working and there is no support from customer care .",
+    "aspect": "customer care",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8564,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0106,
+        "neutral": 0.8564,
+        "negative": 0.133
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9913,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0085,
+        "negative": 0.9913
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "Flipkart delivered the product on time and the installation was done the next day.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6987,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2798,
+        "neutral": 0.6987,
+        "negative": 0.0215
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9973,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9973,
+        "neutral": 0.0024,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "nice product but wall mount stand should be more good and phone can't connect to tv by using usb wire of phone.",
+    "aspect": "wall mount stand",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.7786,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.7786,
+        "neutral": 0.0378,
+        "negative": 0.1836
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9939,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0054,
+        "neutral": 0.0008,
+        "negative": 0.9939
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "excellent picture quality, hd content when played on tv seems like as if I am watching it on small theatre screen, this is because of 120 hz refresh rate.",
+    "aspect": "hd content",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8801,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0639,
+        "neutral": 0.8801,
+        "negative": 0.056
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9984,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9984,
+        "neutral": 0.0011,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "ordered it on 24 oct and got the delivery and installation done on the 25 oct.",
+    "aspect": "delivery",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9551,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0125,
+        "neutral": 0.9551,
+        "negative": 0.0324
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9754,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9754,
+        "neutral": 0.0238,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "ordered it on 24 oct and got the delivery and installation done on the 25 oct.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9364,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0189,
+        "neutral": 0.9364,
+        "negative": 0.0447
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9899,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9899,
+        "neutral": 0.0094,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "purchase in February now getting 2 small blue patches on screen .",
+    "aspect": "screen",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9804,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.9804,
+        "neutral": 0.0164,
+        "negative": 0.0031
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9996,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0002,
+        "negative": 0.9996
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "worth the price , sound could be better.",
+    "aspect": "price",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9895,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0061,
+        "neutral": 0.9895,
+        "negative": 0.0044
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.999,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.999,
+        "neutral": 0.0004,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "best in price, good service and installation .",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.944,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0533,
+        "neutral": 0.944,
+        "negative": 0.0027
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9995,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9995,
+        "neutral": 0.0004,
+        "negative": 0.0001
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "the buil quality is okay-ish.",
+    "aspect": "buil quality",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.7962,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.7962,
+        "neutral": 0.1537,
+        "negative": 0.0501
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5214,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4731,
+        "neutral": 0.5214,
+        "negative": 0.0055
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "coming to the picture clarity , the black levels are satisfactory for a budget television.",
+    "aspect": "picture clarity",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9818,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0122,
+        "neutral": 0.9818,
+        "negative": 0.006
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9822,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9822,
+        "neutral": 0.0172,
+        "negative": 0.0006
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "cons:. need additional antenna to listen fm radio, this feature is unnessary.",
+    "aspect": "antenna",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9812,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.007,
+        "neutral": 0.9812,
+        "negative": 0.0118
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9992,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0006,
+        "negative": 0.9992
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "apps - all the apps play very smoothly like as if you are operating an android app.",
+    "aspect": "apps",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8699,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1093,
+        "neutral": 0.8699,
+        "negative": 0.0207
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9936,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9936,
+        "neutral": 0.0059,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "picture quality and sound quality is very good.",
+    "aspect": "picture quality",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9432,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0523,
+        "neutral": 0.9432,
+        "negative": 0.0045
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9992,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9992,
+        "neutral": 0.0005,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "the tv looks excellent, picture ,sound etc.",
+    "aspect": "picture",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9048,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.086,
+        "neutral": 0.9048,
+        "negative": 0.0092
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9913,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9913,
+        "neutral": 0.0081,
+        "negative": 0.0005
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "this product according to cost is better like as picture quality , on time delivery and installation.",
+    "aspect": "picture quality",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5016,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.484,
+        "neutral": 0.5016,
+        "negative": 0.0145
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9995,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9995,
+        "neutral": 0.0003,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "audio is just ok, don't expect a rich sound experience.",
+    "aspect": "audio",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.5546,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.5546,
+        "neutral": 0.2133,
+        "negative": 0.2321
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9413,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0566,
+        "neutral": 0.9413,
+        "negative": 0.0022
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "audio is just ok, don't expect a rich sound experience.",
+    "aspect": "sound",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.5691,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.5691,
+        "neutral": 0.4227,
+        "negative": 0.0082
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6019,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.1292,
+        "neutral": 0.6019,
+        "negative": 0.2689
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "big and confusing air mouse is not there but an option is there but its bit laggy picture 4/5 audio 4.5/5 connectivity 5/5 remote 3/5 battery provided so a good thing mira cast 3/5 plus as bonus Google play store and aptoide both working seemlessly update after a month use its a great tv in limited budget section go for it without second thought.",
+    "aspect": "picture",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9743,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0207,
+        "neutral": 0.005,
+        "negative": 0.9743
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9976,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.9976,
+        "neutral": 0.0013,
+        "negative": 0.0011
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "big and confusing air mouse is not there but an option is there but its bit laggy picture 4/5 audio 4.5/5 connectivity 5/5 remote 3/5 battery provided so a good thing mira cast 3/5 plus as bonus Google play store and aptoide both working seemlessly update after a month use its a great tv in limited budget section go for it without second thought.",
+    "aspect": "audio",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9526,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0376,
+        "neutral": 0.0098,
+        "negative": 0.9526
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9992,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.9992,
+        "neutral": 0.0005,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "the tv mother board problem in with in a month.",
+    "aspect": "tv mother board",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.955,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0101,
+        "neutral": 0.955,
+        "negative": 0.0349
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9972,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.0024,
+        "negative": 0.9972
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "picture quality and sound quality are so excellent .",
+    "aspect": "picture quality",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7169,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2776,
+        "neutral": 0.7169,
+        "negative": 0.0055
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.999,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.999,
+        "neutral": 0.0006,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "good but live video in Miracast not clear pictures",
+    "aspect": "Miracast",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8408,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0451,
+        "neutral": 0.8408,
+        "negative": 0.1141
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9957,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0007,
+        "neutral": 0.0037,
+        "negative": 0.9957
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "operation of tv is user friendly & air mouse is like cherry on cake.",
+    "aspect": "operation of tv",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9809,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0163,
+        "neutral": 0.9809,
+        "negative": 0.0028
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9992,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9992,
+        "neutral": 0.0006,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "the installation was done on the same day in spite of 2 ? 5 days time period.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9757,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0104,
+        "neutral": 0.9757,
+        "negative": 0.0139
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9994,
+        "neutral": 0.0004,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "it came with table stand, flexi wall mount was brought by installation guy for no additional cost.",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9923,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0058,
+        "neutral": 0.9923,
+        "negative": 0.0019
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9746,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9746,
+        "neutral": 0.0173,
+        "negative": 0.0081
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "ports at the back of panel are creating problem.",
+    "aspect": "ports at the back of panel",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9159,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0153,
+        "neutral": 0.9159,
+        "negative": 0.0689
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9516,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0008,
+        "neutral": 0.0476,
+        "negative": 0.9516
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "verdict about the screen & picture quality - 5 stars ( it meets the expectation )",
+    "aspect": "picture quality",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8023,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1813,
+        "neutral": 0.8023,
+        "negative": 0.0163
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9776,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9776,
+        "neutral": 0.0217,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "worth product in market for 15k range Kodak have to improve the sound and pictures side.",
+    "aspect": "pictures",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.5985,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.5985,
+        "neutral": 0.089,
+        "negative": 0.3125
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9187,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0051,
+        "neutral": 0.0762,
+        "negative": 0.9187
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "no hdmi cable and av cable i suggest go to mi telivision.",
+    "aspect": "hdmi cable",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5632,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0234,
+        "neutral": 0.5632,
+        "negative": 0.4134
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9944,
+      "routed_expert": "home",
+      "probabilities": {
+        "positive": 0.0012,
+        "neutral": 0.0044,
+        "negative": 0.9944
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "no hdmi cable and av cable i suggest go to mi telivision.",
+    "aspect": "av cable",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9616,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.017,
+        "neutral": 0.9616,
+        "negative": 0.0214
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9627,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0005,
+        "neutral": 0.0368,
+        "negative": 0.9627
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "user interface - user friendly user interface , easy to understand, anyone can master handling tv in about 10-15 minutes.",
+    "aspect": "user interface",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8823,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1082,
+        "neutral": 0.8823,
+        "negative": 0.0095
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9953,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9953,
+        "neutral": 0.0041,
+        "negative": 0.0006
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "user interface - user friendly user interface , easy to understand, anyone can master handling tv in about 10-15 minutes.",
+    "aspect": "user interface",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8823,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1082,
+        "neutral": 0.8823,
+        "negative": 0.0095
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9953,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9953,
+        "neutral": 0.0041,
+        "negative": 0.0006
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "Flipkart i receive my order after two days installation tv by lg service good service by Flipkart",
+    "aspect": "installation",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9935,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0046,
+        "neutral": 0.9935,
+        "negative": 0.0019
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9403,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9403,
+        "neutral": 0.0584,
+        "negative": 0.0013
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "Flipkart i receive my order after two days installation tv by lg service good service by Flipkart",
+    "aspect": "service",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6901,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.2997,
+        "neutral": 0.6901,
+        "negative": 0.0102
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9992,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9992,
+        "neutral": 0.0006,
+        "negative": 0.0002
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "bad sound, too bright, okayish picture but best in price .",
+    "aspect": "price",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.598,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.371,
+        "neutral": 0.0309,
+        "negative": 0.598
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9993,
+        "neutral": 0.0003,
+        "negative": 0.0003
+      }
+    }
+  },
+  {
+    "domain": "Television (Home)",
+    "text": "a tv can be a bit less smarter , forgot to mention excellent Netflix support & supports 500 gb hard disk through usb",
+    "aspect": "usb",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5391,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.4558,
+        "neutral": 0.5391,
+        "negative": 0.0051
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.8952,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.8952,
+        "neutral": 0.1029,
+        "negative": 0.0018
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "cloth are good but when we're clean the tshirt then colored are released.",
+    "aspect": "colored",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5305,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0144,
+        "neutral": 0.5305,
+        "negative": 0.4551
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9988,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0004,
+        "neutral": 0.0008,
+        "negative": 0.9988
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "the product looks as it is on the display on Flipkart.",
+    "aspect": "product looks",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5793,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1568,
+        "neutral": 0.5793,
+        "negative": 0.2639
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9417,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9417,
+        "neutral": 0.0504,
+        "negative": 0.0079
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "the fabric material of 1 t shirt was polyester.",
+    "aspect": "fabric material",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.8461,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.1076,
+        "neutral": 0.0463,
+        "negative": 0.8461
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5086,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0508,
+        "neutral": 0.5086,
+        "negative": 0.4406
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "fabric can be better but not a bad deal at all.",
+    "aspect": "fabric",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.8494,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.8494,
+        "neutral": 0.0202,
+        "negative": 0.1304
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.8744,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0817,
+        "neutral": 0.0439,
+        "negative": 0.8744
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "#suprb# look colour fabric fitting.",
+    "aspect": "fabric",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.8646,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.1019,
+        "neutral": 0.0335,
+        "negative": 0.8646
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9851,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.9851,
+        "neutral": 0.0112,
+        "negative": 0.0037
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "after one wash colour will start to wash out and quality of cloth is too worst.",
+    "aspect": "colour",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6953,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0257,
+        "neutral": 0.6953,
+        "negative": 0.279
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0001,
+        "neutral": 0.0006,
+        "negative": 0.9993
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "nice tshirt perfiect fitting and matching .",
+    "aspect": "matching",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6391,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.3544,
+        "neutral": 0.6391,
+        "negative": 0.0065
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9741,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9741,
+        "neutral": 0.0253,
+        "negative": 0.0006
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "its quality is awesome and fair to use .",
+    "aspect": "use",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6182,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.3417,
+        "neutral": 0.6182,
+        "negative": 0.0401
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9917,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9917,
+        "neutral": 0.0079,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "quality of cloth and fitting is also good.",
+    "aspect": "quality of cloth",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5893,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.4036,
+        "neutral": 0.5893,
+        "negative": 0.0071
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9984,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9984,
+        "neutral": 0.0012,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "cloth is fine quality cotton.",
+    "aspect": "cloth",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5756,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.3691,
+        "neutral": 0.5756,
+        "negative": 0.0553
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9979,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9979,
+        "neutral": 0.0017,
+        "negative": 0.0004
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "graphic should be more visible .",
+    "aspect": "graphic",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.5422,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.5422,
+        "neutral": 0.3237,
+        "negative": 0.1341
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9987,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0003,
+        "neutral": 0.001,
+        "negative": 0.9987
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "the material of the tshirt was just ok.",
+    "aspect": "material of the tshirt",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.996,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.996,
+        "neutral": 0.0028,
+        "negative": 0.0012
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5831,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0394,
+        "neutral": 0.5831,
+        "negative": 0.3774
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "it took a long time almost 12 days to get delivered .",
+    "aspect": "delivered",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9083,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.004,
+        "neutral": 0.9083,
+        "negative": 0.0877
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9347,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0006,
+        "neutral": 0.0647,
+        "negative": 0.9347
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "thanks Flipkart to giving me some discount via mobile app and before time delivery .",
+    "aspect": "delivery",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9107,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0882,
+        "neutral": 0.9107,
+        "negative": 0.0011
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9993,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9993,
+        "neutral": 0.0005,
+        "negative": 0.0001
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "only design best but material quality and fitting third class.",
+    "aspect": "material quality",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9957,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.9957,
+        "neutral": 0.0028,
+        "negative": 0.0014
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9884,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0067,
+        "neutral": 0.0049,
+        "negative": 0.9884
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "only onewash after colour gone.",
+    "aspect": "colour",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.6614,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0124,
+        "neutral": 0.6614,
+        "negative": 0.3262
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9994,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0001,
+        "neutral": 0.0005,
+        "negative": 0.9994
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "design and color as shown.",
+    "aspect": "design",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.7813,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.1414,
+        "neutral": 0.7813,
+        "negative": 0.0773
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9913,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9913,
+        "neutral": 0.0079,
+        "negative": 0.0008
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "but tshirt material is average.",
+    "aspect": "tshirt material",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "negative",
+      "confidence": 0.9902,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.003,
+        "neutral": 0.0068,
+        "negative": 0.9902
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.5354,
+      "routed_expert": "apparel",
+      "probabilities": {
+        "positive": 0.0275,
+        "neutral": 0.5354,
+        "negative": 0.4371
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "very poor quality and the graphics is easily scratchable.",
+    "aspect": "graphics",
+    "gold": "negative",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9982,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.9982,
+        "neutral": 0.0011,
+        "negative": 0.0007
+      }
+    },
+    "deberta": {
+      "sentiment": "negative",
+      "confidence": 0.9996,
+      "routed_expert": "tech",
+      "probabilities": {
+        "positive": 0.0002,
+        "neutral": 0.0002,
+        "negative": 0.9996
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "good quality at reasonable price .",
+    "aspect": "price",
+    "gold": "neutral",
+    "roberta": {
+      "sentiment": "positive",
+      "confidence": 0.9285,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9285,
+        "neutral": 0.0203,
+        "negative": 0.0512
+      }
+    },
+    "deberta": {
+      "sentiment": "neutral",
+      "confidence": 0.9954,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0039,
+        "neutral": 0.9954,
+        "negative": 0.0007
+      }
+    }
+  },
+  {
+    "domain": "T-Shirt (Apparel)",
+    "text": "fits me well nice fabric good.",
+    "aspect": "fits",
+    "gold": "positive",
+    "roberta": {
+      "sentiment": "neutral",
+      "confidence": 0.8793,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.0986,
+        "neutral": 0.8793,
+        "negative": 0.0221
+      }
+    },
+    "deberta": {
+      "sentiment": "positive",
+      "confidence": 0.9962,
+      "routed_expert": "fallback",
+      "probabilities": {
+        "positive": 0.9962,
+        "neutral": 0.0035,
+        "negative": 0.0003
+      }
+    }
+  }
+]

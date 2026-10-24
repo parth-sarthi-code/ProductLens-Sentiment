@@ -13,10 +13,13 @@ Usage:
 """
 
 import argparse
+import random
 from pathlib import Path
+import numpy as np
 import yaml
 import pandas as pd
 import torch
+from sklearn.model_selection import GroupShuffleSplit
 from transformers import AutoTokenizer
 
 from productlens.sentiment.model import AspectTargetedSentimentModel
@@ -25,6 +28,14 @@ from productlens.training.trainer import AspectSentimentTrainer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 CONFIG_PATH = BASE_DIR / "configs/training_configs.yaml"
+
+
+def set_seed(seed: int = 42) -> None:
+    """Set all random seeds for reproducibility."""
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
 
 
 def train_model_from_config(model_key: str, config: dict, global_defaults: dict):
@@ -44,10 +55,15 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
     if val_path_str and (BASE_DIR / val_path_str).exists():
         val_df = pd.read_parquet(BASE_DIR / val_path_str)
     else:
-        # 10% stratified validation split if separate val file not present
-        val_size = min(len(train_df) // 10, 150)
-        val_df = train_df.iloc[:val_size]
-        train_df = train_df.iloc[val_size:]
+        # Seeded, stratified, group-aware split (groups on 'text' to prevent
+        # multi-aspect reviews from appearing on both sides of the split).
+        seed = global_defaults.get("seed", 42)
+        splitter = GroupShuffleSplit(n_splits=1, test_size=0.10, random_state=seed)
+        train_idx, val_idx = next(
+            splitter.split(train_df, train_df["sentiment"], groups=train_df["text"])
+        )
+        val_df   = train_df.iloc[val_idx].reset_index(drop=True)
+        train_df = train_df.iloc[train_idx].reset_index(drop=True)
 
     print(f"Loaded Train Samples: {len(train_df)} | Validation Samples: {len(val_df)}")
 
@@ -95,7 +111,10 @@ def main():
         help="Specify which model to generate",
     )
     parser.add_argument("--all", action="store_true", help="Generate all 4 models sequentially")
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
     args = parser.parse_args()
+
+    set_seed(args.seed)
 
     with open(CONFIG_PATH, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)

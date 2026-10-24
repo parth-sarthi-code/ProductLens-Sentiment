@@ -12,6 +12,8 @@ global_defaults:
   warmup_ratio: 0.10
   batch_size: 16
   max_length: 128
+  # Reproducibility seed — passed to train_all_experts.py and GroupShuffleSplit
+  seed: 42
 
 models:
   generic_foundation:
@@ -23,7 +25,8 @@ models:
     epochs: 5
     eval_every_steps: 150
     patience: 4
-    benchmark_accuracy: 84.21
+    # benchmark_accuracy is not stored here — regenerate with:
+    #   python scripts/evaluate_comparison.py
 
   expert_tech:
     domain: "Tech & Hardware (SemEval Laptop14)"
@@ -33,7 +36,6 @@ models:
     epochs: 6
     eval_every_steps: 50
     patience: 5
-    benchmark_accuracy: 84.17
 
   expert_home:
     domain: "Home Electronics & Appliances (Television)"
@@ -43,7 +45,6 @@ models:
     epochs: 5
     eval_every_steps: 50
     patience: 5
-    benchmark_accuracy: 89.81
 
   expert_apparel:
     domain: "Apparel & Fashion (T-Shirt)"
@@ -53,4 +54,3 @@ models:
     epochs: 5
     eval_every_steps: 50
     patience: 5
-    benchmark_accuracy: 94.07
