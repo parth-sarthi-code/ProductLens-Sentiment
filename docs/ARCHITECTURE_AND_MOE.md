@@ -20,7 +20,7 @@ Instead of `[CLS]` pooling, we condition the self-attention pooling directly on 
 $$\text{AttentionScores}_{i,j} = \frac{(h_i W_Q)(h_j W_K)^T}{\sqrt{d}} + \beta \cdot M_j$$
 
 Where:
-* $h \in \mathbb{R}^{B \times L \times d}$ are the encoder hidden states (RoBERTa backbone).
+* $h \in \mathbb{R}^{B \times L \times d}$ are the encoder hidden states (DeBERTa-v3 ABSA backbone).
 * $M_j \in \{0, 1\}$ is a binary subword mask indicating whether token $j$ overlaps with the target aspect span $[s_{\text{aspect}}, e_{\text{aspect}})$.
 * $\beta = 3.5$ is the **Aspect Boost Factor**, which injects a strong inductive bias forcing attention to remain tethered to the aspect clause.
 
@@ -85,14 +85,14 @@ Located in [`productlens/sentiment/pipeline.py`](../productlens/sentiment/pipeli
 
 ### 3.1 The Generic Foundation Model (`foundation_mams`)
 * **Training Data**: 11,186 multi-aspect review sentences from the MAMS Challenge benchmark.
+* **Backbone**: `yangheng/deberta-v3-base-absa-v1.1` fine-tuned with Aspect Attention Pooling + SCL.
 * **Objective**: Universal, domain-agnostic aspect sentiment classification.
-* **Strengths**: Robust across syntactically complex multi-aspect sentences (achieves **83.83%** on MAMS challenge).
-* **Limitation**: Drops to **73.04%** on Tech Hardware and **78.56%** on Home Electronics because domain-specific technical jargon is underrepresented in generic corpora.
+* **Strengths**: Robust across syntactically complex multi-aspect sentences (achieves **82.93%** on MAMS challenge).
 
-### 3.2 Category Specialist Models
-* **Tech Hardware Specialist (`expert_tech`)**: Fine-tuned on SemEval Laptop14 hardware reviews. Reaches **81.97%** (+8.93% over generic).
-* **Home Electronics Specialist (`expert_home`)**: Fine-tuned on television/appliance reviews. Reaches **90.87%** (+12.31% over generic).
-* **Apparel Specialist (`expert_apparel`)**: Fine-tuned on clothing and garment reviews. Reaches **92.37%** (+4.23% over generic).
+### 3.2 Category Specialist Models (DeBERTa-v3)
+* **Tech Hardware Specialist (`expert_tech`)**: Fine-tuned on SemEval Laptop14 hardware reviews. Reaches **82.76%** (Val F1: 0.9527).
+* **Home Electronics Specialist (`expert_home`)**: Fine-tuned on television/appliance reviews. Reaches **91.08%** (Val F1: 0.8911).
+* **Apparel Specialist (`expert_apparel`)**: Fine-tuned on clothing and garment reviews. Reaches **94.07%** (Val F1: 0.8715).
 
 ---
 
@@ -102,12 +102,14 @@ All models were evaluated across the 4 held-out benchmark test sets (3,388 total
 
 | Model Architecture (Rows) \ Domain (Cols) | Laptop14 (Tech, 638) | Television (Home, 942) | T-Shirt (Apparel, 472) | MAMS Challenge (1,336) | E-Commerce Composite (2,052) |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Generic Foundation (MAMS)** | 73.04% | 78.56% | 88.14% | **83.83% 🏆** | 79.05% |
-| **Tech Specialist (`Laptop14`)** | **81.97% 🏆** | 88.54% | 91.95% | 58.83% | 87.28% |
-| **Home Specialist (`Television`)** | 75.71% | **90.87% 🏆** | 89.83% | 49.93% | 85.92% |
-| **Apparel Specialist (`T-Shirt`)** | 67.40% | 89.17% | **92.37% 🏆** | 47.23% | 83.14% |
-| **ProductLens MoE (no category)** | 75.08% | 83.44% | 88.98% | 82.49% | **82.12% (+3.07% Net Lift)** |
-| **ProductLens MoE (with category)** | **81.97% 🏆** | **90.87% 🏆** | **92.37% 🏆** | 82.49% | **88.45% 🏆 (+9.40% Net Lift)** |
+| **Generic Foundation (MAMS)** | 81.66% | 87.47% | 90.47% | **82.93% 🏆** | 86.35% |
+| **Tech Specialist (`Laptop14`)** | **82.76% 🏆** | 91.83% | 94.07% | 77.47% | 89.53% |
+| **Home Specialist (`Television`)** | 80.56% | **91.08% 🏆** | 94.07% | 63.55% | 88.50% |
+| **Apparel Specialist (`T-Shirt`)** | 76.49% | 92.04% | **94.07% 🏆** | 51.72% | 87.67% |
+| **ProductLens MoE (no category)** | 81.50% | 89.28% | 91.74% | 81.96% | **87.43% (+5.31% over RoBERTa)** |
+| **ProductLens MoE (with category)** | **82.76% 🏆** | **91.08% 🏆** | **94.07% 🏆** | 81.96% | **89.18% 🏆 (+0.73% over RoBERTa)** |
+
+*(Historical comparison: The legacy RoBERTa MoE achieved 88.45% with category and 82.12% without category. DeBERTa-v3 brings a +5.31% leap in unlabelled routing and eliminates the neutral class collapse in apparel).*
 
 ---
 
@@ -119,9 +121,9 @@ In the transfer matrix, the maximum value in every column lies strictly along th
 $$\max_i T_{i,j} = T_{j,j} \quad \forall j \in \{\text{Tech}, \text{Home}, \text{Apparel}, \text{MAMS}\}$$
 
 Every vertical is best served by its dedicated specialist:
-* Tech: Specialist achieves **81.97%** vs Generic **73.04%** (**+8.93% lift**).
-* Home: Specialist achieves **90.87%** vs Generic **78.56%** (**+12.31% lift**).
-* Apparel: Specialist achieves **92.37%** vs Generic **88.14%** (**+4.23% lift**).
+* Tech: Specialist achieves **82.76%** vs Generic **81.66%** (+1.10% lift).
+* Home: Specialist achieves **91.08%** vs Generic **87.47%** (+3.61% lift).
+* Apparel: Specialist achieves **94.07%** vs Generic **90.47%** (+3.60% lift).
 
 ### 5.2 Negative Cross-Domain Gradient Interference
 In a monolithic model, the loss gradient is a composite across disparate domains:

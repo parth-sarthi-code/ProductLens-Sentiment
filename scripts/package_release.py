@@ -16,10 +16,10 @@ MODELS_DIR = BASE_DIR / "models"
 RELEASE_DIR = BASE_DIR / "release"
 
 DEBERTA_RELEASE_FILES = {
-    "expert_tech": MODELS_DIR / "category_experts_deberta/expert_tech/best_model.pt",
-    "expert_home": MODELS_DIR / "category_experts_deberta/expert_home/best_model.pt",
-    "expert_apparel": MODELS_DIR / "category_experts_deberta/expert_apparel/best_model.pt",
-    "foundation_mams": MODELS_DIR / "comparison/deberta_v3_mams/best_model.pt",
+    "expert_tech": MODELS_DIR / "category_experts/expert_tech/best_model.pt",
+    "expert_home": MODELS_DIR / "category_experts/expert_home/best_model.pt",
+    "expert_apparel": MODELS_DIR / "category_experts/expert_apparel/best_model.pt",
+    "foundation_mams": MODELS_DIR / "category_experts/foundation_mams/best_model.pt",
 }
 
 

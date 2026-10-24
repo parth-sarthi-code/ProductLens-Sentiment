@@ -8,7 +8,7 @@ This document confirms that **every single model in the ProductLens MoE platform
 
 | Pipeline Component | Source File Location | Purpose & Mechanics |
 | :--- | :--- | :--- |
-| **Neural Backbone & Attention Pooling** | [`productlens/sentiment/model.py`](../productlens/sentiment/model.py) | RoBERTa encoder, `AspectTargetedAttentionPooler` ($\beta=3.5$), 128-dim projection head, and classification MLP. |
+| **Neural Backbone & Attention Pooling** | [`productlens/sentiment/model.py`](../productlens/sentiment/model.py) | DeBERTa-v3 ABSA encoder (`yangheng/deberta-v3-base-absa-v1.1`), `AspectTargetedAttentionPooler` ($\beta=3.5$), 128-dim projection head, and classification MLP. |
 | **Supervised Contrastive Loss** | [`productlens/training/loss.py`](../productlens/training/loss.py) | `JointABSALoss` combining class-weighted cross-entropy with temperature-scaled SupCon ($\tau=0.07$, $\lambda=0.10$). |
 | **Subword Span Alignment** | [`productlens/training/dataset.py`](../productlens/training/dataset.py) | Tokenizes review text and creates exact subword binary masks for target aspect spans. |
 | **End-to-End Trainer** | [`productlens/training/trainer.py`](../productlens/training/trainer.py) | Optimization loop with differential learning rates, linear warmup, sub-epoch validation, and early stopping. |
@@ -28,44 +28,44 @@ This document confirms that **every single model in the ProductLens MoE platform
   ```bash
   python scripts/train_all_experts.py --model generic
   ```
-* **Output Artifact**: `models/category_experts/foundation_mams/best_model.pt`
-* **Benchmark Result**: **84.21%** on MAMS Challenge.
+* **Output Artifact**: `models/category_experts/foundation_mams/best_model.pt` (710 MB)
+* **Benchmark Result**: **82.40% Val Macro F1** (MAMS Challenge: 82.93% Test Acc).
 
 ---
 
 ### Recipe B: Tech Hardware Specialist (`expert_tech`)
 * **Objective**: Maximum precision on laptop, computer, and hardware reviews.
-* **Training Data**: [`data/benchmarks/tech_laptop/train.parquet`](../data/benchmarks/tech_laptop/train.parquet) (SemEval Laptop14 dataset).
+* **Training Data**: [`data/benchmarks/tech_laptop/train.parquet`](../data/benchmarks/tech_laptop/train.parquet) (SemEval Laptop14 dataset, 2,045 samples).
 * **Generation Command**:
   ```bash
   python scripts/train_all_experts.py --model tech
   ```
-* **Output Artifact**: `models/category_experts/expert_tech/best_model.pt`
-* **Benchmark Result**: **84.17%** on Laptop14 (+12.38% over Generic Foundation).
+* **Output Artifact**: `models/category_experts/expert_tech/best_model.pt` (710 MB)
+* **Benchmark Result**: **95.27% Val Macro F1** (Laptop14: 82.76% Test Acc).
 
 ---
 
 ### Recipe C: Home Electronics Specialist (`expert_home`)
 * **Objective**: Maximum precision on TV, audio, and appliance reviews.
-* **Training Data**: [`data/benchmarks/home_television/train.parquet`](../data/benchmarks/home_television/train.parquet) (Television benchmark dataset).
+* **Training Data**: [`data/benchmarks/home_television/train.parquet`](../data/benchmarks/home_television/train.parquet) (Television benchmark dataset, 3,335 samples).
 * **Generation Command**:
   ```bash
   python scripts/train_all_experts.py --model home
   ```
-* **Output Artifact**: `models/category_experts/expert_home/best_model.pt`
-* **Benchmark Result**: **89.81%** on Television (+10.72% over Generic Foundation).
+* **Output Artifact**: `models/category_experts/expert_home/best_model.pt` (710 MB)
+* **Benchmark Result**: **89.11% Val Macro F1** (Television: 91.08% Test Acc).
 
 ---
 
 ### Recipe D: Apparel & Fashion Specialist (`expert_apparel`)
-* **Objective**: Maximum precision on clothing, fit, and fabric reviews.
-* **Training Data**: [`data/benchmarks/apparel_tshirt/train.parquet`](../data/benchmarks/apparel_tshirt/train.parquet) (T-Shirt benchmark dataset).
+* **Objective**: Maximum precision on clothing, fit, and fabric reviews without neutral class collapse.
+* **Training Data**: [`data/benchmarks/apparel_tshirt/train.parquet`](../data/benchmarks/apparel_tshirt/train.parquet) (T-Shirt benchmark dataset, 1,686 samples).
 * **Generation Command**:
   ```bash
   python scripts/train_all_experts.py --model apparel
   ```
-* **Output Artifact**: `models/category_experts/expert_apparel/best_model.pt`
-* **Benchmark Result**: **94.07%** on T-Shirt (+6.57% over Generic Foundation).
+* **Output Artifact**: `models/category_experts/expert_apparel/best_model.pt` (710 MB)
+* **Benchmark Result**: **87.15% Val Macro F1** (T-Shirt: 94.07% Test Acc, 75.26% Macro F1).
 
 ---
 

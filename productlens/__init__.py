@@ -2,10 +2,10 @@
 ProductLens Sentiment Analysis Platform.
 
 Production-grade Aspect-Based Sentiment Analysis (ABSA) system powered by a
-Hierarchical Mixture of Experts (MoE) with domain-specialist RoBERTa backbones.
+Hierarchical Mixture of Experts (MoE) with domain-specialist DeBERTa-v3 backbones.
 """
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 from productlens.schemas import (
     AspectMention,

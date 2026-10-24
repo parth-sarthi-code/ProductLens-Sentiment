@@ -3,7 +3,7 @@
 ## 1. Executive Summary
 - **Repository**: [ProductLens-Sentiment](file:///home/parth/Projects/ProductLens-Sentiment)
 - **Domain**: Aspect-Based Sentiment Analysis (ABSA) for e-commerce reviews.
-- **Core Architecture**: Hierarchical Mixture of Experts (MoE) with domain-specialized RoBERTa backbones and deterministic $O(1)$ zero-latency metadata routing.
+- **Core Architecture**: Hierarchical Mixture of Experts (MoE) with domain-specialized DeBERTa-v3 backbones and deterministic $O(1)$ zero-latency metadata routing.
 - **Key Task**: Given customer reviews (with optional category metadata), extract aspect targets, route to specialized domain models, and predict aspect-level sentiment labels (Positive, Neutral, Negative) with calibrated confidence scores.
 
 ---
@@ -24,7 +24,7 @@ ProductLens-Sentiment/
 │   ├── aspects/
 │   │   └── extractor.py                  # Aspect extraction (noun chunking, gazetteers)
 │   ├── sentiment/
-│   │   ├── model.py                      # RoBERTa backbone with aspect-targeted pooling
+│   │   ├── model.py                      # DeBERTa-v3 backbone with aspect-targeted pooling
 │   │   ├── pipeline.py                   # MoE batch inference & tokenizer coordinator
 │   │   └── router.py                     # 3-tier routing (Metadata -> Keyword -> Fallback)
 │   ├── training/
@@ -53,9 +53,9 @@ flowchart TD
     
     Extractor --> Spans["Aspect Mentions & Evidence Snippets"]
     
-    Router -->|"Level 1: Exact Category Tag"| TechExpert["Tech Specialist (RoBERTa)"]
-    Router -->|"Level 1: Exact Category Tag"| HomeExpert["Home Specialist (RoBERTa)"]
-    Router -->|"Level 1: Exact Category Tag"| ApparelExpert["Apparel Specialist (RoBERTa)"]
+    Router -->|"Level 1: Exact Category Tag"| TechExpert["Tech Specialist (DeBERTa-v3)"]
+    Router -->|"Level 1: Exact Category Tag"| HomeExpert["Home Specialist (DeBERTa-v3)"]
+    Router -->|"Level 1: Exact Category Tag"| ApparelExpert["Apparel Specialist (DeBERTa-v3)"]
     Router -->|"Level 2: Keyword Match"| Experts["Specialist Suite"]
     Router -->|"Level 3: Universal Fallback"| Fallback["Universal MAMS Foundation"]
     
@@ -89,7 +89,7 @@ flowchart TD
   2. *Lexical Match*: Keyword density scoring against category vocabularies.
   3. *Fallback*: Defaults to `mams_foundation` expert for unmapped domains.
 - **[`ProductLensMoEPipeline`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/pipeline.py)**: Manages batch tokenization (`[CLS] text [SEP] aspect [SEP]`) and coordinates forward passes across active expert models.
-- **[`RoBERTaAspectSentimentClassifier`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/model.py)**: RoBERTa backbone with attention pooling targeted at aspect token spans.
+- **[`AspectTargetedSentimentModel`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/model.py)**: DeBERTa-v3 backbone with attention pooling targeted at aspect token spans.
 
 ---
 

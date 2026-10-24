@@ -22,6 +22,7 @@ import torch
 from sklearn.model_selection import GroupShuffleSplit
 from transformers import AutoTokenizer
 
+from productlens.constants import DEFAULT_BACKBONE
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.training.dataset import AspectSentimentDataset
 from productlens.training.trainer import AspectSentimentTrainer
@@ -67,7 +68,7 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
 
     print(f"Loaded Train Samples: {len(train_df)} | Validation Samples: {len(val_df)}")
 
-    backbone = global_defaults.get("backbone", "roberta-base")
+    backbone = global_defaults.get("backbone", DEFAULT_BACKBONE)
     tokenizer = AutoTokenizer.from_pretrained(backbone)
     train_ds = AspectSentimentDataset(train_df, tokenizer, max_length=global_defaults.get("max_length", 128))
     val_ds = AspectSentimentDataset(val_df, tokenizer, max_length=global_defaults.get("max_length", 128))

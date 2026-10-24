@@ -48,9 +48,9 @@ OUTPUT_MAP = {
 def main():
     parser = argparse.ArgumentParser(description="Train ProductLens ABSA Models")
     parser.add_argument("--domain", choices=["generic", "tech", "home", "apparel"], required=True)
-    parser.add_argument("--backbone", default="roberta-base")
+    parser.add_argument("--backbone", default="yangheng/deberta-v3-base-absa-v1.1")
     parser.add_argument("--epochs", type=int, default=5)
-    parser.add_argument("--batch_size", type=int, default=16)
+    parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--eval_steps", type=int, default=150)
     parser.add_argument("--patience", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)

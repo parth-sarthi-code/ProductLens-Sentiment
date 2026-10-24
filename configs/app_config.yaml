@@ -4,7 +4,7 @@ environment: production
 device: auto  # 'auto', 'cuda', or 'cpu'
 
 models:
-  backbone: "roberta-base"
+  backbone: "yangheng/deberta-v3-base-absa-v1.1"
   aspect_boost: 3.5
   lazy_load: true
   checkpoints:
@@ -22,6 +22,6 @@ aspect_extraction:
 
 api:
   title: "ProductLens Aspect-Based Sentiment Analysis Engine"
-  version: "1.0.0"
+  version: "2.0.0"
   host: "0.0.0.0"
   port: 8000

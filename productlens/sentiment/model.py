@@ -52,14 +52,17 @@ class AspectTargetedAttentionPooler(nn.Module):
         return final_rep
 
 
+from productlens.constants import DEFAULT_BACKBONE
+
+
 class AspectTargetedSentimentModel(nn.Module):
     """
-    Aspect-Targeted Sentiment Classifier with RoBERTa backbone,
+    Aspect-Targeted Sentiment Classifier with DeBERTa-v3 ABSA backbone,
     aspect-targeted attention pooling, projection head, and classification MLP.
     """
     def __init__(
         self,
-        backbone_name: str = "roberta-base",
+        backbone_name: str = DEFAULT_BACKBONE,
         num_labels: int = 3,
         aspect_boost: float = 3.5,
         dropout_prob: float = 0.2,

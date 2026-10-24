@@ -2,7 +2,7 @@
 # Exact hyperparameters used to train each domain expert and the generic foundation model.
 
 global_defaults:
-  backbone: "roberta-base"
+  backbone: "yangheng/deberta-v3-base-absa-v1.1"
   aspect_boost: 3.5
   lambda_scl: 0.10
   scl_temperature: 0.07
@@ -10,7 +10,7 @@ global_defaults:
   head_lr: 6.0e-5
   weight_decay: 0.01
   warmup_ratio: 0.10
-  batch_size: 16
+  batch_size: 8
   max_length: 128
   # Reproducibility seed — passed to train_all_experts.py and GroupShuffleSplit
   seed: 42

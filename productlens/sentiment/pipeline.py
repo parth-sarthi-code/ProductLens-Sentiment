@@ -10,7 +10,7 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer
 
-from productlens.constants import MAX_SEQ_LEN
+from productlens.constants import DEFAULT_BACKBONE, DEFAULT_CHECKPOINT_PATHS, MAX_SEQ_LEN
 from productlens.schemas import SentimentPrediction
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.sentiment.router import MoERouter
@@ -21,13 +21,6 @@ LABEL2ID = {"positive": 0, "neutral": 1, "negative": 2}
 ID2LABEL = {0: "positive", 1: "neutral", 2: "negative"}
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-DEFAULT_CHECKPOINT_PATHS = {
-    "tech": BASE_DIR / "models/category_experts/expert_tech/best_model.pt",
-    "home": BASE_DIR / "models/category_experts/expert_home/best_model.pt",
-    "apparel": BASE_DIR / "models/category_experts/expert_apparel/best_model.pt",
-    "beauty": BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
-    "fallback": BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
-}
 
 
 def checkpoints_exist(
@@ -49,7 +42,7 @@ class ProductLensMoEPipeline:
     def __init__(
         self,
         checkpoint_paths: Optional[Dict[str, Union[str, Path]]] = None,
-        backbone_name: str = "roberta-base",
+        backbone_name: str = DEFAULT_BACKBONE,
         device: Optional[str] = None,
         lazy_load: bool = True,
         single_active_expert: bool = False,
@@ -120,7 +113,7 @@ class ProductLensMoEPipeline:
                 model.to(self.device)
 
             # Cache under resolved_key so subsequent calls for the same expert
-            # (or fallback) do not reload roberta-base from disk.
+            # (or fallback) do not reload expert weights from disk.
             self.experts[resolved_key] = model
         else:
             if self.single_active_expert and self.active_expert != resolved_key:

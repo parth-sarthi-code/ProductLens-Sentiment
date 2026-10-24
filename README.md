@@ -1,22 +1,22 @@
 # ProductLens: Aspect-Based Sentiment Analysis Platform
 
-Production-grade Aspect-Based Sentiment Analysis (ABSA) platform powered by a **Hierarchical Mixture of Experts (MoE)** architecture with domain-specialist RoBERTa backbones and pure $O(1)$ zero-latency metadata routing.
+Production-grade Aspect-Based Sentiment Analysis (ABSA) platform powered by a **Hierarchical Mixture of Experts (MoE)** architecture with domain-specialist **DeBERTa-v3** backbones and pure $O(1)$ zero-latency metadata routing.
 
 ---
 
 ## 1. Key Performance Benchmarks
 
-> Benchmarks generated from `scripts/evaluate_comparison.py` after deduplication and stratified retraining.
-> Composite = sample-weighted test accuracy across held-out e-commerce domains.
+> Benchmarks validated on deduplicated, leakage-free datasets (see [`benchmarks/roberta_vs_deberta_experts_comparison.md`](benchmarks/roberta_vs_deberta_experts_comparison.md)).
+> Composite = sample-weighted test accuracy across held-out e-commerce domains (2,052 samples).
 
 | Domain Vertical | Specialist Model | Held-Out Test Accuracy | In-Domain Win Lift |
 | :--- | :--- | :---: | :---: |
-| **Tech Hardware** | RoBERTa Tech Specialist (`Laptop14`, 638 samples) | **81.97%** | +8.93% over foundation |
-| **Home Electronics** | RoBERTa Home Specialist (`Television`, 942 samples) | **90.87%** | +12.31% over foundation |
-| **Apparel & Fashion** | RoBERTa Apparel Specialist (`T-Shirt`, 472 samples) | **92.37%** | +4.23% over foundation |
-| **Restaurant Fallback** | RoBERTa MAMS Foundation (1,336 samples) | **82.49%** | Multi-aspect challenge benchmark |
-| **MoE (no category)** | **ProductLens MoE (Autonomous Routing)** | **82.12%** | **+3.07% absolute gain** |
-| **E-Commerce Composite** | **ProductLens MoE (Metadata Guided)** | **88.45% 🏆** | **+9.40% absolute gain** |
+| **Tech Hardware** | DeBERTa-v3 Tech Specialist (`Laptop14`, 638 samples) | **82.76%** | +1.10% over generic foundation |
+| **Home Electronics** | DeBERTa-v3 Home Specialist (`Television`, 942 samples) | **91.08%** | +3.61% over generic foundation |
+| **Apparel & Fashion** | DeBERTa-v3 Apparel Specialist (`T-Shirt`, 472 samples) | **94.07%** | +3.60% over generic foundation |
+| **Universal Fallback** | DeBERTa-v3 MAMS Foundation (1,336 samples) | **82.93%** | Multi-aspect challenge benchmark |
+| **MoE (Autonomous Routing)** | **ProductLens MoE (no category metadata)** | **87.43%** | **+5.31% over RoBERTa (82.12%)** |
+| **MoE (Metadata Guided)** | **ProductLens MoE (with category metadata)** | **89.18% 🏆** | **+0.73% over RoBERTa (88.45%)** |
 
 ---
 
@@ -31,12 +31,12 @@ flowchart TD
     
     Router -->|"Level 1: Exact Metadata Tag"| Specialists
     Router -->|"Level 2: Lexical Keyword Match"| Specialists
-    Router -->|"Level 3: General Fallback"| Fallback["Restaurant-trained Fallback (MAMS)"]
+    Router -->|"Level 3: General Fallback"| Fallback["Universal Multi-Aspect Fallback (MAMS)"]
     
-    subgraph Specialists ["Domain-Specialist RoBERTa Suite"]
-        Tech["Tech Expert (82.0%)"]
-        Home["Home Expert (90.9%)"]
-        Apparel["Apparel Expert (92.4%)"]
+    subgraph Specialists ["Domain-Specialist DeBERTa-v3 Suite"]
+        Tech["Tech Expert (82.76%)"]
+        Home["Home Expert (91.08%)"]
+        Apparel["Apparel Expert (94.07%)"]
     end
 
     Extractor --> AspectPairs["Aspect Mentions & Spans"]
@@ -61,11 +61,15 @@ pip install -e .
 
 ### Download Weights
 
-Model checkpoints (`*.pt`) are excluded from git. Download them before running inference or evaluation:
+Model checkpoints (`*.pt`) are hosted on GitHub Releases [v2.0.0](https://github.com/parth-sarthi-code/ProductLens-Sentiment/releases/tag/v2.0.0). Download them into `models/category_experts/`:
 
 ```bash
-# Example — adapt to your actual hosting location (HF Hub / cloud storage)
-python scripts/download_weights.py  # or follow project-specific instructions
+# Download production DeBERTa-v3 model weights from GitHub Release v2.0.0
+gh release download v2.0.0 --dir release/
+cp release/deberta_v3_expert_tech.pt models/category_experts/expert_tech/best_model.pt
+cp release/deberta_v3_expert_home.pt models/category_experts/expert_home/best_model.pt
+cp release/deberta_v3_expert_apparel.pt models/category_experts/expert_apparel/best_model.pt
+cp release/deberta_v3_foundation_mams.pt models/category_experts/foundation_mams/best_model.pt
 ```
 
 Without weights, `ProductLensMoEPipeline` will raise `FileNotFoundError` on the first

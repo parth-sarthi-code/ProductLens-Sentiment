@@ -33,6 +33,7 @@ import torch.nn.functional as F
 from sklearn.metrics import accuracy_score, f1_score
 from transformers import AutoTokenizer
 
+from productlens.constants import DEFAULT_BACKBONE
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.sentiment.pipeline import ProductLensMoEPipeline
 from productlens.training.dataset import AspectSentimentDataset, LABEL2ID
@@ -245,7 +246,7 @@ def main():
     set_seed(args.seed)
     print(f"=== ProductLens Benchmark (device={DEVICE}, seed={args.seed}) ===\n")
 
-    tokenizer = AutoTokenizer.from_pretrained("roberta-base")
+    tokenizer = AutoTokenizer.from_pretrained(DEFAULT_BACKBONE)
 
     datasets_raw = {domain: pd.read_parquet(path) for domain, path in DATA_PATHS.items()}
     n_samples = {domain: len(df) for domain, df in datasets_raw.items()}
@@ -262,7 +263,7 @@ def main():
     # -----------------------------------------------------------------------
     for model_name, ckpt_path in CHECKPOINTS.items():
         print(f"Evaluating: {model_name}...")
-        model = AspectTargetedSentimentModel(backbone_name="roberta-base", num_labels=3)
+        model = AspectTargetedSentimentModel(backbone_name=DEFAULT_BACKBONE, num_labels=3)
         model.load_state_dict(torch.load(ckpt_path, map_location=DEVICE, weights_only=True))
         model.to(DEVICE)
 
@@ -280,10 +281,18 @@ def main():
             results[model_name], ecom_domains, n_samples
         )
 
+        del model
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
     # -----------------------------------------------------------------------
     # 2. MoE — two evaluation modes
     # -----------------------------------------------------------------------
-    pipeline = ProductLensMoEPipeline(device=DEVICE)
+    pipeline = ProductLensMoEPipeline(
+        device=DEVICE,
+        backbone_name=DEFAULT_BACKBONE,
+        single_active_expert=True,
+    )
 
     for mode_label, use_category in [
         ("ProductLens MoE (with category)", True),
