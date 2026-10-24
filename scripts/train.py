@@ -54,12 +54,14 @@ def main():
     parser.add_argument("--eval_steps", type=int, default=150)
     parser.add_argument("--patience", type=int, default=4)
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--output_dir", default=None, help="Optional custom output directory")
+    parser.add_argument("--max_samples", type=int, default=None, help="Optional sample limit for quick flow verification")
     args = parser.parse_args()
 
     set_seed(args.seed)
 
     data_dir = Path(DATA_MAP[args.domain])
-    out_dir = Path(OUTPUT_MAP[args.domain])
+    out_dir = Path(args.output_dir) if args.output_dir else Path(OUTPUT_MAP[args.domain])
 
     print(f"=== Training {args.domain.upper()} Model ===")
     print(f"Data Dir: {data_dir}")
@@ -78,6 +80,12 @@ def main():
         )
         val_df   = train_df.iloc[val_idx].reset_index(drop=True)
         train_df = train_df.iloc[train_idx].reset_index(drop=True)
+
+    if args.max_samples:
+        train_df = train_df.iloc[:args.max_samples].reset_index(drop=True)
+        val_limit = max(10, min(len(val_df), args.max_samples // 4))
+        val_df = val_df.iloc[:val_limit].reset_index(drop=True)
+        print(f"Verification Mode: subsampled to {len(train_df)} train / {len(val_df)} val samples.")
 
     tokenizer = AutoTokenizer.from_pretrained(args.backbone)
     train_ds = AspectSentimentDataset(train_df, tokenizer)
