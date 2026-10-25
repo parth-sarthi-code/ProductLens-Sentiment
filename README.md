@@ -11,12 +11,12 @@ Production-grade Aspect-Based Sentiment Analysis (ABSA) platform powered by a **
 
 | Domain Vertical | Specialist Model | Held-Out Test Accuracy | In-Domain Win Lift |
 | :--- | :--- | :---: | :---: |
-| **Tech Hardware** | DeBERTa-v3 Tech Specialist (`Laptop14`, 638 samples) | **82.76%** | +1.10% over generic foundation |
-| **Home Electronics** | DeBERTa-v3 Home Specialist (`Television`, 942 samples) | **91.08%** | +3.61% over generic foundation |
-| **Apparel & Fashion** | DeBERTa-v3 Apparel Specialist (`T-Shirt`, 472 samples) | **94.07%** | +3.60% over generic foundation |
-| **Universal Fallback** | DeBERTa-v3 MAMS Foundation (1,336 samples) | **82.93%** | Multi-aspect challenge benchmark |
-| **MoE (Autonomous Routing)** | **ProductLens MoE (no category metadata)** | **87.43%** | **+5.31% over RoBERTa (82.12%)** |
-| **MoE (Metadata Guided)** | **ProductLens MoE (with category metadata)** | **89.18% 🏆** | **+0.73% over RoBERTa (88.45%)** |
+| **Tech Hardware** | DeBERTa-v3 Tech Specialist (`Laptop14`, 638 samples) | **82.92%** (Macro-F1 78.77%) | +1.10% over generic foundation |
+| **Home Electronics** | DeBERTa-v3 Home Specialist (`Television`, 942 samples) | **92.14%** (Macro-F1 79.35%) | +1.38% over RoBERTa |
+| **Apparel & Fashion** | DeBERTa-v3 Apparel Specialist (`T-Shirt`, 472 samples) | **94.49%** (Macro-F1 76.00%) | +2.12% over RoBERTa |
+| **Universal Fallback** | DeBERTa-v3 MAMS Foundation (1,336 samples) | **83.38%** (Macro-F1 82.99%) | Multi-aspect challenge benchmark |
+| **MoE (Autonomous Routing)** | **ProductLens MoE (no category metadata)** | **89.47%** | **+7.35% over RoBERTa (82.12%)** |
+| **MoE (Metadata Guided)** | **ProductLens MoE (with category metadata)** | **89.81% 🏆** | **+1.36% over RoBERTa (88.45%)** |
 
 ---
 
@@ -29,14 +29,15 @@ flowchart TD
     
     Category["Optional Department / Category Tag"] --> Router
     
-    Router -->|"Level 1: Exact Metadata Tag"| Specialists
-    Router -->|"Level 2: Lexical Keyword Match"| Specialists
+    Router -->|"Level 1: Exact Metadata Tag O(1)"| Specialists
+    Router -->|"Level 2A: Learned Gating Network (MLP)"| Specialists
+    Router -->|"Level 2B: Lexical Keyword Match"| Specialists
     Router -->|"Level 3: General Fallback"| Fallback["Universal Multi-Aspect Fallback (MAMS)"]
     
-    subgraph Specialists ["Domain-Specialist DeBERTa-v3 Suite"]
-        Tech["Tech Expert (82.76%)"]
-        Home["Home Expert (91.08%)"]
-        Apparel["Apparel Expert (94.07%)"]
+    subgraph Specialists ["Domain-Specialist DeBERTa-v3 Suite (WiSE-FT)"]
+        Tech["Tech Expert (82.92%)"]
+        Home["Home Expert (92.14%)"]
+        Apparel["Apparel Expert (94.49%)"]
     end
 
     Extractor --> AspectPairs["Aspect Mentions & Spans"]
