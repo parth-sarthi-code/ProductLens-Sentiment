@@ -56,3 +56,12 @@ models:
     epochs: 5
     eval_every_steps: 50
     patience: 5
+
+  unified_backbone:
+    domain: "Unified E-Commerce (Tech + Home + Apparel)"
+    train_data: "data/benchmarks/unified_ecommerce/train.parquet"
+    test_data: "data/benchmarks/unified_ecommerce/test.parquet"
+    output_checkpoint: "models/unified_backbone/best_model.pt"
+    epochs: 4
+    eval_every_steps: 150
+    patience: 4

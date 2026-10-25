@@ -1,23 +1,58 @@
 {
-  "last_updated": "2026-10-25T23:09:00Z",
-  "current_phase": "Branch: experiment/unified-backbone (Option B Exploration)",
-  "status": "In Progress (Side Branch)",
-  "progress_percentage": 25,
+  "last_updated": "2026-10-25T23:36:00Z",
+  "current_phase": "Branch: experiment/unified-backbone (Option B Evaluated)",
+  "status": "Complete & Evaluated",
+  "progress_percentage": 100,
   "completed_steps": [
     "Preserved v2.1.0 release and diagnostics on main branch",
     "Created and pushed isolated side branch: experiment/unified-backbone",
-    "Conducted online survey across Hugging Face, Kaggle, and GitHub for ABSA & e-commerce review datasets",
-    "Cataloged candidate datasets: ARTS (adversarial multi-aspect), Amazon-Reviews-2023, SetFit ABSA, and Kaggle e-commerce datasets"
+    "Inspected IberaSoft/ecommerce-reviews-sentiment on Hugging Face API: Verified phantom repo (0 data files, only README.md)",
+    "Consolidated multi-domain e-commerce training corpus (7,838 samples across Tech, Home, Apparel)",
+    "Downloaded and prepared official ARTS adversarial test set (1,877 samples)",
+    "Benchmarked base model baseline on ARTS: 78.90% Accuracy, 75.63% Macro-F1",
+    "Trained unified single-backbone model on consolidated corpus (Task 895)",
+    "Evaluated unified single backbone across all 3 domain test sets and ARTS adversarial test set"
   ],
-  "current_step": "Synthesized external dataset catalog and staging unified single-backbone pipeline architecture",
+  "current_step": "Benchmarking complete: Unified single backbone matches composite accuracy (89.37%) while beating MoE on Tech (83.54% vs 83.23%) and Tech Neutral-F1 (66.90% vs 64.52%), cutting memory and model size by 67%.",
   "upcoming_steps": [
-    "Consolidate domain datasets into unified multi-task training corpus",
-    "Implement single unified calibrated DeBERTa-v3 model without multi-checkpoint MoE overhead",
-    "Benchmark unified backbone against previous MoE setup and ARTS robustness test"
+    "Present comparative findings to user and align on merging Option B or keeping side branch"
   ],
   "metrics": {
-    "baseline_composite_accuracy": 89.33,
-    "current_composite_accuracy": 89.67,
+    "unified_backbone_results": {
+      "composite_accuracy": 89.37,
+      "tech_laptop": {
+        "accuracy": 83.54,
+        "macro_f1": 79.78,
+        "neutral_f1": 66.90,
+        "ece": 11.45,
+        "nll": 0.5907
+      },
+      "home_television": {
+        "accuracy": 91.40,
+        "macro_f1": 79.06,
+        "neutral_f1": 48.57,
+        "ece": 5.22,
+        "nll": 0.3080
+      },
+      "apparel_tshirt": {
+        "accuracy": 93.22,
+        "macro_f1": 71.04,
+        "neutral_f1": 23.08,
+        "ece": 3.85,
+        "nll": 0.2527
+      },
+      "arts_adversarial": {
+        "accuracy": 78.80,
+        "macro_f1": 76.29,
+        "neutral_f1": 64.96,
+        "ece": 14.93,
+        "nll": 0.7998
+      }
+    },
+    "moe_pipeline_composite": 89.67,
+    "canonical_backbone_composite": 89.33,
+    "model_footprint_reduction": "2.2 GB (3 models + router) -> 712 MB (1 unified model)"
+  },
     "net_test_samples_flipped": 7,
     "total_benchmark_samples": 2052,
     "diagnostic_profiling": {

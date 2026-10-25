@@ -37,6 +37,7 @@ DATA_MAP = {
     "tech": "data/benchmarks/tech_laptop",
     "home": "data/benchmarks/home_television",
     "apparel": "data/benchmarks/apparel_tshirt",
+    "unified": "data/benchmarks/unified_ecommerce",
 }
 
 OUTPUT_MAP = {
@@ -44,12 +45,13 @@ OUTPUT_MAP = {
     "tech": "models/category_experts/expert_tech",
     "home": "models/category_experts/expert_home",
     "apparel": "models/category_experts/expert_apparel",
+    "unified": "models/unified_backbone",
 }
 
 
 def main():
     parser = argparse.ArgumentParser(description="Train ProductLens ABSA Models")
-    parser.add_argument("--domain", choices=["generic", "tech", "home", "apparel"], required=True)
+    parser.add_argument("--domain", choices=["generic", "tech", "home", "apparel", "unified"], required=True)
     parser.add_argument("--backbone", default="yangheng/deberta-v3-base-absa-v1.1")
     parser.add_argument("--epochs", type=int, default=5)
     parser.add_argument("--batch_size", type=int, default=8)
