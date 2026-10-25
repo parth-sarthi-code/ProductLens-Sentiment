@@ -21,7 +21,7 @@
 
 ## 2. Review Aspect-to-Sentiment Table
 
-| Aspect Term | Sub-Domain | Review Evidence / Context | Human Truth | ProductLens MoE Prediction | Generic Model (MAMS) | Winner & Behavioral Analysis |
+| Aspect Term | Sub-Domain | Review Evidence / Context | Human Truth | ProductLens Unified Prediction | Generic Model (MAMS) | Winner & Behavioral Analysis |
 | :--- | :--- | :--- | :---: | :---: | :---: | :--- |
 | **`Display`** | Visuals | *"Display is very great and video quality at peak beacuse of 2k res"* | 🟢 **POSITIVE** | 🟢 **Positive** (97.1%) | 🟢 **Positive** (93.3%) | **Tie**: Both models captured strong visual praise. |
 | **`screen bleeding`** | Defect | *"mine has more screen bleeding in all four sides... only noticeable in dark room"* | 🔴 **NEGATIVE** | 🔴 **Negative** (95.4%) | 🔴 **Negative** (88.5%) | **MoE (+6.9% conf)**: Tech specialist accurately penalizes panel defect terminology. |

@@ -1,0 +1,14 @@
+{
+  "temperature": 0.8999,
+  "uncalibrated": {
+    "ece": 0.0245,
+    "nll": 0.0768,
+    "brier": 0.0311
+  },
+  "calibrated": {
+    "ece": 0.0166,
+    "nll": 0.0705,
+    "brier": 0.0309
+  },
+  "selection_reason": "Step 450: composite score improved from 0.9552 to 0.9641 (Macro F1: 0.9726, Neutral F1: 0.9444)"
+}

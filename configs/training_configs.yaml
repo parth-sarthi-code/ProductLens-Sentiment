@@ -1,5 +1,5 @@
 # ProductLens Model Generation Configurations
-# Exact hyperparameters used to train each domain expert and the generic foundation model.
+# Exact hyperparameters used to train the unified calibrated DeBERTa-v3 sentiment model.
 
 global_defaults:
   backbone: "yangheng/deberta-v3-base-absa-v1.1"
@@ -10,58 +10,23 @@ global_defaults:
   head_lr: 5.0e-5
   weight_decay: 0.01
   warmup_ratio: 0.10
-  batch_size: 8
+  batch_size: 16
   max_length: 128
-  # Class imbalance strategy: "none", "inverse_freq", "effective_num"
   class_weight_strategy: "none"
   effective_num_beta: 0.999
-  # Composite checkpoint selection weights
   w_macro: 0.7
   w_neutral: 0.3
-  # Ordinal Wasserstein loss and label smoothing for neutral-aware geometry
   lambda_ordinal: 0.15
   label_smoothing: 0.05
-  # Post-hoc temperature calibration
   calibrate: true
-  # Reproducibility seed — passed to train_all_experts.py and GroupShuffleSplit
   seed: 42
 
 models:
-  # Note: Fallback uses canonical pretrained backbone 'yangheng/deberta-v3-base-absa-v1.1' directly.
-  # No redundant re-training on MAMS is needed.
-
-  expert_tech:
-    domain: "Tech & Hardware (SemEval Laptop14)"
-    train_data: "data/benchmarks/tech_laptop/train.parquet"
-    test_data: "data/benchmarks/tech_laptop/test.parquet"
-    output_checkpoint: "models/category_experts/expert_tech/best_model.pt"
-    epochs: 6
-    eval_every_steps: 50
-    patience: 5
-
-  expert_home:
-    domain: "Home Electronics & Appliances (Television)"
-    train_data: "data/benchmarks/home_television/train.parquet"
-    test_data: "data/benchmarks/home_television/test.parquet"
-    output_checkpoint: "models/category_experts/expert_home/best_model.pt"
-    epochs: 5
-    eval_every_steps: 50
-    patience: 5
-
-  expert_apparel:
-    domain: "Apparel & Fashion (T-Shirt)"
-    train_data: "data/benchmarks/apparel_tshirt/train.parquet"
-    test_data: "data/benchmarks/apparel_tshirt/test.parquet"
-    output_checkpoint: "models/category_experts/expert_apparel/best_model.pt"
-    epochs: 5
-    eval_every_steps: 50
-    patience: 5
-
   unified_backbone:
-    domain: "Unified E-Commerce (Tech + Home + Apparel)"
+    domain: "Unified E-Commerce (Tech, Home, Apparel)"
     train_data: "data/benchmarks/unified_ecommerce/train.parquet"
     test_data: "data/benchmarks/unified_ecommerce/test.parquet"
     output_checkpoint: "models/unified_backbone/best_model.pt"
-    epochs: 4
+    epochs: 10
     eval_every_steps: 150
-    patience: 4
+    patience: 6

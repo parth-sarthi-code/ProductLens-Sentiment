@@ -1,38 +1,42 @@
-# Real-World Multi-Aspect Review Benchmark Sample
+# Real-World Multi-Aspect Review Analysis Sample
 
 ### Review Subject: Gaming Laptop Multi-Aspect Evaluation
 
-| Target Aspect | Human Ground Truth | Generic Foundation (MAMS) | Tech Specialist (Laptop14) | Home Specialist | Apparel Specialist | ProductLens MoE (Routed) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Gaming** | **POSITIVE** | ⚪ **neutral** (95.0%) | ⚪ **neutral** (55.2%) | 🟢 **positive** (93.9%) | ⚪ **neutral** (54.5%) | ⚪ **neutral** (55.2%) |
-| **Display** | **POSITIVE** | 🟢 **positive** (93.3%) | 🟢 **positive** (97.1%) | 🟢 **positive** (96.4%) | 🟢 **positive** (77.6%) | 🟢 **positive** (97.1%) |
-| **screen bleeding** | **NEGATIVE** | 🔴 **negative** (88.5%) | 🔴 **negative** (95.4%) | 🔴 **negative** (98.5%) | 🔴 **negative** (91.7%) | 🔴 **negative** (95.4%) |
-| **dead pixel** | **NEGATIVE** | 🔴 **negative** (95.3%) | 🔴 **negative** (96.0%) | 🔴 **negative** (98.6%) | 🔴 **negative** (92.8%) | 🔴 **negative** (96.0%) |
-| **speaker** | **NEUTRAL** | ⚪ **neutral** (76.0%) | ⚪ **neutral** (74.7%) | ⚪ **neutral** (84.8%) | 🔴 **negative** (75.6%) | ⚪ **neutral** (74.7%) |
-| **Heating** | **NEUTRAL** | 🔴 **negative** (53.1%) | ⚪ **neutral** (53.3%) | ⚪ **neutral** (78.9%) | 🔴 **negative** (80.6%) | ⚪ **neutral** (53.3%) |
-| **keyboard** | **NEGATIVE** | 🔴 **negative** (61.3%) | 🔴 **negative** (90.8%) | 🔴 **negative** (98.5%) | 🔴 **negative** (89.7%) | 🔴 **negative** (90.8%) |
-| **touch pad** | **NEGATIVE** | 🔴 **negative** (78.0%) | 🔴 **negative** (95.9%) | 🔴 **negative** (98.8%) | 🔴 **negative** (92.1%) | 🔴 **negative** (95.9%) |
-| **battery** | **NEGATIVE** | ⚪ **neutral** (51.0%) | ⚪ **neutral** (51.8%) | ⚪ **neutral** (48.1%) | 🔴 **negative** (44.9%) | ⚪ **neutral** (51.8%) |
-| **price** | **POSITIVE** | ⚪ **neutral** (91.4%) | 🟢 **positive** (80.8%) | 🟢 **positive** (79.1%) | ⚪ **neutral** (61.0%) | 🟢 **positive** (80.8%) |
+**Summary Sentiment**: **NEGATIVE** (Processed in 256.3ms)
+
+| Target Aspect | Human Ground Truth | Predicted Sentiment | Calibrated Confidence |
+| :--- | :---: | :---: | :---: |
+| **Gaming** | `POSITIVE` | 🟢 **positive** | 98.7% |
+| **Display** | `POSITIVE` | 🟢 **positive** | 97.3% |
+| **screen bleeding** | `NEGATIVE` | 🔴 **negative** | 96.7% |
+| **dead pixel** | `NEGATIVE` | 🔴 **negative** | 90.8% |
+| **speaker** | `NEUTRAL` | ⚪ **neutral** | 70.7% |
+| **Heating** | `NEUTRAL` | 🔴 **negative** | 52.3% |
+| **keyboard** | `NEGATIVE` | 🔴 **negative** | 95.6% |
+| **touch pad** | `NEGATIVE` | 🔴 **negative** | 96.4% |
+| **battery** | `NEGATIVE` | 🔴 **negative** | 91.1% |
+| **price** | `POSITIVE` | 🟢 **positive** | 92.3% |
 
 ### Auto-Extracted Aspects by ProductLensEngine:
 
-| Extracted Aspect Span | Predicted Sentiment | Confidence | Routed Specialist |
+| Extracted Aspect Span | Predicted Sentiment | Confidence | Evidence Snippet |
 | :--- | :---: | :---: | :--- |
-| `graphics` | ⚪ **neutral** | 94.1% | `tech` (metadata_match:tech) |
-| `Display` | 🟢 **positive** | 97.1% | `tech` (metadata_match:tech) |
-| `screen` | 🔴 **negative** | 94.0% | `tech` (metadata_match:tech) |
-| `Heat` | 🔴 **negative** | 63.1% | `tech` (metadata_match:tech) |
-| `graphics` | ⚪ **neutral** | 90.6% | `tech` (metadata_match:tech) |
-| `fan` | ⚪ **neutral** | 49.2% | `tech` (metadata_match:tech) |
-| `speed` | 🔴 **negative** | 64.1% | `tech` (metadata_match:tech) |
-| `keyboard` | 🔴 **negative** | 90.8% | `tech` (metadata_match:tech) |
-| `keyboard` | 🔴 **negative** | 97.5% | `tech` (metadata_match:tech) |
-| `battery` | ⚪ **neutral** | 51.8% | `tech` (metadata_match:tech) |
-| `battery life` | ⚪ **neutral** | 51.8% | `tech` (metadata_match:tech) |
-| `screen` | ⚪ **neutral** | 51.8% | `tech` (metadata_match:tech) |
-| `screen` | ⚪ **neutral** | 51.8% | `tech` (metadata_match:tech) |
-| `screen` | ⚪ **neutral** | 51.8% | `tech` (metadata_match:tech) |
-| `screen` | ⚪ **neutral** | 51.8% | `tech` (metadata_match:tech) |
+| `graphics` | 🟢 **positive** | 83.8% | *"Genshin (max graphics 60fps)"* |
+| `Display` | 🟢 **positive** | 97.3% | *"...fps)
+Valorant (max 144-200fps)
+Overwatch 2 (max 70+fps)
 
-**Aggregated Summary Sentiment**: **MIXED**
+2.Display is very great and video quality at peak beacuse of 2k res ,..."* |
+| `screen` | ⚪ **neutral** | 44.4% | *"...video quality at peak beacuse of 2k res , but mine has more screen bleeding and i got one dead pixel (my fault because I didn'..."* |
+| `Heat` | 🔴 **negative** | 63.2% | *"Heat management is average"* |
+| `graphics` | 🔴 **negative** | 89.7% | *"When I play games at high graphics it goes upto 90-95° sometimes at max fan speed."* |
+| `fan` | 🔴 **negative** | 77.0% | *"When I play games at high graphics it goes upto 90-95° sometimes at max fan speed."* |
+| `speed` | 🔴 **negative** | 88.0% | *"When I play games at high graphics it goes upto 90-95° sometimes at max fan speed."* |
+| `keyboard` | 🔴 **negative** | 95.6% | *"keyboard and touch pad (4/10)"* |
+| `keyboard` | 🔴 **negative** | 94.1% | *"Tbh worst keyboard and touch pad at this price and low quality."* |
+| `battery` | 🔴 **negative** | 91.1% | *"battery (4/10)"* |
+| `battery life` | 🔴 **negative** | 97.6% | *"Worst battery life not even 90 minutes of playing or streaming videos."* |
+| `screen` | 🔴 **negative** | 87.6% | *"*IF YOU ARE GOING TO BUY* Then don't forget to check if it has more screen bleeding."* |
+| `screen` | 🔴 **negative** | 87.7% | *"(All LCD displays have screen bleeding and it's common but buy which has the slightest screen bleeding)"* |
+| `screen` | 🔴 **negative** | 87.7% | *"(All LCD displays have screen bleeding and it's common but buy which has the slightest screen bleeding)"* |
+| `screen` | 🔴 **negative** | 87.3% | *"Mine has more screen bleeding in all four sides but only noticeable in dark room"* |

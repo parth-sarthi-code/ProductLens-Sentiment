@@ -10,8 +10,10 @@ async def health_check():
     engine = get_engine()
     return HealthResponse(
         status="healthy",
-        version="1.0.0",
+        version="2.2.0",
         device=str(engine.pipeline.device),
+        model="unified_deberta_v3",
         loaded_experts=list(engine.pipeline.experts.keys()),
         available_experts=list(engine.pipeline.checkpoint_paths.keys()),
     )
+

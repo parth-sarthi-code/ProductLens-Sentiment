@@ -1,19 +1,19 @@
 {
-  "last_updated": "2026-10-25T23:36:00Z",
-  "current_phase": "Branch: experiment/unified-backbone (Option B Evaluated)",
-  "status": "Complete & Evaluated",
+  "last_updated": "2026-10-26T00:20:00Z",
+  "current_phase": "Production Clean: Unified Single Backbone (MoE Deprecated)",
+  "status": "Complete & Production Ready",
   "progress_percentage": 100,
   "completed_steps": [
-    "Preserved v2.1.0 release and diagnostics on main branch",
-    "Created and pushed isolated side branch: experiment/unified-backbone",
-    "Inspected IberaSoft/ecommerce-reviews-sentiment on Hugging Face API: Verified phantom repo (0 data files, only README.md)",
-    "Consolidated multi-domain e-commerce training corpus (7,838 samples across Tech, Home, Apparel)",
-    "Downloaded and prepared official ARTS adversarial test set (1,877 samples)",
-    "Benchmarked base model baseline on ARTS: 78.90% Accuracy, 75.63% Macro-F1",
-    "Trained unified single-backbone model on consolidated corpus (Task 895)",
-    "Evaluated unified single backbone across all 3 domain test sets and ARTS adversarial test set"
+    "Preserved v2.1.0 release milestone on origin",
+    "Consolidated multi-domain e-commerce training corpus (7,838 samples)",
+    "Trained unified calibrated DeBERTa-v3 model with Cross-Attention & Ordinal Wasserstein Loss",
+    "Evaluated unified single backbone on 2,052 test samples and 1,877 ARTS adversarial samples",
+    "Purged MoE routing modules, learned gating, and multi-expert caching complexity",
+    "Streamlined ProductLensSentimentPipeline as the single unified production inference engine",
+    "Updated README.md, CHANGELOG.md (v2.2.0), ARCHITECTURE.md, and MODEL_GENERATION_RECIPES.md",
+    "Verified full unit test suite (31/31 passing)"
   ],
-  "current_step": "Benchmarking complete: Unified single backbone matches composite accuracy (89.37%) while beating MoE on Tech (83.54% vs 83.23%) and Tech Neutral-F1 (66.90% vs 64.52%), cutting memory and model size by 67%.",
+  "current_step": "Production cleanup complete. All MoE dependencies eliminated, unified pipeline verified across all 31 unit tests.",
   "upcoming_steps": [
     "Present comparative findings to user and align on merging Option B or keeping side branch"
   ],

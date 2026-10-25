@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-ProductLens DeBERTa-v3 Specialists Release Packager.
+ProductLens Unified Sentiment Model Release Packager.
 
-Collects, validates, hashes, and packages DeBERTa-v3 ABSA specialists for release
-via GitHub Releases or HuggingFace Hub.
+Collects, validates, hashes, and packages the unified calibrated DeBERTa-v3 model
+for release via GitHub Releases or HuggingFace Hub.
 """
 
 import hashlib
@@ -15,10 +15,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 MODELS_DIR = BASE_DIR / "models"
 RELEASE_DIR = BASE_DIR / "release"
 
-DEBERTA_RELEASE_FILES = {
-    "expert_tech": MODELS_DIR / "category_experts/expert_tech/best_model.pt",
-    "expert_home": MODELS_DIR / "category_experts/expert_home/best_model.pt",
-    "expert_apparel": MODELS_DIR / "category_experts/expert_apparel/best_model.pt",
+UNIFIED_RELEASE_FILES = {
+    "unified_backbone": MODELS_DIR / "unified_backbone/best_model.pt",
 }
 
 
@@ -32,18 +30,18 @@ def sha256_checksum(filepath: Path) -> str:
 
 def main():
     print("=" * 70)
-    print("ProductLens Release Packager: DeBERTa-v3 Specialists (v2.1.0)")
+    print("ProductLens Release Packager: Unified Calibrated DeBERTa-v3 (v2.2.0)")
     print("=" * 70)
 
     RELEASE_DIR.mkdir(parents=True, exist_ok=True)
     manifest = {
-        "version": "v2.1.0",
+        "version": "v2.2.0",
         "backbone": "yangheng/deberta-v3-base-absa-v1.1",
-        "description": "Production DeBERTa-v3 ABSA Domain Specialists with Ordinal Loss & Cross-Attention",
+        "description": "Production Unified Calibrated DeBERTa-v3 ABSA Model with Cross-Attention & Ordinal Wasserstein Regularization",
         "weights": {},
     }
 
-    for name, path in DEBERTA_RELEASE_FILES.items():
+    for name, path in UNIFIED_RELEASE_FILES.items():
         if not path.exists():
             print(f"ERROR: Checkpoint missing for {name} at {path}")
             return
@@ -60,32 +58,23 @@ def main():
 
         manifest["weights"][name] = {
             "filename": dest_name,
-            "size_bytes": path.stat().st_size,
-            "size_mb": round(size_mb, 2),
             "sha256": checksum,
-            "original_path": str(path.relative_to(BASE_DIR)),
+            "size_mb": round(size_mb, 2),
         }
 
+    # Copy calibration metadata if available
+    calib_src = MODELS_DIR / "unified_backbone/calibration.json"
+    if calib_src.exists():
+        shutil.copy2(calib_src, RELEASE_DIR / "calibration.json")
+        manifest["calibration"] = "calibration.json"
+
     manifest_path = RELEASE_DIR / "manifest.json"
-    with open(manifest_path, "w", encoding="utf-8") as f:
+    with open(manifest_path, "w") as f:
         json.dump(manifest, f, indent=2)
 
-    print(f"\nManifest saved to: {manifest_path}")
-    print("\nRelease files prepared:")
-    for name, info in manifest["weights"].items():
-        print(f"  * {info['filename']} ({info['size_mb']} MB) - SHA256: {info['sha256'][:16]}...")
-
-    print("\n" + "=" * 70)
-    print("Publishing Instructions:")
-    print("=" * 70)
-    print("Option 1: GitHub Release (via gh cli):")
-    print(f"  gh release create v2.0.0 {RELEASE_DIR}/*.pt {RELEASE_DIR}/manifest.json \\")
-    print("     --title 'v2.0.0: DeBERTa-v3 ABSA Domain Specialists & MoE' \\")
-    print("     --notes-file CHANGELOG.md")
-    print("\nOption 2: HuggingFace Hub:")
-    print("  from huggingface_hub import HfApi")
-    print("  api = HfApi()")
-    print("  api.upload_folder(folder_path='release', repo_id='your-org/productlens-deberta-moe', repo_type='model')")
+    print("\nManifest written to:", manifest_path)
+    print(json.dumps(manifest, indent=2))
+    print("\nPackage ready for release!")
 
 
 if __name__ == "__main__":

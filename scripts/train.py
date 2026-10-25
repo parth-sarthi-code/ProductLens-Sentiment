@@ -10,6 +10,7 @@ Usage:
 """
 
 import argparse
+import logging
 import random
 from pathlib import Path
 import numpy as np
@@ -17,6 +18,13 @@ import pandas as pd
 import torch
 from sklearn.model_selection import GroupShuffleSplit
 from transformers import AutoTokenizer
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%H:%M:%S",
+)
+logger = logging.getLogger("productlens.train")
 
 from productlens.constants import LABEL2ID
 from productlens.sentiment.model import AspectTargetedSentimentModel

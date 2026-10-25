@@ -1,28 +1,13 @@
 {
-  "version": "v2.1.0",
+  "version": "v2.2.0",
   "backbone": "yangheng/deberta-v3-base-absa-v1.1",
-  "description": "Production DeBERTa-v3 ABSA Domain Specialists with Ordinal Loss & Cross-Attention",
+  "description": "Production Unified Calibrated DeBERTa-v3 ABSA Model with Cross-Attention & Ordinal Wasserstein Regularization",
   "weights": {
-    "expert_tech": {
-      "filename": "deberta_v3_expert_tech.pt",
-      "size_bytes": 746459111,
-      "size_mb": 711.88,
-      "sha256": "bfb1d116939040b9726a7db840c894a1da8752297fa131cb149080e58028cd87",
-      "original_path": "models/category_experts/expert_tech/best_model.pt"
-    },
-    "expert_home": {
-      "filename": "deberta_v3_expert_home.pt",
-      "size_bytes": 746459111,
-      "size_mb": 711.88,
-      "sha256": "d930981b80c64feb01b6cd31778b103755961c1131afa4b6545aecdcde7533b3",
-      "original_path": "models/category_experts/expert_home/best_model.pt"
-    },
-    "expert_apparel": {
-      "filename": "deberta_v3_expert_apparel.pt",
-      "size_bytes": 746459111,
-      "size_mb": 711.88,
-      "sha256": "9ae6cc216bc53be4e7ad0848d5bfa9f3d607a491eb7f680ddfb9b01ecc49b6ab",
-      "original_path": "models/category_experts/expert_apparel/best_model.pt"
+    "unified_backbone": {
+      "filename": "deberta_v3_unified_backbone.pt",
+      "sha256": "0e0a5d5376a2f826abe2e2edf7acc63712e00b8869b12abd25be7a3a25f92095",
+      "size_mb": 711.88
     }
-  }
+  },
+  "calibration": "calibration.json"
 }

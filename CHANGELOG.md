@@ -1,6 +1,49 @@
 # ProductLens Production Changelog
 
-## [Release v2.0.0] - Production Update: DeBERTa-v3 ABSA Specialists, Leakage Elimination & Optimized MoE
+## [Release v2.2.0] - Production Architecture: Unified Calibrated Backbone & MoE Deprecation
+
+**Release Date:** October 2026  
+**Type:** Architectural Realignment & Production Simplification  
+**Scope:** Architecture Consolidation, Single-Checkpoint Deployment, Ordinal Wasserstein Regularization, Temperature Calibration
+
+---
+
+### Executive Summary
+
+Release v2.2.0 establishes a streamlined, production-grade architecture that replaces the multi-checkpoint Mixture of Experts (MoE) pipeline with a **single unified calibrated DeBERTa-v3 backbone**. 
+
+Rigorous profiling revealed that maintaining 3 separate domain specialist checkpoints plus a routing layer achieved only a **+0.34% (+7 samples out of 2,052)** discrete accuracy lift over a single model, while incurring ~2.2 GB of memory bloat, router latency, and out-of-domain fallback failures. By consolidating all 7,838 training samples into a unified multi-task training corpus and regularizing with **Ordinal Wasserstein Loss** and **Aspect-to-Context Cross-Attention**, the unified single checkpoint achieves **89.37% Composite Accuracy**, surpasses MoE on **Tech (83.54% vs 83.23%)** and **Neutral-F1 (66.90% vs 64.52%)**, and reduces disk and VRAM requirements by **67%**.
+
+---
+
+### Key Architectural Upgrades in v2.2.0
+
+1. **Unified Single-Checkpoint Architecture (`models/unified_backbone/best_model.pt`)**:
+   * Consolidated Tech (Laptop14: 2,266), Home (Television: 3,705), and Apparel (T-Shirt: 1,867) into a **7,838-sample unified e-commerce corpus**.
+   * Replaced multi-model routing and cache-swapping with a single high-throughput model instance (712 MB).
+   * Eliminated all routing errors, keyword taxonomy lookup overhead, and out-of-domain router fallbacks.
+
+2. **Aspect-to-Context Query-Key Cross-Attention (`AspectTargetedAttentionPooler`)**:
+   * Upgraded from symmetric pooling to true query-key evidence gathering ($Q_{\text{aspect}} \to K_{\text{review}}$).
+   * Tripartite Context Fusion ($[h_{\text{cls}} + h_{\text{aspect}} + h_{\text{opinion}}] / 3$) ensures aspect-targeted polarity decisions are grounded in modifying opinion words.
+
+3. **Neutral-Aware Ordinal Wasserstein Loss & Label Smoothing**:
+   * Incorporated 1D Earth Mover's Distance penalty ($\lambda_{\text{ordinal}} = 0.15$) to structurally penalize severe polarity misclassifications (Positive $\leftrightarrow$ Negative penalized twice as harshly as adjacent Neutral).
+   * Added Label Smoothing ($\epsilon = 0.05$) to curb overconfidence on subjective reviews.
+
+4. **Aspect-Centered Context Windowing**:
+   * Preserves clauses modifying the aspect in long reviews ($>128$ tokens / $>512$ characters) by centering a dynamic window around target aspect character spans.
+
+5. **Post-Hoc Temperature Calibration**:
+   * Integrated post-hoc temperature scaling ($T = 0.8999$) fitted on validation log-likelihood.
+   * Reduced Tech Negative Log-Likelihood (NLL) by **-30.4%** (0.8489 $\to$ 0.5907) and achieved ECE of **3.85%** on Apparel.
+
+6. **2.21x Faster Multi-Aspect Batched Inference**:
+   * Single-tokenization batched tensor pass in `predict_aspects()` processes multi-aspect reviews in a single forward pass without redundant DeBERTa tokenization passes.
+
+---
+
+## [Release v2.0.0] - Foundation Update: DeBERTa-v3 ABSA Specialists & Leakage Elimination
 
 **Release Date:** October 2026  
 **Type:** Major Production Update (`prod_update`)  

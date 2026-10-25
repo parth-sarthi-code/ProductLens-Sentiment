@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 """
-Evaluates all models on a real-world multi-aspect gaming laptop review.
-Compares:
-1. Generic Foundation Model (MAMS)
-2. Tech Specialist (Laptop14)
-3. Home Specialist (Television)
-4. Apparel Specialist (T-Shirt)
-5. ProductLens MoE Unified Pipeline
+Evaluates ProductLens unified sentiment engine on a real-world multi-aspect gaming laptop review.
+Demonstrates:
+1. Automatic aspect extraction & self-extracted evidence snippets.
+2. Aspect-targeted sentiment classification with calibrated probabilities.
+3. Clean, high-throughput unified inference without MoE routing overhead.
 """
 
-import json
 from pathlib import Path
+import json
 from productlens.engine import ProductLensEngine
-from productlens.sentiment.pipeline import ProductLensMoEPipeline
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 REVIEW_TEXT = """Good laptop at this price range
 
@@ -63,115 +62,80 @@ TARGET_ASPECTS = [
 
 
 def main():
-    engine = ProductLensEngine(lazy_load=True)
-    pipeline = engine.pipeline
+    engine = ProductLensEngine()
 
-    # 1. Run full auto-extraction analysis via ProductLensEngine
-    print("=== 1. Running ProductLensEngine Auto-Extraction & MoE Analysis ===")
-    auto_report = engine.analyze_review(text=REVIEW_TEXT, category="Electronics")
+    print("=== 1. Running ProductLensEngine Auto-Extraction & Unified Analysis ===")
+    auto_report = engine.analyze_review(text=REVIEW_TEXT)
     print(f"Extracted {auto_report.aspect_count} aspects automatically.")
-    print(f"Summary Sentiment: {auto_report.summary_sentiment} (Execution: {auto_report.execution_time_ms}ms)")
+    print(f"Summary Sentiment: {auto_report.summary_sentiment} (Execution: {auto_report.execution_time_ms:.1f}ms)")
 
-    # 2. Run multi-model comparison across target aspects
-    models_to_test = {
-        "Generic Foundation (MAMS)": "fallback",
-        "Tech Specialist (Laptop14)": "tech",
-        "Home Specialist (Television)": "home",
-        "Apparel Specialist (T-Shirt)": "apparel",
-        "ProductLens MoE (Auto Routed)": None,
-    }
-
-    comparison_results = []
-
+    target_results = []
+    print("\n=== 2. Evaluating Specific Target Aspects ===")
     for item in TARGET_ASPECTS:
         asp = item["aspect"]
         expected = item["expected_human"]
-
-        row = {
+        pred = engine.pipeline.predict(text=REVIEW_TEXT, aspect=asp)
+        target_results.append({
             "aspect": asp,
             "expected_human": expected,
-            "predictions": {},
-        }
+            "predicted_sentiment": pred.sentiment,
+            "confidence": round(pred.confidence, 4),
+            "probabilities": {k: round(v, 4) for k, v in pred.probabilities.items()},
+        })
+        print(f"• {asp:18} | Expected: {expected:8} | Pred: {pred.sentiment:8} ({pred.confidence:.1%})")
 
-        for model_label, force_key in models_to_test.items():
-            pred = pipeline.predict(
-                text=REVIEW_TEXT,
-                aspect=asp,
-                category="Electronics",
-                force_expert=force_key,
-            )
-            row["predictions"][model_label] = {
-                "sentiment": pred.sentiment,
-                "confidence": round(pred.confidence, 4),
-                "probabilities": {k: round(v, 4) for k, v in pred.probabilities.items()},
-                "routed_expert": pred.routed_expert,
-                "routing_reason": pred.routing_reason,
-            }
-
-        comparison_results.append(row)
+    samples_dir = BASE_DIR / "samples"
+    samples_dir.mkdir(parents=True, exist_ok=True)
+    json_path = samples_dir / "laptop_review_benchmark_sample.json"
 
     sample_output = {
         "review_text": REVIEW_TEXT,
         "auto_extracted_aspects": [r.model_dump() for r in auto_report.results],
         "summary_sentiment": auto_report.summary_sentiment,
-        "target_aspect_comparison": comparison_results,
+        "target_aspect_evaluations": target_results,
     }
 
-    # Save JSON sample
-    json_path = Path("/home/parth/ProductLens-Sentiment/samples/laptop_review_benchmark_sample.json")
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(sample_output, f, indent=2)
 
-    # Generate Markdown Table
+    # Generate Markdown summary
     md_lines = [
-        "# Real-World Multi-Aspect Review Benchmark Sample",
+        "# Real-World Multi-Aspect Review Analysis Sample",
         "",
         "### Review Subject: Gaming Laptop Multi-Aspect Evaluation",
         "",
-        "| Target Aspect | Human Ground Truth | Generic Foundation (MAMS) | Tech Specialist (Laptop14) | Home Specialist | Apparel Specialist | ProductLens MoE (Routed) |",
-        "| :--- | :---: | :---: | :---: | :---: | :---: | :---: |",
+        f"**Summary Sentiment**: **{auto_report.summary_sentiment.upper()}** (Processed in {auto_report.execution_time_ms:.1f}ms)",
+        "",
+        "| Target Aspect | Human Ground Truth | Predicted Sentiment | Calibrated Confidence |",
+        "| :--- | :---: | :---: | :---: |",
     ]
 
-    for item in comparison_results:
-        asp = item["aspect"]
-        exp = item["expected_human"]
-        gen = item["predictions"]["Generic Foundation (MAMS)"]
-        tech = item["predictions"]["Tech Specialist (Laptop14)"]
-        home = item["predictions"]["Home Specialist (Television)"]
-        app = item["predictions"]["Apparel Specialist (T-Shirt)"]
-        moe = item["predictions"]["ProductLens MoE (Auto Routed)"]
-
-        def fmt(p):
-            icon = "🟢" if p["sentiment"] == "positive" else ("🔴" if p["sentiment"] == "negative" else "⚪")
-            return f"{icon} **{p['sentiment']}** ({p['confidence'] * 100:.1f}%)"
-
+    for item in target_results:
+        icon = "🟢" if item["predicted_sentiment"] == "positive" else ("🔴" if item["predicted_sentiment"] == "negative" else "⚪")
         md_lines.append(
-            f"| **{asp}** | **{exp.upper()}** | {fmt(gen)} | {fmt(tech)} | {fmt(home)} | {fmt(app)} | {fmt(moe)} |"
+            f"| **{item['aspect']}** | `{item['expected_human'].upper()}` | {icon} **{item['predicted_sentiment']}** | {item['confidence'] * 100:.1f}% |"
         )
 
     md_lines.extend([
         "",
         "### Auto-Extracted Aspects by ProductLensEngine:",
         "",
-        "| Extracted Aspect Span | Predicted Sentiment | Confidence | Routed Specialist |",
+        "| Extracted Aspect Span | Predicted Sentiment | Confidence | Evidence Snippet |",
         "| :--- | :---: | :---: | :--- |",
     ])
 
     for res in auto_report.results:
         icon = "🟢" if res.sentiment == "positive" else ("🔴" if res.sentiment == "negative" else "⚪")
         md_lines.append(
-            f"| `{res.aspect}` | {icon} **{res.sentiment}** | {res.confidence * 100:.1f}% | `{res.routed_expert}` ({res.routing_reason}) |"
+            f"| `{res.aspect}` | {icon} **{res.sentiment}** | {res.confidence * 100:.1f}% | *\"{res.evidence_snippet}\"* |"
         )
 
-    md_lines.append(f"\n**Aggregated Summary Sentiment**: **{auto_report.summary_sentiment.upper()}**")
-
-    md_path = Path("/home/parth/ProductLens-Sentiment/samples/laptop_review_benchmark_sample.md")
+    md_path = samples_dir / "laptop_review_benchmark_sample.md"
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
 
     print(f"\nSaved sample JSON to: {json_path}")
     print(f"Saved sample Markdown to: {md_path}")
-    print("\n" + "\n".join(md_lines[:20]))
 
 
 if __name__ == "__main__":

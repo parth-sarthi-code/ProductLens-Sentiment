@@ -1,6 +1,6 @@
-# ProductLens: Complete Model Generation Recipes & Codebase Map
+# ProductLens: Complete Model Generation Recipe & Codebase Map
 
-This document confirms that **every single model in the ProductLens MoE platform is fully reproducible from source code** in this repository. There are no black-box or unaccounted-for `.pt` files.
+This document confirms that **the ProductLens unified sentiment model is fully reproducible from source code** in this repository. There are no black-box or unaccounted-for `.pt` files.
 
 ---
 
@@ -8,75 +8,40 @@ This document confirms that **every single model in the ProductLens MoE platform
 
 | Pipeline Component | Source File Location | Purpose & Mechanics |
 | :--- | :--- | :--- |
-| **Neural Backbone & Attention Pooling** | [`productlens/sentiment/model.py`](../productlens/sentiment/model.py) | DeBERTa-v3 ABSA encoder (`yangheng/deberta-v3-base-absa-v1.1`), `AspectTargetedAttentionPooler` ($\beta=3.5$), 128-dim projection head, and classification MLP. |
-| **Supervised Contrastive Loss** | [`productlens/training/loss.py`](../productlens/training/loss.py) | `JointABSALoss` combining class-weighted cross-entropy with temperature-scaled SupCon ($\tau=0.07$, $\lambda=0.10$). |
-| **Subword Span Alignment** | [`productlens/training/dataset.py`](../productlens/training/dataset.py) | Tokenizes review text and creates exact subword binary masks for target aspect spans. |
-| **End-to-End Trainer** | [`productlens/training/trainer.py`](../productlens/training/trainer.py) | Optimization loop with differential learning rates, linear warmup, sub-epoch validation, and early stopping. |
-| **Hyperparameter Configurations** | [`configs/training_configs.yaml`](../configs/training_configs.yaml) | YAML manifest detailing dataset paths, learning rates, epochs, and early-stopping parameters for every model. |
-| **Master Generator Script** | [`scripts/train_all_experts.py`](../scripts/train_all_experts.py) | Executable CLI to train any individual model or the entire 4-model suite sequentially from scratch. |
-| **Automated Benchmark Evaluator** | [`scripts/evaluate_comparison.py`](../scripts/evaluate_comparison.py) | Runs all models across 3,388 test samples and generates the transfer matrix comparison. |
+| **Neural Backbone & Attention Pooling** | [`productlens/sentiment/model.py`](../productlens/sentiment/model.py) | DeBERTa-v3 ABSA encoder (`yangheng/deberta-v3-base-absa-v1.1`), `AspectTargetedAttentionPooler` with Query-Key Cross-Attention ($\beta=3.5$) and Tripartite Context Fusion. |
+| **Ordinal Wasserstein & SCL Loss** | [`productlens/training/loss.py`](../productlens/training/loss.py) | `JointABSALoss` combining class-weighted cross-entropy with 1D Earth Mover's Distance ($\lambda_{\text{ordinal}}=0.15$), label smoothing ($\epsilon=0.05$), and contrastive SCL ($\tau=0.07$, $\lambda=0.10$). |
+| **Context Windowing & Tokenization** | [`productlens/training/dataset.py`](../productlens/training/dataset.py) | Dynamic aspect-centered windowing preserving clauses $>128$ tokens, with exact subword binary masks for target aspect spans. |
+| **End-to-End Trainer** | [`productlens/training/trainer.py`](../productlens/training/trainer.py) | Optimization loop with mixed precision (FP16), differential learning rates, composite neutral-aware checkpointing, live console progress, and early stopping. |
+| **Post-Hoc Calibration** | [`productlens/sentiment/calibration.py`](../productlens/sentiment/calibration.py) | TemperatureScaler fitting validation logits to minimize Negative Log-Likelihood and Expected Calibration Error. |
+| **Hyperparameter Configurations** | [`configs/training_configs.yaml`](../configs/training_configs.yaml) | YAML manifest detailing dataset paths, learning rates, epochs, and early-stopping parameters. |
+| **Dataset Preparation Script** | [`scripts/prepare_unified_dataset.py`](../scripts/prepare_unified_dataset.py) | Consolidates multi-domain e-commerce reviews and downloads the official ARTS adversarial benchmark. |
+| **Unified Training Script** | [`scripts/train.py`](../scripts/train.py) | Executable CLI to train the unified model with live evaluation output. |
+| **Master Benchmark Evaluator** | [`scripts/evaluate_unified.py`](../scripts/evaluate_unified.py) | Evaluates models across held-out e-commerce domains and ARTS adversarial test sets. |
 
 ---
 
-## 2. Model Generation Recipes
+## 2. Production Model Generation Recipe
 
-### Recipe A: Generic Foundation Model (`foundation_mams`)
-* **Objective**: Universal aspect sentiment handling; serves as the MoE universal fallback.
-* **Training Data**: [`data/benchmarks/multi_aspect_mams/train.parquet`](../data/benchmarks/multi_aspect_mams/train.parquet) (11,186 multi-aspect challenge samples).
-* **Validation Data**: [`data/benchmarks/multi_aspect_mams/val.parquet`](../data/benchmarks/multi_aspect_mams/val.parquet) (1,332 samples).
-* **Generation Command**:
-  ```bash
-  python scripts/train_all_experts.py --model generic
-  ```
-* **Output Artifact**: `models/category_experts/foundation_mams/best_model.pt` (710 MB)
-* **Benchmark Result**: **82.40% Val Macro F1** (MAMS Challenge: 82.93% Test Acc).
+### Unified E-Commerce Sentiment Model (`unified_backbone`)
+* **Objective**: Universal, high-accuracy e-commerce aspect sentiment classification with neutral-aware calibration.
+* **Consolidated Training Data**: [`data/benchmarks/unified_ecommerce/train.parquet`](../data/benchmarks/unified_ecommerce/train.parquet) (**7,838 samples** across Tech, Home, and Apparel).
+* **Consolidated Test Data**: [`data/benchmarks/unified_ecommerce/test.parquet`](../data/benchmarks/unified_ecommerce/test.parquet) (**2,052 samples**).
+* **Adversarial Benchmark**: [`data/benchmarks/arts_laptop/test.parquet`](../data/benchmarks/arts_laptop/test.parquet) (**1,877 samples**).
 
----
-
-### Recipe B: Tech Hardware Specialist (`expert_tech`)
-* **Objective**: Maximum precision on laptop, computer, and hardware reviews.
-* **Training Data**: [`data/benchmarks/tech_laptop/train.parquet`](../data/benchmarks/tech_laptop/train.parquet) (SemEval Laptop14 dataset, 2,045 samples).
-* **Generation Command**:
-  ```bash
-  python scripts/train_all_experts.py --model tech
-  ```
-* **Output Artifact**: `models/category_experts/expert_tech/best_model.pt` (710 MB)
-* **Benchmark Result**: **95.27% Val Macro F1** (Laptop14: 82.76% Test Acc).
-
----
-
-### Recipe C: Home Electronics Specialist (`expert_home`)
-* **Objective**: Maximum precision on TV, audio, and appliance reviews.
-* **Training Data**: [`data/benchmarks/home_television/train.parquet`](../data/benchmarks/home_television/train.parquet) (Television benchmark dataset, 3,335 samples).
-* **Generation Command**:
-  ```bash
-  python scripts/train_all_experts.py --model home
-  ```
-* **Output Artifact**: `models/category_experts/expert_home/best_model.pt` (710 MB)
-* **Benchmark Result**: **89.11% Val Macro F1** (Television: 91.08% Test Acc).
-
----
-
-### Recipe D: Apparel & Fashion Specialist (`expert_apparel`)
-* **Objective**: Maximum precision on clothing, fit, and fabric reviews without neutral class collapse.
-* **Training Data**: [`data/benchmarks/apparel_tshirt/train.parquet`](../data/benchmarks/apparel_tshirt/train.parquet) (T-Shirt benchmark dataset, 1,686 samples).
-* **Generation Command**:
-  ```bash
-  python scripts/train_all_experts.py --model apparel
-  ```
-* **Output Artifact**: `models/category_experts/expert_apparel/best_model.pt` (710 MB)
-* **Benchmark Result**: **87.15% Val Macro F1** (T-Shirt: 94.07% Test Acc, 75.26% Macro F1).
-
----
-
-## 3. How to Retrain the Entire Suite in One Command
-
-To reproduce all 4 checkpoints completely from scratch using the GPU:
+### Step 1: Consolidate Training Data
 ```bash
-python scripts/train_all_experts.py --all
+python scripts/prepare_unified_dataset.py
 ```
-This will sequentially train:
-1. `generic_foundation` $\rightarrow$ `models/category_experts/foundation_mams/best_model.pt`
-2. `expert_tech` $\rightarrow$ `models/category_experts/expert_tech/best_model.pt`
-3. `expert_home` $\rightarrow$ `models/category_experts/expert_home/best_model.pt`
-4. `expert_apparel` $\rightarrow$ `models/category_experts/expert_apparel/best_model.pt`
+
+### Step 2: Train Unified Model
+```bash
+python scripts/train.py --domain unified --batch_size 16 --epochs 10 --eval_steps 150 --patience 6
+```
+
+### Step 3: Evaluate on Held-Out Benchmark Suites
+```bash
+python scripts/evaluate_unified.py
+```
+
+* **Output Artifact**: `models/unified_backbone/best_model.pt` (712 MB) & `models/unified_backbone/calibration.json`
+* **Benchmark Result**: **89.37% E-Commerce Composite Accuracy** (83.54% Tech Acc, 66.90% Neutral F1, 30.4% lower NLL).

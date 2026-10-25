@@ -1,0 +1,72 @@
+{
+  "Canonical Backbone (Pretrained)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 81.82,
+      "macro_f1": 76.8,
+      "neutral_f1": 60.0,
+      "ece": 13.11,
+      "nll": 0.6464,
+      "n_samples": 638
+    },
+    "Television (Home)": {
+      "accuracy": 91.83,
+      "macro_f1": 77.89,
+      "neutral_f1": 44.26,
+      "ece": 4.98,
+      "nll": 0.2918,
+      "n_samples": 942
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 94.49,
+      "macro_f1": 76.0,
+      "neutral_f1": 36.36,
+      "ece": 4.61,
+      "nll": 0.2571,
+      "n_samples": 472
+    },
+    "ARTS Laptop (Adversarial)": {
+      "accuracy": 78.9,
+      "macro_f1": 75.63,
+      "neutral_f1": 62.42,
+      "ece": 14.63,
+      "nll": 0.8031,
+      "n_samples": 1877
+    },
+    "E-Commerce Composite": 89.33
+  },
+  "ProductLens Unified Backbone (v2.2.0)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 83.54,
+      "macro_f1": 79.78,
+      "neutral_f1": 66.9,
+      "ece": 11.45,
+      "nll": 0.5907,
+      "n_samples": 638
+    },
+    "Television (Home)": {
+      "accuracy": 91.4,
+      "macro_f1": 79.06,
+      "neutral_f1": 48.57,
+      "ece": 5.22,
+      "nll": 0.308,
+      "n_samples": 942
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 93.22,
+      "macro_f1": 71.04,
+      "neutral_f1": 23.08,
+      "ece": 3.85,
+      "nll": 0.2527,
+      "n_samples": 472
+    },
+    "ARTS Laptop (Adversarial)": {
+      "accuracy": 78.8,
+      "macro_f1": 76.29,
+      "neutral_f1": 64.96,
+      "ece": 14.93,
+      "nll": 0.7998,
+      "n_samples": 1877
+    },
+    "E-Commerce Composite": 89.37
+  }
+}

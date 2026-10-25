@@ -3,8 +3,8 @@
 ## 1. Executive Summary
 - **Repository**: [ProductLens-Sentiment](file:///home/parth/Projects/ProductLens-Sentiment)
 - **Domain**: Aspect-Based Sentiment Analysis (ABSA) for e-commerce reviews.
-- **Core Architecture**: Hierarchical Mixture of Experts (MoE) with domain-specialized DeBERTa-v3 backbones and deterministic $O(1)$ zero-latency metadata routing.
-- **Key Task**: Given customer reviews (with optional category metadata), extract aspect targets, route to specialized domain models, and predict aspect-level sentiment labels (Positive, Neutral, Negative) with calibrated confidence scores.
+- **Core Architecture**: Unified calibrated DeBERTa-v3 architecture with Query-Key Cross-Attention Evidence Pooling, Aspect-Centered Windowing, and Ordinal Wasserstein Loss.
+- **Key Task**: Given customer reviews, extract aspect targets, ground contextual opinion snippets, and predict aspect-level sentiment labels (Positive, Neutral, Negative) with calibrated confidence scores without multi-model routing overhead.
 
 ---
 
@@ -24,20 +24,21 @@ ProductLens-Sentiment/
 │   ├── aspects/
 │   │   └── extractor.py                  # Aspect extraction (noun chunking, gazetteers)
 │   ├── sentiment/
-│   │   ├── model.py                      # DeBERTa-v3 backbone with aspect-targeted pooling
-│   │   ├── pipeline.py                   # MoE batch inference & tokenizer coordinator
-│   │   └── router.py                     # 3-tier routing (Metadata -> Keyword -> Fallback)
+│   │   ├── model.py                      # DeBERTa-v3 backbone with aspect cross-attention pooling
+│   │   ├── pipeline.py                   # Unified high-throughput inference pipeline
+│   │   └── calibration.py                # Temperature calibration module
 │   ├── training/
-│   │   ├── dataset.py                    # PyTorch Dataset for ABSA tokenization
-│   │   ├── loss.py                       # Supervised ABSA loss functions
-│   │   └── trainer.py                    # PyTorch fine-tuning trainer
+│   │   ├── dataset.py                    # PyTorch Dataset for ABSA tokenization & windowing
+│   │   ├── loss.py                       # Ordinal Wasserstein & SCL loss functions
+│   │   └── trainer.py                    # AspectSentimentTrainer with mixed precision
 │   ├── engine.py                         # Unified ProductLensEngine facade
 │   └── schemas.py                        # Domain dataclasses & schemas
 ├── configs/
-│   ├── app_config.yaml                   # Model weights paths, routing tables, runtime params
-│   └── training_configs.yaml             # Hyperparameters for expert fine-tuning
-├── data/benchmarks/                      # Benchmark datasets (Tech, Home, Apparel, MAMS)
-├── models/category_experts/              # Pretrained / fine-tuned expert weights
+│   ├── app_config.yaml                   # Model weights paths and runtime params
+│   └── training_configs.yaml             # Hyperparameters for unified model training
+├── data/benchmarks/                      # Benchmark datasets (Tech, Home, Apparel, ARTS)
+├── models/unified_backbone/              # Unified model checkpoint & calibration parameters
+```
 ├── scripts/                              # Training, evaluation & verification CLI scripts
 └── tests/                                # Pytest test suite
 ```
@@ -83,13 +84,10 @@ flowchart TD
 ### Aspect Extraction
 - **[`AspectExtractor`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/aspects/extractor.py)**: Identifies aspect terms using linguistic heuristics, noun phrases, and domain gazetteers.
 
-### MoE Routing & Inference
-- **[`ProductLensRouter`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/router.py)**: Deterministic, low-overhead expert selection.
-  1. *Metadata Match*: Direct map from metadata categories (e.g. `Laptop` -> `tech_expert`).
-  2. *Lexical Match*: Keyword density scoring against category vocabularies.
-  3. *Fallback*: Defaults to `mams_foundation` expert for unmapped domains.
-- **[`ProductLensMoEPipeline`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/pipeline.py)**: Manages batch tokenization (`[CLS] text [SEP] aspect [SEP]`) and coordinates forward passes across active expert models.
-- **[`AspectTargetedSentimentModel`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/model.py)**: DeBERTa-v3 backbone with attention pooling targeted at aspect token spans.
+### Sentiment Classification & Pipeline
+- **[`ProductLensSentimentPipeline`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/pipeline.py)**: Manages batch tokenization (`[CLS] text [SEP] aspect [SEP]`), aspect windowing, and high-throughput batched tensor inference.
+- **[`AspectTargetedSentimentModel`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/model.py)**: DeBERTa-v3 backbone with Query-Key cross-attention pooling targeted at aspect token spans and Tripartite Context Fusion.
+- **[`TemperatureScaler`](file:///home/parth/Projects/ProductLens-Sentiment/productlens/sentiment/calibration.py)**: Post-hoc temperature calibration minimizing Negative Log-Likelihood and Expected Calibration Error.
 
 ---
 

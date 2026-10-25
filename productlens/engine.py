@@ -10,7 +10,7 @@ from productlens.schemas import (
     BatchAnalysisReport,
 )
 from productlens.aspects.extractor import AspectExtractor
-from productlens.sentiment.pipeline import ProductLensMoEPipeline
+from productlens.sentiment.pipeline import ProductLensSentimentPipeline
 from productlens.utils import find_aspect_span
 
 
@@ -53,20 +53,20 @@ class ProductLensEngine:
     """
     Unified Production Facade for ProductLens.
     Coordinates aspect extraction, evidence snippet extraction,
-    MoE routing, and aspect-targeted sentiment analysis.
+    and aspect-targeted sentiment analysis using a single unified calibrated model.
     """
 
     def __init__(
         self,
-        checkpoint_paths: Optional[dict] = None,
+        checkpoint_path: Optional[Union[str, Path, dict]] = None,
         device: Optional[str] = None,
-        lazy_load: bool = True,
+        **kwargs,
     ):
         self.extractor = AspectExtractor()
-        self.pipeline = ProductLensMoEPipeline(
-            checkpoint_paths=checkpoint_paths,
+        self.pipeline = ProductLensSentimentPipeline(
+            checkpoint_path=checkpoint_path,
             device=device,
-            lazy_load=lazy_load,
+            **kwargs,
         )
 
     def analyze_review(

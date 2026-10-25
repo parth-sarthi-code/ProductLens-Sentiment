@@ -3,15 +3,11 @@
 environment: production
 device: auto  # 'auto', 'cuda', or 'cpu'
 
-models:
+model:
   backbone: "yangheng/deberta-v3-base-absa-v1.1"
   aspect_boost: 3.5
-  lazy_load: true
-  checkpoints:
-    tech: "models/category_experts/expert_tech/best_model.pt"
-    home: "models/category_experts/expert_home/best_model.pt"
-    apparel: "models/category_experts/expert_apparel/best_model.pt"
-    fallback: null
+  checkpoint: "models/unified_backbone/best_model.pt"
+  calibration: "models/unified_backbone/calibration.json"
 
 aspect_extraction:
   min_length: 2
@@ -21,6 +17,6 @@ aspect_extraction:
 
 api:
   title: "ProductLens Aspect-Based Sentiment Analysis Engine"
-  version: "2.0.0"
+  version: "2.2.0"
   host: "0.0.0.0"
   port: 8000

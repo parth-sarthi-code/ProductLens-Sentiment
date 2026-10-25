@@ -5,823 +5,368 @@
       "aspect": "graphics",
       "start_char": 71,
       "end_char": 79,
-      "sentiment": "neutral",
-      "confidence": 0.9412811398506165,
+      "evidence_snippet": "Genshin (max graphics 60fps)",
+      "sentiment": "positive",
+      "confidence": 0.8382063508033752,
       "probabilities": {
-        "positive": 0.03317142277956009,
-        "neutral": 0.9412811398506165,
-        "negative": 0.025547415018081665
+        "positive": 0.8382063508033752,
+        "neutral": 0.09126189351081848,
+        "negative": 0.07053173333406448
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "Display",
       "start_char": 268,
       "end_char": 275,
+      "evidence_snippet": "...fps)\nValorant (max 144-200fps)\nOverwatch 2 (max 70+fps)\n\n2.Display is very great and video quality at peak beacuse of 2k res ,...",
       "sentiment": "positive",
-      "confidence": 0.9711601138114929,
+      "confidence": 0.9727886915206909,
       "probabilities": {
-        "positive": 0.9711601138114929,
-        "neutral": 0.014655103906989098,
-        "negative": 0.014184746891260147
+        "positive": 0.9727886915206909,
+        "neutral": 0.015154093503952026,
+        "negative": 0.01205712091177702
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "screen",
       "start_char": 354,
       "end_char": 360,
-      "sentiment": "negative",
-      "confidence": 0.9403831362724304,
+      "evidence_snippet": "...video quality at peak beacuse of 2k res , but mine has more screen bleeding and i got one dead pixel (my fault because I didn'...",
+      "sentiment": "neutral",
+      "confidence": 0.4444660246372223,
       "probabilities": {
-        "positive": 0.010300948284566402,
-        "neutral": 0.0493159182369709,
-        "negative": 0.9403831362724304
+        "positive": 0.18338602781295776,
+        "neutral": 0.4444660246372223,
+        "negative": 0.37214788794517517
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "Heat",
       "start_char": 490,
       "end_char": 494,
+      "evidence_snippet": "Heat management is average",
       "sentiment": "negative",
-      "confidence": 0.6314871311187744,
+      "confidence": 0.6320728659629822,
       "probabilities": {
-        "positive": 0.037388548254966736,
-        "neutral": 0.3311242461204529,
-        "negative": 0.6314871311187744
+        "positive": 0.11526498198509216,
+        "neutral": 0.25266212224960327,
+        "negative": 0.6320728659629822
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "graphics",
       "start_char": 543,
       "end_char": 551,
-      "sentiment": "neutral",
-      "confidence": 0.9061614871025085,
+      "evidence_snippet": "When I play games at high graphics it goes upto 90-95\u00b0 sometimes at max fan speed.",
+      "sentiment": "negative",
+      "confidence": 0.8970821499824524,
       "probabilities": {
-        "positive": 0.02882763184607029,
-        "neutral": 0.9061614871025085,
-        "negative": 0.06501085311174393
+        "positive": 0.044130731374025345,
+        "neutral": 0.05878710001707077,
+        "negative": 0.8970821499824524
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "fan",
       "start_char": 589,
       "end_char": 592,
-      "sentiment": "neutral",
-      "confidence": 0.4924381971359253,
+      "evidence_snippet": "When I play games at high graphics it goes upto 90-95\u00b0 sometimes at max fan speed.",
+      "sentiment": "negative",
+      "confidence": 0.7698067426681519,
       "probabilities": {
-        "positive": 0.026895932853221893,
-        "neutral": 0.4924381971359253,
-        "negative": 0.4806658625602722
+        "positive": 0.04701647162437439,
+        "neutral": 0.18317674100399017,
+        "negative": 0.7698067426681519
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "speed",
       "start_char": 593,
       "end_char": 598,
+      "evidence_snippet": "When I play games at high graphics it goes upto 90-95\u00b0 sometimes at max fan speed.",
       "sentiment": "negative",
-      "confidence": 0.6411657929420471,
+      "confidence": 0.8804792761802673,
       "probabilities": {
-        "positive": 0.02925199270248413,
-        "neutral": 0.32958218455314636,
-        "negative": 0.6411657929420471
+        "positive": 0.0380842387676239,
+        "neutral": 0.08143641799688339,
+        "negative": 0.8804792761802673
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "keyboard",
       "start_char": 660,
       "end_char": 668,
+      "evidence_snippet": "keyboard and touch pad (4/10)",
       "sentiment": "negative",
-      "confidence": 0.9080103039741516,
+      "confidence": 0.9563730359077454,
       "probabilities": {
-        "positive": 0.012179652228951454,
-        "neutral": 0.07981003075838089,
-        "negative": 0.9080103039741516
+        "positive": 0.018955621868371964,
+        "neutral": 0.0246712826192379,
+        "negative": 0.9563730359077454
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "keyboard",
       "start_char": 700,
       "end_char": 708,
+      "evidence_snippet": "Tbh worst keyboard and touch pad at this price and low quality.",
       "sentiment": "negative",
-      "confidence": 0.9752838015556335,
+      "confidence": 0.9410694241523743,
       "probabilities": {
-        "positive": 0.010407466441392899,
-        "neutral": 0.014308684505522251,
-        "negative": 0.9752838015556335
+        "positive": 0.01643744669854641,
+        "neutral": 0.04249311238527298,
+        "negative": 0.9410694241523743
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "battery",
       "start_char": 816,
       "end_char": 823,
-      "sentiment": "neutral",
-      "confidence": 0.5184462666511536,
+      "evidence_snippet": "battery (4/10)",
+      "sentiment": "negative",
+      "confidence": 0.9113181829452515,
       "probabilities": {
-        "positive": 0.21750499308109283,
-        "neutral": 0.5184462666511536,
-        "negative": 0.2640487551689148
+        "positive": 0.022979354485869408,
+        "neutral": 0.06570252031087875,
+        "negative": 0.9113181829452515
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "battery life",
       "start_char": 837,
       "end_char": 849,
-      "sentiment": "neutral",
-      "confidence": 0.5184462666511536,
+      "evidence_snippet": "Worst battery life not even 90 minutes of playing or streaming videos.",
+      "sentiment": "negative",
+      "confidence": 0.9760428667068481,
       "probabilities": {
-        "positive": 0.21750499308109283,
-        "neutral": 0.5184462666511536,
-        "negative": 0.2640487551689148
+        "positive": 0.007918615825474262,
+        "neutral": 0.016038546338677406,
+        "negative": 0.9760428667068481
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "screen",
       "start_char": 1082,
       "end_char": 1088,
-      "sentiment": "neutral",
-      "confidence": 0.5184462666511536,
+      "evidence_snippet": "*IF YOU ARE GOING TO BUY* Then don't forget to check if it has more screen bleeding.",
+      "sentiment": "negative",
+      "confidence": 0.8760519027709961,
       "probabilities": {
-        "positive": 0.21750499308109283,
-        "neutral": 0.5184462666511536,
-        "negative": 0.2640487551689148
+        "positive": 0.033867161720991135,
+        "neutral": 0.09008090943098068,
+        "negative": 0.8760519027709961
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "screen",
       "start_char": 1122,
       "end_char": 1128,
-      "sentiment": "neutral",
-      "confidence": 0.5184462666511536,
+      "evidence_snippet": "(All LCD displays have screen bleeding and it's common but buy which has the slightest screen bleeding)",
+      "sentiment": "negative",
+      "confidence": 0.8767857551574707,
       "probabilities": {
-        "positive": 0.21750499308109283,
-        "neutral": 0.5184462666511536,
-        "negative": 0.2640487551689148
+        "positive": 0.033939238637685776,
+        "neutral": 0.08927500247955322,
+        "negative": 0.8767857551574707
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "screen",
       "start_char": 1186,
       "end_char": 1192,
-      "sentiment": "neutral",
-      "confidence": 0.5184462666511536,
+      "evidence_snippet": "(All LCD displays have screen bleeding and it's common but buy which has the slightest screen bleeding)",
+      "sentiment": "negative",
+      "confidence": 0.8767088651657104,
       "probabilities": {
-        "positive": 0.21750499308109283,
-        "neutral": 0.5184462666511536,
-        "negative": 0.2640487551689148
+        "positive": 0.03384477645158768,
+        "neutral": 0.08944640308618546,
+        "negative": 0.8767088651657104
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     },
     {
       "aspect": "screen",
       "start_char": 1217,
       "end_char": 1223,
-      "sentiment": "neutral",
-      "confidence": 0.5184462666511536,
+      "evidence_snippet": "Mine has more screen bleeding in all four sides but only noticeable in dark room",
+      "sentiment": "negative",
+      "confidence": 0.8725428581237793,
       "probabilities": {
-        "positive": 0.21750499308109283,
-        "neutral": 0.5184462666511536,
-        "negative": 0.2640487551689148
+        "positive": 0.0352206826210022,
+        "neutral": 0.09223642200231552,
+        "negative": 0.8725428581237793
       },
-      "routed_expert": "tech",
-      "routing_reason": "metadata_match:tech"
+      "routed_expert": "unified",
+      "routing_reason": "unified_calibrated_backbone",
+      "aspect_mask_fallback": false,
+      "calibrated": true
     }
   ],
-  "summary_sentiment": "mixed",
-  "target_aspect_comparison": [
+  "summary_sentiment": "negative",
+  "target_aspect_evaluations": [
     {
       "aspect": "Gaming",
       "expected_human": "positive",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "neutral",
-          "confidence": 0.9502,
-          "probabilities": {
-            "positive": 0.023,
-            "neutral": 0.9502,
-            "negative": 0.0268
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "neutral",
-          "confidence": 0.5518,
-          "probabilities": {
-            "positive": 0.4302,
-            "neutral": 0.5518,
-            "negative": 0.018
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "positive",
-          "confidence": 0.9389,
-          "probabilities": {
-            "positive": 0.9389,
-            "neutral": 0.0423,
-            "negative": 0.0188
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "neutral",
-          "confidence": 0.5447,
-          "probabilities": {
-            "positive": 0.3336,
-            "neutral": 0.5447,
-            "negative": 0.1216
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "neutral",
-          "confidence": 0.5518,
-          "probabilities": {
-            "positive": 0.4302,
-            "neutral": 0.5518,
-            "negative": 0.018
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "positive",
+      "confidence": 0.9871,
+      "probabilities": {
+        "positive": 0.9871,
+        "neutral": 0.0075,
+        "negative": 0.0054
       }
     },
     {
       "aspect": "Display",
       "expected_human": "positive",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "positive",
-          "confidence": 0.933,
-          "probabilities": {
-            "positive": 0.933,
-            "neutral": 0.0375,
-            "negative": 0.0296
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "positive",
-          "confidence": 0.9712,
-          "probabilities": {
-            "positive": 0.9712,
-            "neutral": 0.0147,
-            "negative": 0.0142
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "positive",
-          "confidence": 0.9641,
-          "probabilities": {
-            "positive": 0.9641,
-            "neutral": 0.0205,
-            "negative": 0.0154
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "positive",
-          "confidence": 0.7762,
-          "probabilities": {
-            "positive": 0.7762,
-            "neutral": 0.0914,
-            "negative": 0.1325
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "positive",
-          "confidence": 0.9712,
-          "probabilities": {
-            "positive": 0.9712,
-            "neutral": 0.0147,
-            "negative": 0.0142
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "positive",
+      "confidence": 0.9728,
+      "probabilities": {
+        "positive": 0.9728,
+        "neutral": 0.0152,
+        "negative": 0.0121
       }
     },
     {
       "aspect": "screen bleeding",
       "expected_human": "negative",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "negative",
-          "confidence": 0.8848,
-          "probabilities": {
-            "positive": 0.0116,
-            "neutral": 0.1035,
-            "negative": 0.8848
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "negative",
-          "confidence": 0.9536,
-          "probabilities": {
-            "positive": 0.0082,
-            "neutral": 0.0381,
-            "negative": 0.9536
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "negative",
-          "confidence": 0.9845,
-          "probabilities": {
-            "positive": 0.0031,
-            "neutral": 0.0124,
-            "negative": 0.9845
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.9171,
-          "probabilities": {
-            "positive": 0.0106,
-            "neutral": 0.0723,
-            "negative": 0.9171
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "negative",
-          "confidence": 0.9536,
-          "probabilities": {
-            "positive": 0.0082,
-            "neutral": 0.0381,
-            "negative": 0.9536
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "negative",
+      "confidence": 0.9668,
+      "probabilities": {
+        "positive": 0.014,
+        "neutral": 0.0192,
+        "negative": 0.9668
       }
     },
     {
       "aspect": "dead pixel",
       "expected_human": "negative",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "negative",
-          "confidence": 0.9527,
-          "probabilities": {
-            "positive": 0.0073,
-            "neutral": 0.04,
-            "negative": 0.9527
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "negative",
-          "confidence": 0.9597,
-          "probabilities": {
-            "positive": 0.0067,
-            "neutral": 0.0336,
-            "negative": 0.9597
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "negative",
-          "confidence": 0.9859,
-          "probabilities": {
-            "positive": 0.003,
-            "neutral": 0.0111,
-            "negative": 0.9859
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.9279,
-          "probabilities": {
-            "positive": 0.0087,
-            "neutral": 0.0634,
-            "negative": 0.9279
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "negative",
-          "confidence": 0.9597,
-          "probabilities": {
-            "positive": 0.0067,
-            "neutral": 0.0336,
-            "negative": 0.9597
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "negative",
+      "confidence": 0.908,
+      "probabilities": {
+        "positive": 0.0299,
+        "neutral": 0.0621,
+        "negative": 0.908
       }
     },
     {
       "aspect": "speaker",
       "expected_human": "neutral",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "neutral",
-          "confidence": 0.7598,
-          "probabilities": {
-            "positive": 0.0255,
-            "neutral": 0.7598,
-            "negative": 0.2148
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "neutral",
-          "confidence": 0.7471,
-          "probabilities": {
-            "positive": 0.0409,
-            "neutral": 0.7471,
-            "negative": 0.2119
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "neutral",
-          "confidence": 0.8481,
-          "probabilities": {
-            "positive": 0.0319,
-            "neutral": 0.8481,
-            "negative": 0.12
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.7563,
-          "probabilities": {
-            "positive": 0.0247,
-            "neutral": 0.219,
-            "negative": 0.7563
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "neutral",
-          "confidence": 0.7471,
-          "probabilities": {
-            "positive": 0.0409,
-            "neutral": 0.7471,
-            "negative": 0.2119
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "neutral",
+      "confidence": 0.707,
+      "probabilities": {
+        "positive": 0.1162,
+        "neutral": 0.707,
+        "negative": 0.1767
       }
     },
     {
       "aspect": "Heating",
       "expected_human": "neutral",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "negative",
-          "confidence": 0.5313,
-          "probabilities": {
-            "positive": 0.029,
-            "neutral": 0.4397,
-            "negative": 0.5313
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "neutral",
-          "confidence": 0.5334,
-          "probabilities": {
-            "positive": 0.0339,
-            "neutral": 0.5334,
-            "negative": 0.4327
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "neutral",
-          "confidence": 0.7888,
-          "probabilities": {
-            "positive": 0.0164,
-            "neutral": 0.7888,
-            "negative": 0.1948
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.8063,
-          "probabilities": {
-            "positive": 0.0232,
-            "neutral": 0.1705,
-            "negative": 0.8063
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "neutral",
-          "confidence": 0.5334,
-          "probabilities": {
-            "positive": 0.0339,
-            "neutral": 0.5334,
-            "negative": 0.4327
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "negative",
+      "confidence": 0.5235,
+      "probabilities": {
+        "positive": 0.1329,
+        "neutral": 0.3436,
+        "negative": 0.5235
       }
     },
     {
       "aspect": "keyboard",
       "expected_human": "negative",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "negative",
-          "confidence": 0.6132,
-          "probabilities": {
-            "positive": 0.0377,
-            "neutral": 0.3491,
-            "negative": 0.6132
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "negative",
-          "confidence": 0.908,
-          "probabilities": {
-            "positive": 0.0122,
-            "neutral": 0.0798,
-            "negative": 0.908
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "negative",
-          "confidence": 0.9847,
-          "probabilities": {
-            "positive": 0.0063,
-            "neutral": 0.009,
-            "negative": 0.9847
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.8967,
-          "probabilities": {
-            "positive": 0.0163,
-            "neutral": 0.087,
-            "negative": 0.8967
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "negative",
-          "confidence": 0.908,
-          "probabilities": {
-            "positive": 0.0122,
-            "neutral": 0.0798,
-            "negative": 0.908
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "negative",
+      "confidence": 0.9564,
+      "probabilities": {
+        "positive": 0.019,
+        "neutral": 0.0247,
+        "negative": 0.9564
       }
     },
     {
       "aspect": "touch pad",
       "expected_human": "negative",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "negative",
-          "confidence": 0.7801,
-          "probabilities": {
-            "positive": 0.0307,
-            "neutral": 0.1892,
-            "negative": 0.7801
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "negative",
-          "confidence": 0.9589,
-          "probabilities": {
-            "positive": 0.0089,
-            "neutral": 0.0322,
-            "negative": 0.9589
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "negative",
-          "confidence": 0.9878,
-          "probabilities": {
-            "positive": 0.0056,
-            "neutral": 0.0065,
-            "negative": 0.9878
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.9214,
-          "probabilities": {
-            "positive": 0.0144,
-            "neutral": 0.0643,
-            "negative": 0.9214
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "negative",
-          "confidence": 0.9589,
-          "probabilities": {
-            "positive": 0.0089,
-            "neutral": 0.0322,
-            "negative": 0.9589
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "negative",
+      "confidence": 0.9638,
+      "probabilities": {
+        "positive": 0.0164,
+        "neutral": 0.0198,
+        "negative": 0.9638
       }
     },
     {
       "aspect": "battery",
       "expected_human": "negative",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "neutral",
-          "confidence": 0.51,
-          "probabilities": {
-            "positive": 0.1758,
-            "neutral": 0.51,
-            "negative": 0.3143
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "neutral",
-          "confidence": 0.5184,
-          "probabilities": {
-            "positive": 0.2175,
-            "neutral": 0.5184,
-            "negative": 0.264
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "neutral",
-          "confidence": 0.4808,
-          "probabilities": {
-            "positive": 0.1685,
-            "neutral": 0.4808,
-            "negative": 0.3506
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "negative",
-          "confidence": 0.4486,
-          "probabilities": {
-            "positive": 0.158,
-            "neutral": 0.3934,
-            "negative": 0.4486
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "neutral",
-          "confidence": 0.5184,
-          "probabilities": {
-            "positive": 0.2175,
-            "neutral": 0.5184,
-            "negative": 0.264
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "negative",
+      "confidence": 0.9113,
+      "probabilities": {
+        "positive": 0.023,
+        "neutral": 0.0657,
+        "negative": 0.9113
       }
     },
     {
       "aspect": "price",
       "expected_human": "positive",
-      "predictions": {
-        "Generic Foundation (MAMS)": {
-          "sentiment": "neutral",
-          "confidence": 0.914,
-          "probabilities": {
-            "positive": 0.0269,
-            "neutral": 0.914,
-            "negative": 0.0591
-          },
-          "routed_expert": "fallback",
-          "routing_reason": "forced:fallback"
-        },
-        "Tech Specialist (Laptop14)": {
-          "sentiment": "positive",
-          "confidence": 0.8079,
-          "probabilities": {
-            "positive": 0.8079,
-            "neutral": 0.1703,
-            "negative": 0.0218
-          },
-          "routed_expert": "tech",
-          "routing_reason": "forced:tech"
-        },
-        "Home Specialist (Television)": {
-          "sentiment": "positive",
-          "confidence": 0.7907,
-          "probabilities": {
-            "positive": 0.7907,
-            "neutral": 0.1812,
-            "negative": 0.0281
-          },
-          "routed_expert": "home",
-          "routing_reason": "forced:home"
-        },
-        "Apparel Specialist (T-Shirt)": {
-          "sentiment": "neutral",
-          "confidence": 0.61,
-          "probabilities": {
-            "positive": 0.2479,
-            "neutral": 0.61,
-            "negative": 0.1421
-          },
-          "routed_expert": "apparel",
-          "routing_reason": "forced:apparel"
-        },
-        "ProductLens MoE (Auto Routed)": {
-          "sentiment": "positive",
-          "confidence": 0.8079,
-          "probabilities": {
-            "positive": 0.8079,
-            "neutral": 0.1703,
-            "negative": 0.0218
-          },
-          "routed_expert": "tech",
-          "routing_reason": "metadata_match:tech"
-        }
+      "predicted_sentiment": "positive",
+      "confidence": 0.9229,
+      "probabilities": {
+        "positive": 0.9229,
+        "neutral": 0.0529,
+        "negative": 0.0242
       }
     }
   ]

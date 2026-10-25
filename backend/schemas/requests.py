@@ -18,5 +18,7 @@ class HealthResponse(BaseModel):
     status: str
     version: str
     device: str
-    loaded_experts: List[str]
-    available_experts: List[str]
+    model: str = "unified_deberta_v3"
+    loaded_experts: List[str] = ["unified"]
+    available_experts: List[str] = ["unified"]
+

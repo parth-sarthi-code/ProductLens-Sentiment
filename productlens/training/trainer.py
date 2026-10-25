@@ -158,15 +158,9 @@ class AspectSentimentTrainer:
                     val_f1 = val_metrics["macro_f1"]
                     val_neutral_f1 = val_metrics["neutral_f1"]
                     composite_score = val_metrics["composite_score"]
-                    logger.info(
-                        "Step %d (Epoch %.2f): Val Acc=%.4f, Val Macro F1=%.4f, Val Neutral F1=%.4f, Composite Score=%.4f",
-                        global_step,
-                        global_step / len(train_loader),
-                        val_acc,
-                        val_f1,
-                        val_neutral_f1,
-                        composite_score,
-                    )
+                    avg_train_loss = running_loss / eval_every_steps
+                    running_loss = 0.0
+                    status_tag = ""
 
                     if composite_score > best_composite_score:
                         selection_reason = (
@@ -178,15 +172,22 @@ class AspectSentimentTrainer:
                         best_val_neutral_f1 = val_neutral_f1
                         patience_counter = 0
                         torch.save(self.model.state_dict(), best_model_path)
-                        logger.info("Saved new best model checkpoint to %s [%s]", best_model_path, selection_reason)
+                        status_tag = " [NEW BEST SAVED ★]"
                     else:
                         patience_counter += 1
-                        if patience_counter >= patience:
-                            logger.info(
-                                "Early stopping triggered at step %d. Best Composite Score: %.4f (Val Macro F1: %.4f, Neutral F1: %.4f)",
-                                global_step, best_composite_score, best_val_f1, best_val_neutral_f1
-                            )
-                            break
+                        status_tag = f" [Patience: {patience_counter}/{patience}]"
+
+                    print(
+                        f"--> Step {global_step:4d} | Epoch {global_step / len(train_loader):.2f}/{epochs} | "
+                        f"Loss: {avg_train_loss:.4f} | Val Acc: {val_acc*100:.2f}% | "
+                        f"Macro-F1: {val_f1*100:.2f}% | Neutral-F1: {val_neutral_f1*100:.2f}% | "
+                        f"Composite: {composite_score:.4f}{status_tag}",
+                        flush=True,
+                    )
+
+                    if patience_counter >= patience:
+                        print(f"Early stopping triggered at step {global_step}. Best Composite: {best_composite_score:.4f}", flush=True)
+                        break
 
             if patience_counter >= patience:
                 break
