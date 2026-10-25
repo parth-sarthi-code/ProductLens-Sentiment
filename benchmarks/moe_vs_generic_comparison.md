@@ -9,19 +9,19 @@
 | Model | Laptop14 (Tech, 638) | Television (Home, 942) | T-Shirt (Apparel, 472) | E-Com Composite |
 | :--- | :---: | :---: | :---: | :---: |
 | Canonical Backbone (PyABSA DeBERTa-v3) | 81.82% | 91.83% | 94.49% | 89.33% |
-| Tech Specialist (Laptop14) | 82.92% | 91.72% | 94.07% | 89.52% |
-| Home Specialist (Television) | 83.07% | 92.14% | 94.07% | 89.76% |
+| Tech Specialist (Laptop14) | 83.07% | 92.25% | 93.86% | 89.77% |
+| Home Specialist (Television) | 83.54% | 91.61% | 94.07% | 89.67% |
 | Apparel Specialist (T-Shirt) | 81.82% | 91.83% | 94.49% | 89.33% |
-| **ProductLens MoE (with category)** | 82.92% | 92.14% | 94.49% | **89.81% (+0.48% vs backbone)** |
-| **ProductLens MoE (no category)** | 82.92% | 91.93% | 94.28% | **89.67% (+0.34% vs backbone)** |
+| **ProductLens MoE (with category)** | 83.07% | 91.61% | 94.49% | **89.62% (+0.29% vs backbone)** |
+| **ProductLens MoE (no category)** | 83.23% | 91.72% | 94.28% | **89.67% (+0.34% vs backbone)** |
 
 ## Detailed F1 & Calibration Metrics (No Category Mode)
 
 | Domain | Accuracy (%) | Macro-F1 (%) | Neutral-F1 (%) | ECE (%) | NLL | Brier | Fallback Rate (%) | AspectMask Fallback (%) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Laptop14 (Tech) | 82.92% | 78.7% | 64.31% | 14.58% | 0.8489 | 0.3081 | 3.29% | 0.0% |
-| Television (Home) | 91.93% | 78.14% | 45.0% | 5.7% | 0.3302 | 0.1379 | 11.25% | 0.0% |
-| T-Shirt (Apparel) | 94.28% | 75.85% | 36.36% | 4.72% | 0.2627 | 0.1084 | 5.72% | 0.0% |
+| Laptop14 (Tech) | 83.23% | 79.06% | 64.52% | 12.66% | 0.6416 | 0.2953 | 2.35% | 0.0% |
+| Television (Home) | 91.72% | 77.89% | 44.63% | 5.23% | 0.2937 | 0.1390 | 15.71% | 0.0% |
+| T-Shirt (Apparel) | 94.28% | 75.85% | 36.36% | 4.24% | 0.2506 | 0.1075 | 6.99% | 0.0% |
 
 ## Notes
 - **Fallback Architecture**: Uses canonical pretrained backbone (`yangheng/deberta-v3-base-absa-v1.1`) directly for unrouted or OOD domains.

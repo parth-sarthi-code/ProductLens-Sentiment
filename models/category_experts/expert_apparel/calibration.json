@@ -1,15 +1,14 @@
 {
-  "temperature": 1.0599,
-  "domain": "apparel",
-  "val_samples": 181,
+  "temperature": 1.0598,
   "uncalibrated": {
-    "ece": 0.0109,
-    "nll": 0.0702,
+    "ece": 0.0111,
+    "nll": 0.0701,
     "brier": 0.0245
   },
   "calibrated": {
-    "ece": 0.0095,
+    "ece": 0.0094,
     "nll": 0.0687,
     "brier": 0.0246
-  }
+  },
+  "selection_reason": "Step 0 baseline saved"
 }

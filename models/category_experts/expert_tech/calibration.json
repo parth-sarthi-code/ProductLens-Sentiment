@@ -1,15 +1,14 @@
 {
-  "temperature": 1.141,
-  "domain": "tech",
-  "val_samples": 221,
+  "temperature": 0.9238,
   "uncalibrated": {
-    "ece": 0.0227,
-    "nll": 0.0814,
-    "brier": 0.0404
+    "ece": 0.0153,
+    "nll": 0.0825,
+    "brier": 0.0392
   },
   "calibrated": {
-    "ece": 0.0221,
-    "nll": 0.0754,
-    "brier": 0.0393
-  }
+    "ece": 0.0078,
+    "nll": 0.0791,
+    "brier": 0.0392
+  },
+  "selection_reason": "Step 300: composite score improved from 0.9604 to 0.9667 (Macro F1: 0.9737, Neutral F1: 0.9505)"
 }

@@ -12,14 +12,14 @@ from productlens.sentiment.calibration import (
     compute_ece,
     compute_nll,
 )
-from productlens.training.loss import JointABSALoss, compute_class_weights
+from productlens.training.loss import JointABSALoss, OrdinalWassersteinLoss, compute_class_weights
 from productlens.training.trainer import AspectSentimentTrainer
 from productlens.sentiment.pipeline import ProductLensMoEPipeline, checkpoints_exist
 from productlens.engine import ProductLensEngine
 
 
 # ---------------------------------------------------------------------------
-# 1. Class Imbalance Weighting Tests
+# 1. Class Imbalance Weighting & Ordinal Loss Tests
 # ---------------------------------------------------------------------------
 
 class TestClassImbalanceWeights:
@@ -53,13 +53,27 @@ class TestClassImbalanceWeights:
 
     def test_joint_loss_with_class_weights(self):
         weights = torch.tensor([1.0, 2.0, 0.5])
-        loss_fn = JointABSALoss(class_weights=weights, lambda_scl=0.1)
+        loss_fn = JointABSALoss(class_weights=weights, lambda_scl=0.1, lambda_ordinal=0.15)
         logits = torch.randn(4, 3)
         features = torch.randn(4, 128)
         labels = torch.tensor([0, 1, 2, 1])
         total_loss, ce_loss, scl_loss = loss_fn(logits, features, labels)
         assert total_loss > 0
         assert ce_loss > 0
+
+    def test_ordinal_wasserstein_loss(self):
+        loss_fn = OrdinalWassersteinLoss(num_classes=3)
+        # Polar inversion: true is 0 (negative), but model predicts 2 (positive) with high confidence
+        logits_extreme = torch.tensor([[-5.0, 0.0, 10.0]])
+        # Neutral confusion: true is 0 (negative), but model predicts 1 (neutral) with high confidence
+        logits_neutral = torch.tensor([[-5.0, 10.0, 0.0]])
+        label = torch.tensor([0])
+
+        loss_extreme = loss_fn(logits_extreme, label)
+        loss_neutral = loss_fn(logits_neutral, label)
+        # Ordinal Wasserstein distance penalizes extreme polar inversion twice as much as neutral confusion
+        assert loss_extreme > loss_neutral
+        assert pytest.approx(float(loss_extreme), abs=0.1) == 2.0 * float(loss_neutral)
 
 
 # ---------------------------------------------------------------------------

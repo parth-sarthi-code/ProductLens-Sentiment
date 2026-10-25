@@ -70,126 +70,126 @@
   },
   "Tech Specialist (Laptop14)": {
     "Laptop14 (Tech)": {
-      "accuracy": 82.92,
-      "micro_f1": 82.92,
-      "macro_f1": 78.77,
-      "neutral_f1": 64.79,
-      "per_class_f1": {
-        "negative": 79.87,
-        "neutral": 64.79,
-        "positive": 91.64
-      },
-      "accuracy_ci95": [
-        79.78,
-        85.74
-      ],
-      "macro_f1_ci95": [
-        75.35,
-        82.01
-      ],
-      "ece": 15.01,
-      "nll": 0.8755,
-      "brier": 0.3132
-    },
-    "Television (Home)": {
-      "accuracy": 91.72,
-      "micro_f1": 91.72,
-      "macro_f1": 76.88,
-      "neutral_f1": 41.74,
-      "per_class_f1": {
-        "negative": 93.16,
-        "neutral": 41.74,
-        "positive": 95.74
-      },
-      "accuracy_ci95": [
-        90.02,
-        93.31
-      ],
-      "macro_f1_ci95": [
-        72.4,
-        81.07
-      ],
-      "ece": 6.86,
-      "nll": 0.3912,
-      "brier": 0.1432
-    },
-    "T-Shirt (Apparel)": {
-      "accuracy": 94.07,
-      "micro_f1": 94.07,
-      "macro_f1": 72.82,
-      "neutral_f1": 27.27,
-      "per_class_f1": {
-        "negative": 95.19,
-        "neutral": 27.27,
-        "positive": 95.99
-      },
-      "accuracy_ci95": [
-        91.95,
-        96.19
-      ],
-      "macro_f1_ci95": [
-        64.03,
-        81.58
-      ],
-      "ece": 5.14,
-      "nll": 0.3272,
-      "brier": 0.1073
-    },
-    "E-Commerce Composite (weighted)": 89.52
-  },
-  "Home Specialist (Television)": {
-    "Laptop14 (Tech)": {
       "accuracy": 83.07,
       "micro_f1": 83.07,
-      "macro_f1": 79.08,
-      "neutral_f1": 64.79,
+      "macro_f1": 78.87,
+      "neutral_f1": 64.52,
       "per_class_f1": {
-        "negative": 81.08,
-        "neutral": 64.79,
-        "positive": 91.38
+        "negative": 80.54,
+        "neutral": 64.52,
+        "positive": 91.56
       },
       "accuracy_ci95": [
         80.09,
-        85.74
+        85.89
       ],
       "macro_f1_ci95": [
-        75.6,
-        82.46
+        75.43,
+        82.37
       ],
-      "ece": 13.28,
-      "nll": 0.6968,
-      "brier": 0.2958
+      "ece": 12.91,
+      "nll": 0.6487,
+      "brier": 0.2983
     },
     "Television (Home)": {
-      "accuracy": 92.14,
-      "micro_f1": 92.14,
-      "macro_f1": 79.35,
-      "neutral_f1": 48.39,
+      "accuracy": 92.25,
+      "micro_f1": 92.25,
+      "macro_f1": 77.01,
+      "neutral_f1": 41.51,
       "per_class_f1": {
-        "negative": 93.87,
-        "neutral": 48.39,
-        "positive": 95.8
+        "negative": 93.51,
+        "neutral": 41.51,
+        "positive": 96.01
       },
       "accuracy_ci95": [
-        90.34,
+        90.55,
         93.74
       ],
       "macro_f1_ci95": [
-        75.25,
-        83.39
+        72.5,
+        81.33
       ],
-      "ece": 6.28,
-      "nll": 0.3505,
-      "brier": 0.1403
+      "ece": 5.33,
+      "nll": 0.2986,
+      "brier": 0.1346
+    },
+    "T-Shirt (Apparel)": {
+      "accuracy": 93.86,
+      "micro_f1": 93.86,
+      "macro_f1": 72.66,
+      "neutral_f1": 27.27,
+      "per_class_f1": {
+        "negative": 94.91,
+        "neutral": 27.27,
+        "positive": 95.81
+      },
+      "accuracy_ci95": [
+        91.74,
+        96.19
+      ],
+      "macro_f1_ci95": [
+        63.92,
+        81.7
+      ],
+      "ece": 4.09,
+      "nll": 0.2508,
+      "brier": 0.1084
+    },
+    "E-Commerce Composite (weighted)": 89.77
+  },
+  "Home Specialist (Television)": {
+    "Laptop14 (Tech)": {
+      "accuracy": 83.54,
+      "micro_f1": 83.54,
+      "macro_f1": 79.87,
+      "neutral_f1": 66.67,
+      "per_class_f1": {
+        "negative": 81.53,
+        "neutral": 66.67,
+        "positive": 91.4
+      },
+      "accuracy_ci95": [
+        80.72,
+        86.21
+      ],
+      "macro_f1_ci95": [
+        76.45,
+        83.28
+      ],
+      "ece": 11.06,
+      "nll": 0.5937,
+      "brier": 0.2782
+    },
+    "Television (Home)": {
+      "accuracy": 91.61,
+      "micro_f1": 91.61,
+      "macro_f1": 78.94,
+      "neutral_f1": 47.76,
+      "per_class_f1": {
+        "negative": 93.44,
+        "neutral": 47.76,
+        "positive": 95.62
+      },
+      "accuracy_ci95": [
+        89.7,
+        93.31
+      ],
+      "macro_f1_ci95": [
+        74.8,
+        82.91
+      ],
+      "ece": 5.29,
+      "nll": 0.3019,
+      "brier": 0.144
     },
     "T-Shirt (Apparel)": {
       "accuracy": 94.07,
       "micro_f1": 94.07,
-      "macro_f1": 73.19,
-      "neutral_f1": 28.57,
+      "macro_f1": 75.69,
+      "neutral_f1": 36.36,
       "per_class_f1": {
-        "negative": 95.19,
-        "neutral": 28.57,
+        "negative": 94.91,
+        "neutral": 36.36,
         "positive": 95.81
       },
       "accuracy_ci95": [
@@ -197,14 +197,14 @@
         96.19
       ],
       "macro_f1_ci95": [
-        64.01,
-        82.13
+        66.4,
+        84.31
       ],
-      "ece": 5.04,
-      "nll": 0.291,
-      "brier": 0.1079
+      "ece": 4.16,
+      "nll": 0.2483,
+      "brier": 0.1069
     },
-    "E-Commerce Composite (weighted)": 89.76
+    "E-Commerce Composite (weighted)": 89.67
   },
   "Apparel Specialist (T-Shirt)": {
     "Laptop14 (Tech)": {
@@ -249,7 +249,7 @@
       ],
       "ece": 4.67,
       "nll": 0.2811,
-      "brier": 0.1325
+      "brier": 0.1326
     },
     "T-Shirt (Apparel)": {
       "accuracy": 94.49,
@@ -277,50 +277,50 @@
   },
   "ProductLens MoE (with category)": {
     "Laptop14 (Tech)": {
-      "accuracy": 82.92,
-      "micro_f1": 82.92,
-      "macro_f1": 78.77,
-      "neutral_f1": 64.79,
+      "accuracy": 83.07,
+      "micro_f1": 83.07,
+      "macro_f1": 78.87,
+      "neutral_f1": 64.52,
       "per_class_f1": {
-        "negative": 79.87,
-        "neutral": 64.79,
-        "positive": 91.64
+        "negative": 80.54,
+        "neutral": 64.52,
+        "positive": 91.56
       },
       "accuracy_ci95": [
-        79.78,
-        85.74
+        80.09,
+        85.89
       ],
       "macro_f1_ci95": [
-        75.35,
-        82.01
+        75.43,
+        82.37
       ],
-      "ece": 15.01,
-      "nll": 0.8755,
-      "brier": 0.3132,
+      "ece": 12.91,
+      "nll": 0.6487,
+      "brier": 0.2983,
       "fallback_rate": 0.0,
       "aspect_mask_fallback_rate": 0.0
     },
     "Television (Home)": {
-      "accuracy": 92.14,
-      "micro_f1": 92.14,
-      "macro_f1": 79.35,
-      "neutral_f1": 48.39,
+      "accuracy": 91.61,
+      "micro_f1": 91.61,
+      "macro_f1": 78.94,
+      "neutral_f1": 47.76,
       "per_class_f1": {
-        "negative": 93.87,
-        "neutral": 48.39,
-        "positive": 95.8
+        "negative": 93.44,
+        "neutral": 47.76,
+        "positive": 95.62
       },
       "accuracy_ci95": [
-        90.34,
-        93.74
+        89.7,
+        93.31
       ],
       "macro_f1_ci95": [
-        75.25,
-        83.39
+        74.8,
+        82.91
       ],
-      "ece": 6.28,
-      "nll": 0.3505,
-      "brier": 0.1403,
+      "ece": 5.29,
+      "nll": 0.3019,
+      "brier": 0.144,
       "fallback_rate": 0.0,
       "aspect_mask_fallback_rate": 0.0
     },
@@ -348,69 +348,69 @@
       "fallback_rate": 0.0,
       "aspect_mask_fallback_rate": 0.0
     },
-    "E-Commerce Composite (weighted)": 89.81
+    "E-Commerce Composite (weighted)": 89.62
   },
   "ProductLens MoE (no category)": {
     "Laptop14 (Tech)": {
-      "accuracy": 82.92,
-      "micro_f1": 82.92,
-      "macro_f1": 78.7,
-      "neutral_f1": 64.31,
+      "accuracy": 83.23,
+      "micro_f1": 83.23,
+      "macro_f1": 79.06,
+      "neutral_f1": 64.52,
       "per_class_f1": {
-        "negative": 80.13,
-        "neutral": 64.31,
-        "positive": 91.67
+        "negative": 81.08,
+        "neutral": 64.52,
+        "positive": 91.58
       },
       "accuracy_ci95": [
-        79.78,
-        85.74
+        80.4,
+        86.05
       ],
       "macro_f1_ci95": [
-        75.15,
-        81.99
+        75.53,
+        82.35
       ],
-      "ece": 14.58,
-      "nll": 0.8489,
-      "brier": 0.3081,
-      "fallback_rate": 3.29,
+      "ece": 12.66,
+      "nll": 0.6416,
+      "brier": 0.2953,
+      "fallback_rate": 2.35,
       "aspect_mask_fallback_rate": 0.0,
-      "routing_accuracy": 73.67,
+      "routing_accuracy": 89.03,
       "routing_distribution": {
-        "tech": 470,
-        "apparel": 116,
-        "fallback": 21,
-        "home": 31
+        "tech": 568,
+        "fallback": 15,
+        "apparel": 35,
+        "home": 20
       }
     },
     "Television (Home)": {
-      "accuracy": 91.93,
-      "micro_f1": 91.93,
-      "macro_f1": 78.14,
-      "neutral_f1": 45.0,
+      "accuracy": 91.72,
+      "micro_f1": 91.72,
+      "macro_f1": 77.89,
+      "neutral_f1": 44.63,
       "per_class_f1": {
-        "negative": 93.69,
-        "neutral": 45.0,
-        "positive": 95.73
+        "negative": 93.49,
+        "neutral": 44.63,
+        "positive": 95.57
       },
       "accuracy_ci95": [
-        90.23,
+        89.92,
         93.42
       ],
       "macro_f1_ci95": [
-        73.97,
-        81.92
+        73.75,
+        81.89
       ],
-      "ece": 5.7,
-      "nll": 0.3302,
-      "brier": 0.1379,
-      "fallback_rate": 11.25,
+      "ece": 5.23,
+      "nll": 0.2937,
+      "brier": 0.139,
+      "fallback_rate": 15.71,
       "aspect_mask_fallback_rate": 0.0,
-      "routing_accuracy": 31.0,
+      "routing_accuracy": 25.16,
       "routing_distribution": {
-        "home": 292,
-        "apparel": 425,
-        "fallback": 106,
-        "tech": 119
+        "home": 237,
+        "apparel": 416,
+        "fallback": 148,
+        "tech": 141
       }
     },
     "T-Shirt (Apparel)": {
@@ -431,17 +431,17 @@
         66.61,
         84.58
       ],
-      "ece": 4.72,
-      "nll": 0.2627,
-      "brier": 0.1084,
-      "fallback_rate": 5.72,
+      "ece": 4.24,
+      "nll": 0.2506,
+      "brier": 0.1075,
+      "fallback_rate": 6.99,
       "aspect_mask_fallback_rate": 0.0,
-      "routing_accuracy": 77.54,
+      "routing_accuracy": 76.69,
       "routing_distribution": {
-        "apparel": 366,
-        "home": 54,
-        "fallback": 27,
-        "tech": 25
+        "apparel": 362,
+        "home": 51,
+        "fallback": 33,
+        "tech": 26
       }
     },
     "E-Commerce Composite (weighted)": 89.67
@@ -494,9 +494,9 @@
         50.0,
         100.0
       ],
-      "ece": 9.52,
-      "nll": 0.5801,
-      "brier": 0.1987,
+      "ece": 9.39,
+      "nll": 0.422,
+      "brier": 0.1937,
       "fallback_rate": 30.0,
       "aspect_mask_fallback_rate": 0.0,
       "routing_accuracy": 30.0,
@@ -524,15 +524,15 @@
         55.56,
         100.0
       ],
-      "ece": 10.42,
-      "nll": 0.421,
+      "ece": 10.44,
+      "nll": 0.4209,
       "brier": 0.1956,
-      "fallback_rate": 50.0,
+      "fallback_rate": 60.0,
       "aspect_mask_fallback_rate": 0.0,
-      "routing_accuracy": 50.0,
+      "routing_accuracy": 60.0,
       "routing_distribution": {
-        "apparel": 5,
-        "fallback": 5
+        "fallback": 6,
+        "apparel": 4
       }
     }
   }

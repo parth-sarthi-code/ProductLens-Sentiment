@@ -41,6 +41,8 @@ class AspectSentimentTrainer:
         w_macro: float = 0.7,
         w_neutral: float = 0.3,
         calibrate: bool = True,
+        lambda_ordinal: float = 0.15,
+        label_smoothing: float = 0.0,
     ):
         self.model = model.to(device)
         self.tokenizer = tokenizer
@@ -49,6 +51,8 @@ class AspectSentimentTrainer:
         self.head_lr = head_lr
         self.weight_decay = weight_decay
         self.lambda_scl = lambda_scl
+        self.lambda_ordinal = lambda_ordinal
+        self.label_smoothing = label_smoothing
         self.scl_temp = scl_temp
         self.class_weights = class_weights.to(device) if class_weights is not None else None
         self.w_macro = w_macro
@@ -57,7 +61,9 @@ class AspectSentimentTrainer:
         self.criterion = JointABSALoss(
             class_weights=self.class_weights,
             lambda_scl=lambda_scl,
+            lambda_ordinal=lambda_ordinal,
             temperature=scl_temp,
+            label_smoothing=label_smoothing,
         )
 
     def train(

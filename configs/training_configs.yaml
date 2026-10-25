@@ -18,6 +18,9 @@ global_defaults:
   # Composite checkpoint selection weights
   w_macro: 0.7
   w_neutral: 0.3
+  # Ordinal Wasserstein loss and label smoothing for neutral-aware geometry
+  lambda_ordinal: 0.15
+  label_smoothing: 0.05
   # Post-hoc temperature calibration
   calibrate: true
   # Reproducibility seed — passed to train_all_experts.py and GroupShuffleSplit

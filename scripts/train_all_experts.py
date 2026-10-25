@@ -79,6 +79,8 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
     w_macro = float(m_cfg.get("w_macro", global_defaults.get("w_macro", 0.7)))
     w_neutral = float(m_cfg.get("w_neutral", global_defaults.get("w_neutral", 0.3)))
     calibrate = bool(m_cfg.get("calibrate", global_defaults.get("calibrate", True)))
+    lambda_ordinal = float(m_cfg.get("lambda_ordinal", global_defaults.get("lambda_ordinal", 0.15)))
+    label_smoothing = float(m_cfg.get("label_smoothing", global_defaults.get("label_smoothing", 0.05)))
 
     train_labels = [LABEL2ID.get(str(s).lower(), 1) for s in train_df["sentiment"]]
     class_weights = compute_class_weights(train_labels, strategy=class_weight_strat, beta=beta)
@@ -103,6 +105,8 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
         w_macro=w_macro,
         w_neutral=w_neutral,
         calibrate=calibrate,
+        lambda_ordinal=lambda_ordinal,
+        label_smoothing=label_smoothing,
     )
 
     results = trainer.train(

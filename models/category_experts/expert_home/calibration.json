@@ -1,15 +1,14 @@
 {
-  "temperature": 1.061,
-  "domain": "home",
-  "val_samples": 370,
+  "temperature": 0.8364,
   "uncalibrated": {
-    "ece": 0.0113,
-    "nll": 0.0497,
-    "brier": 0.0226
+    "ece": 0.034,
+    "nll": 0.0632,
+    "brier": 0.0235
   },
   "calibrated": {
-    "ece": 0.0105,
-    "nll": 0.0488,
-    "brier": 0.0226
-  }
+    "ece": 0.0191,
+    "nll": 0.0502,
+    "brier": 0.0217
+  },
+  "selection_reason": "Step 100: composite score improved from 0.9452 to 0.9741 (Macro F1: 0.9816, Neutral F1: 0.9565)"
 }

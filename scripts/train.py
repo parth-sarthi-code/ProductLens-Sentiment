@@ -62,6 +62,8 @@ def main():
     parser.add_argument("--beta", type=float, default=0.999, help="Beta parameter for effective_num class weighting")
     parser.add_argument("--w_macro", type=float, default=0.7, help="Weight for Macro F1 in composite checkpoint selection")
     parser.add_argument("--w_neutral", type=float, default=0.3, help="Weight for Neutral F1 in composite checkpoint selection")
+    parser.add_argument("--lambda_ordinal", type=float, default=0.15, help="Weight for Ordinal Wasserstein loss")
+    parser.add_argument("--label_smoothing", type=float, default=0.05, help="Label smoothing factor for CrossEntropyLoss")
     parser.add_argument("--no_calibration", action="store_true", help="Disable post-hoc temperature scaling")
     args = parser.parse_args()
 
@@ -115,6 +117,8 @@ def main():
         w_macro=args.w_macro,
         w_neutral=args.w_neutral,
         calibrate=not args.no_calibration,
+        lambda_ordinal=args.lambda_ordinal,
+        label_smoothing=args.label_smoothing,
     )
 
     results = trainer.train(

@@ -102,22 +102,58 @@ class SupervisedContrastiveLoss(nn.Module):
         return -mean_log_prob_pos[valid_pos].mean()
 
 
+class OrdinalWassersteinLoss(nn.Module):
+    """
+    1D Earth Mover's Distance (Wasserstein-1) Loss for Ordinal Sentiment Classes.
+    Enforces natural sentiment geometry: Negative (0) < Neutral (1) < Positive (2).
+    Penalizes extreme polar confusion (+ <-> -) twice as much as neutral confusion (+ <-> neu).
+    """
+
+    def __init__(self, num_classes: int = 3, r: float = 1.0):
+        super().__init__()
+        self.num_classes = num_classes
+        self.r = r
+
+    def forward(self, logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+        probs = F.softmax(logits, dim=-1)
+        # Cumulative probability distributions: C_k = sum_{j=0}^k p_j for k in [0, K-2]
+        cum_probs = torch.cumsum(probs, dim=-1)[:, :-1]  # B x (K-1)
+
+        # True cumulative distribution: C_k(y) = 1.0 if y <= k else 0.0
+        batch_size = labels.size(0)
+        k_indices = torch.arange(self.num_classes - 1, device=labels.device).unsqueeze(0).expand(batch_size, -1)
+        cum_labels = (labels.unsqueeze(1) <= k_indices).float()  # B x (K-1)
+
+        diff = torch.abs(cum_probs - cum_labels)
+        if self.r != 1.0:
+            diff = torch.pow(diff, self.r)
+
+        return diff.sum(dim=-1).mean()
+
+
 class JointABSALoss(nn.Module):
     """
-    Joint loss function combining Class-Weighted Cross Entropy and Supervised Contrastive Loss.
-    Loss = CE_Loss + lambda_scl * SCL_Loss
+    Joint loss function combining:
+    1. Class-Weighted Cross Entropy (with optional label smoothing)
+    2. Ordinal Wasserstein (Earth Mover's Distance) Loss
+    3. Supervised Contrastive Loss (SCL)
+    Loss = CE_Loss + lambda_ordinal * Ordinal_Loss + lambda_scl * SCL_Loss
     """
 
     def __init__(
         self,
         class_weights: torch.Tensor | None = None,
         lambda_scl: float = 0.10,
+        lambda_ordinal: float = 0.15,
         temperature: float = 0.07,
+        label_smoothing: float = 0.0,
     ):
         super().__init__()
-        self.ce_loss = nn.CrossEntropyLoss(weight=class_weights)
+        self.ce_loss = nn.CrossEntropyLoss(weight=class_weights, label_smoothing=label_smoothing)
+        self.ordinal_loss = OrdinalWassersteinLoss(num_classes=3)
         self.scl_loss = SupervisedContrastiveLoss(temperature=temperature)
         self.lambda_scl = lambda_scl
+        self.lambda_ordinal = lambda_ordinal
 
     def forward(
         self,
@@ -126,10 +162,16 @@ class JointABSALoss(nn.Module):
         labels: torch.Tensor,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         loss_ce = self.ce_loss(logits, labels)
+
+        if self.lambda_ordinal > 0:
+            loss_ord = self.ordinal_loss(logits, labels)
+        else:
+            loss_ord = torch.tensor(0.0, device=logits.device)
+
         if features is not None and self.lambda_scl > 0:
             loss_scl = self.scl_loss(features, labels)
         else:
             loss_scl = torch.tensor(0.0, device=logits.device)
 
-        total_loss = loss_ce + (self.lambda_scl * loss_scl)
+        total_loss = loss_ce + (self.lambda_ordinal * loss_ord) + (self.lambda_scl * loss_scl)
         return total_loss, loss_ce, loss_scl

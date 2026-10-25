@@ -29,6 +29,20 @@ class AspectSentimentDataset(Dataset):
             sentiment = str(row.get("sentiment", "neutral")).lower()
             label = LABEL2ID.get(sentiment, 1)
 
+            # Aspect-Centered Windowing: for long reviews, slice a context window
+            # centered around the aspect span so modifying opinion clauses are never clipped.
+            max_char_len = max_length * 4
+            if len(text) > max_char_len and asp_start >= 0 and asp_end > asp_start:
+                center = (asp_start + asp_end) // 2
+                half = max_char_len // 2
+                w_start = max(0, center - half)
+                w_end = min(len(text), w_start + max_char_len)
+                if w_end == len(text):
+                    w_start = max(0, w_end - max_char_len)
+                text = text[w_start:w_end]
+                asp_start -= w_start
+                asp_end -= w_start
+
             encoding = tokenizer(
                 text,
                 aspect,

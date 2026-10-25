@@ -225,8 +225,29 @@ class ProductLensMoEPipeline:
                 resolved_key,
             )
 
+        fell_back_aspect_mask = False
+        if aspect_start is not None and aspect_end is not None:
+            s_char, e_char = aspect_start, aspect_end
+        else:
+            s_char, e_char = find_aspect_span(text, aspect)
+            if aspect.lower() not in text.lower():
+                fell_back_aspect_mask = True
+
+        proc_text = text
+        max_char_len = MAX_SEQ_LEN * 4
+        if len(text) > max_char_len and not fell_back_aspect_mask and s_char >= 0 and e_char > s_char:
+            center = (s_char + e_char) // 2
+            half = max_char_len // 2
+            w_start = max(0, center - half)
+            w_end = min(len(text), w_start + max_char_len)
+            if w_end == len(text):
+                w_start = max(0, w_end - max_char_len)
+            proc_text = text[w_start:w_end]
+            s_char -= w_start
+            e_char -= w_start
+
         encoding = self.tokenizer(
-            text,
+            proc_text,
             aspect,
             truncation=True,
             max_length=MAX_SEQ_LEN,
@@ -240,14 +261,6 @@ class ProductLensMoEPipeline:
         seq_ids = encoding.sequence_ids(0) if hasattr(encoding, "sequence_ids") else None
 
         aspect_mask = torch.zeros_like(attention_mask[0], dtype=torch.float32)
-
-        fell_back_aspect_mask = False
-        if aspect_start is not None and aspect_end is not None:
-            s_char, e_char = aspect_start, aspect_end
-        else:
-            s_char, e_char = find_aspect_span(text, aspect)
-            if aspect.lower() not in text.lower():
-                fell_back_aspect_mask = True
 
         for i, (tok_start, tok_end) in enumerate(offset_mapping):
             if tok_start == tok_end:

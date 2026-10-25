@@ -28,28 +28,36 @@ class AspectTargetedAttentionPooler(nn.Module):
         attention_mask: torch.Tensor,
         aspect_mask: torch.Tensor,
     ) -> torch.Tensor:
-        queries = self.query_proj(token_embeddings)
-        keys = self.key_proj(token_embeddings)
-        attn_scores = torch.bmm(queries, keys.transpose(1, 2)) * self.scale
-
-        key_padding_mask = attention_mask.unsqueeze(1).expand(-1, token_embeddings.size(1), -1)
-        attn_scores = attn_scores.masked_fill(key_padding_mask == 0, -10000.0)
-
-        if aspect_mask is not None:
-            asp_bias = aspect_mask.unsqueeze(1).expand(-1, token_embeddings.size(1), -1)
-            attn_scores = attn_scores + (asp_bias * self.aspect_boost)
-
-        attn_weights = F.softmax(attn_scores, dim=-1)
-        pooled = torch.bmm(attn_weights, token_embeddings)
-
+        # 1. Compute aspect query vector by pooling token embeddings on aspect positions
         if aspect_mask is not None and aspect_mask.sum() > 0:
             asp_weights = aspect_mask.unsqueeze(-1)
-            asp_sum = torch.clamp(asp_weights.sum(dim=1), min=1.0)
-            aspect_rep = (token_embeddings * asp_weights).sum(dim=1) / asp_sum
-            cls_rep = pooled[:, 0, :]
-            final_rep = (cls_rep + aspect_rep) / 2.0
+            asp_sum = torch.clamp(asp_weights.sum(dim=1, keepdim=True), min=1.0)
+            aspect_rep = (token_embeddings * asp_weights).sum(dim=1, keepdim=True) / asp_sum  # B x 1 x D
         else:
-            final_rep = pooled[:, 0, :]
+            aspect_rep = token_embeddings[:, 0:1, :]  # B x 1 x D (fallback to CLS)
+
+        # 2. Aspect-to-Context Cross-Attention:
+        # Aspect acts as query, all review tokens act as keys to gather opinion evidence
+        aspect_q = self.query_proj(aspect_rep)       # B x 1 x D
+        context_k = self.key_proj(token_embeddings)  # B x L x D
+
+        cross_scores = torch.bmm(aspect_q, context_k.transpose(1, 2)) * self.scale  # B x 1 x L
+
+        # Mask padding tokens
+        pad_mask = (attention_mask == 0).unsqueeze(1)  # B x 1 x L
+        cross_scores = cross_scores.masked_fill(pad_mask, -10000.0)
+
+        # Additive aspect boost to anchor aspect context
+        if aspect_mask is not None:
+            cross_scores = cross_scores + (aspect_mask.unsqueeze(1) * self.aspect_boost)
+
+        cross_weights = F.softmax(cross_scores, dim=-1)  # B x 1 x L
+        opinion_evidence = torch.bmm(cross_weights, token_embeddings).squeeze(1)  # B x D
+
+        # 3. Tripartite Fusion: CLS (global sentiment) + Aspect (target) + Opinion Evidence (gathered predicate)
+        cls_rep = token_embeddings[:, 0, :]
+        aspect_flat = aspect_rep.squeeze(1)
+        final_rep = (cls_rep + aspect_flat + opinion_evidence) / 3.0
 
         return final_rep
 
