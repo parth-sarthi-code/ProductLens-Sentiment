@@ -19,7 +19,6 @@ DEBERTA_RELEASE_FILES = {
     "expert_tech": MODELS_DIR / "category_experts/expert_tech/best_model.pt",
     "expert_home": MODELS_DIR / "category_experts/expert_home/best_model.pt",
     "expert_apparel": MODELS_DIR / "category_experts/expert_apparel/best_model.pt",
-    "foundation_mams": MODELS_DIR / "category_experts/foundation_mams/best_model.pt",
 }
 
 
@@ -33,14 +32,14 @@ def sha256_checksum(filepath: Path) -> str:
 
 def main():
     print("=" * 70)
-    print("ProductLens Release Packager: DeBERTa-v3 Specialists (v2.0.0)")
+    print("ProductLens Release Packager: DeBERTa-v3 Specialists (v2.1.0)")
     print("=" * 70)
 
     RELEASE_DIR.mkdir(parents=True, exist_ok=True)
     manifest = {
-        "version": "v2.0.0",
+        "version": "v2.1.0",
         "backbone": "yangheng/deberta-v3-base-absa-v1.1",
-        "description": "Production DeBERTa-v3 ABSA Domain Specialists & MoE Pipeline",
+        "description": "Production DeBERTa-v3 ABSA Domain Specialists with Ordinal Loss & Cross-Attention",
         "weights": {},
     }
 
