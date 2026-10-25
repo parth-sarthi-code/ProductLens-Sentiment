@@ -4,7 +4,7 @@ from typing import Optional, Tuple
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from transformers import AutoConfig, AutoModel
+from transformers import AutoConfig, AutoModelForSequenceClassification
 
 from productlens.constants import DEFAULT_BACKBONE
 
@@ -57,8 +57,10 @@ class AspectTargetedAttentionPooler(nn.Module):
 
 class AspectTargetedSentimentModel(nn.Module):
     """
-    Aspect-Targeted Sentiment Classifier with DeBERTa-v3 ABSA backbone,
-    aspect-targeted attention pooling, projection head, and classification MLP.
+    Aspect-Targeted Sentiment Classifier retaining the pre-trained
+    AutoModelForSequenceClassification backbone and classification head,
+    augmented with an additive aspect-targeted attention pooling branch.
+    Zero-initialized at step 0 so fine-tuning starts strictly from baseline.
     """
     def __init__(
         self,
@@ -69,9 +71,14 @@ class AspectTargetedSentimentModel(nn.Module):
     ):
         super().__init__()
         self.config = AutoConfig.from_pretrained(backbone_name)
-        self.encoder = AutoModel.from_pretrained(backbone_name, config=self.config)
+        # 1. Retain pre-trained backbone, pooler, and classification head
+        self.base_model = AutoModelForSequenceClassification.from_pretrained(
+            backbone_name,
+            config=self.config,
+        )
         hidden_size = self.config.hidden_size
 
+        # 2. Auxiliary aspect-targeted attention pooling branch
         self.pooler = AspectTargetedAttentionPooler(hidden_size, aspect_boost=aspect_boost)
         self.proj_head = nn.Sequential(
             nn.Linear(hidden_size, hidden_size),
@@ -85,6 +92,29 @@ class AspectTargetedSentimentModel(nn.Module):
             nn.Dropout(dropout_prob),
             nn.Linear(hidden_size // 2, num_labels),
         )
+        # Zero-initialize the auxiliary classifier so at step 0:
+        # aspect_logits == 0 and logits == base_logits (zero-shot baseline perfectly preserved)
+        nn.init.zeros_(self.classifier[-1].weight)
+        nn.init.zeros_(self.classifier[-1].bias)
+
+    @property
+    def encoder(self):
+        return self.base_model.deberta
+
+    def load_state_dict(self, state_dict: dict, strict: bool = True):
+        """
+        Loads state_dict with seamless backward-compatibility for legacy
+        checkpoints where encoder weights were prefixed with 'encoder.'.
+        """
+        new_state_dict = {}
+        for k, v in state_dict.items():
+            if k.startswith("encoder."):
+                new_key = k.replace("encoder.", "base_model.deberta.", 1)
+                new_state_dict[new_key] = v
+            else:
+                new_state_dict[k] = v
+        has_base_head = any(k.startswith("base_model.classifier.") for k in new_state_dict)
+        return super().load_state_dict(new_state_dict, strict=has_base_head and strict)
 
     def forward(
         self,
@@ -93,13 +123,23 @@ class AspectTargetedSentimentModel(nn.Module):
         aspect_mask: torch.Tensor,
         return_features: bool = False,
     ) -> Tuple[torch.Tensor, Optional[torch.Tensor]]:
-        outputs = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
-        token_embeddings = outputs[0]
-        pooled = self.pooler(token_embeddings, attention_mask, aspect_mask)
-        logits = self.classifier(pooled)
+        # 1. Forward through DeBERTa encoder
+        encoder_outputs = self.base_model.deberta(input_ids=input_ids, attention_mask=attention_mask)
+        token_embeddings = encoder_outputs[0]
+
+        # 2. Base model head branch (Yangheng's pre-trained classification)
+        base_pooled = self.base_model.pooler(token_embeddings)
+        base_logits = self.base_model.classifier(self.base_model.dropout(base_pooled))
+
+        # 3. Auxiliary aspect-targeted pooler branch
+        aspect_pooled = self.pooler(token_embeddings, attention_mask, aspect_mask)
+        aspect_logits = self.classifier(aspect_pooled)
+
+        # 4. Residual fusion: base_logits + aspect_logits
+        logits = base_logits + aspect_logits
 
         features = None
         if return_features:
-            features = F.normalize(self.proj_head(pooled), dim=-1)
+            features = F.normalize(self.proj_head(aspect_pooled), dim=-1)
 
         return logits, features

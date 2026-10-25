@@ -12,7 +12,7 @@ from transformers import AutoTokenizer
 from productlens.constants import DEFAULT_BACKBONE, DEFAULT_CHECKPOINT_PATHS, ID2LABEL, LABEL2ID, MAX_SEQ_LEN
 from productlens.schemas import SentimentPrediction
 from productlens.sentiment.model import AspectTargetedSentimentModel
-from productlens.sentiment.router import MoERouter
+from productlens.sentiment.router import LearnedGatingNetwork, MoERouter
 from productlens.utils import find_aspect_span
 
 logger = logging.getLogger("productlens.sentiment")
@@ -41,12 +41,27 @@ class ProductLensMoEPipeline:
         device: Optional[str] = None,
         lazy_load: bool = True,
         single_active_expert: bool = False,
+        router_checkpoint: Optional[Union[str, Path]] = None,
     ):
         self.backbone_name = backbone_name
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.checkpoint_paths = {k: Path(v) for k, v in (checkpoint_paths or DEFAULT_CHECKPOINT_PATHS).items()}
         self.tokenizer = AutoTokenizer.from_pretrained(backbone_name)
-        self.router = MoERouter()
+
+        learned_gate = None
+        r_path = Path(router_checkpoint) if router_checkpoint else Path("models/learned_router.pt")
+        if r_path.exists():
+            try:
+                gate = LearnedGatingNetwork(hidden_size=768, num_experts=4)
+                gate.load_state_dict(torch.load(r_path, map_location=self.device, weights_only=True))
+                gate.to(self.device)
+                gate.eval()
+                learned_gate = gate
+                logger.info("Loaded Learned Gating Router from %s", r_path)
+            except Exception as e:
+                logger.warning("Could not load learned gating network from %s: %s", r_path, e)
+
+        self.router = MoERouter(learned_gate=learned_gate)
         self.lazy_load = lazy_load
         self.single_active_expert = single_active_expert
         self.active_expert = None
@@ -150,7 +165,19 @@ class ProductLensMoEPipeline:
             routed_key = force_expert
             reason = f"forced:{force_expert}"
         else:
-            routed_key, reason = self.router.route(category=category, text=text, aspect=aspect)
+            embedding = None
+            if category is None and self.router.learned_gate is not None:
+                emb_key = self.active_expert or "fallback"
+                try:
+                    emb_model, _ = self._get_expert(emb_key)
+                    with torch.no_grad():
+                        enc = self.tokenizer(text, aspect, truncation=True, max_length=MAX_SEQ_LEN, return_tensors="pt").to(self.device)
+                        out = emb_model.base_model.deberta(enc["input_ids"], enc["attention_mask"])
+                        embedding = emb_model.base_model.pooler(out[0])
+                except Exception as e:
+                    logger.debug("Learned gating embedding extraction failed, falling back to lexical: %s", e)
+
+            routed_key, reason = self.router.route(category=category, text=text, aspect=aspect, embedding=embedding)
 
         model, resolved_key = self._get_expert(routed_key)
 
@@ -163,6 +190,7 @@ class ProductLensMoEPipeline:
 
         encoding = self.tokenizer(
             text,
+            aspect,
             truncation=True,
             max_length=MAX_SEQ_LEN,
             return_offsets_mapping=True,
@@ -172,6 +200,7 @@ class ProductLensMoEPipeline:
         input_ids = encoding["input_ids"].to(self.device)
         attention_mask = encoding["attention_mask"].to(self.device)
         offset_mapping = encoding["offset_mapping"][0].cpu().numpy()
+        seq_ids = encoding.sequence_ids(0) if hasattr(encoding, "sequence_ids") else None
 
         aspect_mask = torch.zeros_like(attention_mask[0], dtype=torch.float32)
 
@@ -183,8 +212,15 @@ class ProductLensMoEPipeline:
         for i, (tok_start, tok_end) in enumerate(offset_mapping):
             if tok_start == tok_end:
                 continue
-            if not (tok_end <= s_char or tok_start >= e_char):
+            is_text_segment = (seq_ids[i] == 0) if seq_ids is not None else True
+            if is_text_segment and not (tok_end <= s_char or tok_start >= e_char):
                 aspect_mask[i] = 1.0
+
+        # If not found in text segment, anchor on query aspect tokens (seq_id == 1)
+        if aspect_mask.sum() == 0 and seq_ids is not None:
+            for tok_idx, sid in enumerate(seq_ids):
+                if sid == 1:
+                    aspect_mask[tok_idx] = 1.0
 
         if aspect_mask.sum() == 0:
             logger.warning(
@@ -206,9 +242,9 @@ class ProductLensMoEPipeline:
         confidence = float(probs[pred_id])
 
         prob_dict = {
-            "positive": float(probs[0]),
-            "neutral": float(probs[1]),
-            "negative": float(probs[2]),
+            "negative": float(probs[LABEL2ID["negative"]]),
+            "neutral": float(probs[LABEL2ID["neutral"]]),
+            "positive": float(probs[LABEL2ID["positive"]]),
         }
 
         return SentimentPrediction(

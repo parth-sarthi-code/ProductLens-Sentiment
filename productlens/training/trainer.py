@@ -29,8 +29,8 @@ class AspectSentimentTrainer:
         model: AspectTargetedSentimentModel,
         tokenizer: Any,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
-        backbone_lr: float = 1.5e-5,
-        head_lr: float = 6.0e-5,
+        backbone_lr: float = 5.0e-6,
+        head_lr: float = 5.0e-5,
         weight_decay: float = 0.01,
         lambda_scl: float = 0.10,
         scl_temp: float = 0.07,
@@ -62,9 +62,11 @@ class AspectSentimentTrainer:
         total_steps = len(train_loader) * epochs
         warmup_steps = int(0.1 * total_steps)
 
-        # Differential Learning Rates
+        # Differential Learning Rates: gentle backbone LR (5e-6) + higher head LR (5e-5)
         optimizer_params = [
-            {"params": self.model.encoder.parameters(), "lr": self.backbone_lr, "weight_decay": self.weight_decay},
+            {"params": self.model.base_model.deberta.parameters(), "lr": self.backbone_lr, "weight_decay": self.weight_decay},
+            {"params": self.model.base_model.pooler.parameters(), "lr": self.backbone_lr, "weight_decay": self.weight_decay},
+            {"params": self.model.base_model.classifier.parameters(), "lr": self.backbone_lr, "weight_decay": self.weight_decay},
             {"params": self.model.pooler.parameters(), "lr": self.head_lr, "weight_decay": self.weight_decay},
             {"params": self.model.proj_head.parameters(), "lr": self.head_lr, "weight_decay": self.weight_decay},
             {"params": self.model.classifier.parameters(), "lr": self.head_lr, "weight_decay": self.weight_decay},
@@ -72,10 +74,22 @@ class AspectSentimentTrainer:
         optimizer = torch.optim.AdamW(optimizer_params)
         scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps, num_training_steps=total_steps)
 
-        best_val_f1 = 0.0
+        best_model_path = output_dir / "best_model.pt"
+
+        # Step-0 Evaluation: assess baseline before training steps
+        logger.info("Running Step-0 baseline evaluation on validation set...")
+        step0_metrics = self.evaluate(val_dataset, batch_size=batch_size)
+        best_val_f1 = step0_metrics["macro_f1"]
+        best_val_acc = step0_metrics["accuracy"]
+        logger.info(
+            "Step 0 Baseline: Val Acc=%.4f, Val Macro F1=%.4f",
+            best_val_acc,
+            best_val_f1,
+        )
+        torch.save(self.model.state_dict(), best_model_path)
+
         patience_counter = 0
         global_step = 0
-        best_model_path = output_dir / "best_model.pt"
 
         logger.info("Starting training: total_samples=%d, batch_size=%d, epochs=%d, total_steps=%d", len(train_dataset), batch_size, epochs, total_steps)
 

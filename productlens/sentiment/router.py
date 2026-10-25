@@ -50,11 +50,47 @@ LEXICAL_DOMAIN_KEYWORDS: Dict[str, List[str]] = {
 _MIN_CAT_LEN_FOR_SUBSTRING = 4
 
 
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+class LearnedGatingNetwork(nn.Module):
+    """
+    Learned soft gating network for autonomous text-based MoE routing.
+    Takes the pooled encoder representation (768-dim) and outputs soft routing
+    probabilities over the specialist domains:
+      0: tech
+      1: home
+      2: apparel
+      3: fallback
+    """
+    def __init__(self, hidden_size: int = 768, num_experts: int = 4, dropout: float = 0.1):
+        super().__init__()
+        self.expert_keys = ["tech", "home", "apparel", "fallback"]
+        self.gate = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(hidden_size, 128),
+            nn.GELU(),
+            nn.Linear(128, num_experts)
+        )
+
+    def forward(self, embedding: torch.Tensor) -> torch.Tensor:
+        logits = self.gate(embedding)
+        return F.softmax(logits, dim=-1)
+
+    def route(self, embedding: torch.Tensor) -> Tuple[str, float]:
+        probs = self.forward(embedding).squeeze(0)
+        idx = int(torch.argmax(probs).item())
+        confidence = float(probs[idx].item())
+        return self.expert_keys[idx], confidence
+
+
 class MoERouter:
     """
     Hierarchical Router for dispatching queries to domain experts or MAMS fallback.
     Level 1: Exact or substring metadata match on e-commerce department tag (O(1)).
-    Level 2: Lexical keyword detection in aspect span and review text.
+    Level 2: Learned Gating Network over encoder embeddings (or lexical keyword detection).
     Level 3: Universal fallback to MAMS Foundation Expert.
     """
 
@@ -62,15 +98,18 @@ class MoERouter:
         self,
         taxonomy_map: Optional[Dict[str, List[str]]] = None,
         lexical_keywords: Optional[Dict[str, List[str]]] = None,
+        learned_gate: Optional[LearnedGatingNetwork] = None,
     ):
         self.taxonomy_map = taxonomy_map or CATEGORY_TAXONOMY_MAP
         self.lexical_keywords = lexical_keywords or LEXICAL_DOMAIN_KEYWORDS
+        self.learned_gate = learned_gate
 
     def route(
         self,
         category: Optional[str] = None,
         text: Optional[str] = None,
         aspect: Optional[str] = None,
+        embedding: Optional[torch.Tensor] = None,
     ) -> Tuple[str, str]:
         """
         Determines the optimal expert key and returns rationale.
@@ -84,8 +123,6 @@ class MoERouter:
             cat_clean = re.sub(r"[^a-zA-Z0-9_]+", "_", str(category).lower().strip())
             for domain, synonyms in self.taxonomy_map.items():
                 for syn in synonyms:
-                    # Require minimum length before allowing substring match to avoid
-                    # very short category strings matching unrelated synonyms.
                     if syn == cat_clean:
                         return domain, f"metadata_match:{domain}"
                     if (
@@ -94,6 +131,11 @@ class MoERouter:
                         and (syn in cat_clean or cat_clean in syn)
                     ):
                         return domain, f"metadata_match:{domain}"
+
+        # --- Level 2A: Learned Gating Network (if embedding & gate available) ---
+        if embedding is not None and self.learned_gate is not None:
+            expert_key, conf = self.learned_gate.route(embedding)
+            return expert_key, f"learned_gating:{expert_key}(conf={conf:.2f})"
 
         # --- Level 2: Lexical / Semantic Keyword Gating ---
         query_text = f"{aspect or ''} {text or ''}".lower()

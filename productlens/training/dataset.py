@@ -31,6 +31,7 @@ class AspectSentimentDataset(Dataset):
 
             encoding = tokenizer(
                 text,
+                aspect,
                 max_length=max_length,
                 padding="max_length",
                 truncation=True,
@@ -41,14 +42,17 @@ class AspectSentimentDataset(Dataset):
             input_ids = encoding["input_ids"].squeeze(0)
             attention_mask = encoding["attention_mask"].squeeze(0)
             offset_mapping = encoding["offset_mapping"].squeeze(0)
+            seq_ids = encoding.sequence_ids(0) if hasattr(encoding, "sequence_ids") else None
 
-            # Construct binary aspect mask over subword tokens
+            # Construct binary aspect mask over subword tokens in the review text segment
             aspect_mask = torch.zeros_like(attention_mask, dtype=torch.float32)
             found_aspect_token = False
             for tok_idx, (start, end) in enumerate(offset_mapping):
                 if start == 0 and end == 0:
                     continue
-                if start < asp_end and end > asp_start:
+                # Keep aspect mask on text tokens (seq_id == 0) matching the aspect character span
+                is_text_segment = (seq_ids[tok_idx] == 0) if seq_ids is not None else True
+                if is_text_segment and start < asp_end and end > asp_start:
                     aspect_mask[tok_idx] = 1.0
                     found_aspect_token = True
 
@@ -59,11 +63,19 @@ class AspectSentimentDataset(Dataset):
                     seq = input_ids.tolist()
                     asp_len = len(asp_enc)
                     for idx in range(len(seq) - asp_len + 1):
-                        if seq[idx : idx + asp_len] == asp_enc:
+                        is_text_seq = (seq_ids[idx] == 0) if seq_ids is not None else True
+                        if is_text_seq and seq[idx : idx + asp_len] == asp_enc:
                             for m in range(asp_len):
                                 aspect_mask[idx + m] = 1.0
                             found_aspect_token = True
                             break
+
+            # If still not found in text segment, anchor on query aspect tokens (seq_id == 1)
+            if not found_aspect_token and seq_ids is not None:
+                for tok_idx, sid in enumerate(seq_ids):
+                    if sid == 1:
+                        aspect_mask[tok_idx] = 1.0
+                        found_aspect_token = True
 
             if not found_aspect_token:
                 logger.warning(

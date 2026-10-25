@@ -8,12 +8,12 @@
 
 | Model | Laptop14 (Tech, 638) | Television (Home, 942) | T-Shirt (Apparel, 472) | MAMS (1336) | E-Com Composite |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Generic Foundation (MAMS) | 73.04% | 78.56% | 88.14% | 83.83% | 79.05% |
-| Tech Specialist (Laptop14) | 81.97% | 88.54% | 91.95% | 58.83% | 87.28% |
-| Home Specialist (Television) | 75.71% | 90.87% | 89.83% | 49.93% | 85.92% |
-| Apparel Specialist (T-Shirt) | 67.4% | 89.17% | 92.37% | 47.23% | 83.14% |
-| **ProductLens MoE (with category)** | 81.97% | 90.87% | 92.37% | 82.49% | **88.45% (+9.4% vs foundation)** |
-| **ProductLens MoE (no category)** | 75.08% | 83.44% | 88.98% | 82.49% | **82.12% (+3.07% vs foundation)** |
+| Generic Foundation (MAMS) | 81.82% | 91.83% | 94.49% | 83.38% | 89.33% |
+| Tech Specialist (Laptop14) | 82.92% | 91.72% | 94.07% | 83.53% | 89.52% |
+| Home Specialist (Television) | 83.07% | 92.14% | 94.07% | 82.86% | 89.76% |
+| Apparel Specialist (T-Shirt) | 81.82% | 91.83% | 94.49% | 83.38% | 89.33% |
+| **ProductLens MoE (with category)** | 82.92% | 92.14% | 94.49% | 83.38% | **89.81% (+0.48% vs foundation)** |
+| **ProductLens MoE (no category)** | 81.97% | 92.04% | 94.49% | 83.38% | **89.47% (+0.14% vs foundation)** |
 
 ## Notes
 - **Routing Accuracy** (no-category run): see JSON for per-domain routing distributions.

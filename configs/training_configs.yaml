@@ -6,8 +6,8 @@ global_defaults:
   aspect_boost: 3.5
   lambda_scl: 0.10
   scl_temperature: 0.07
-  backbone_lr: 1.5e-5
-  head_lr: 6.0e-5
+  backbone_lr: 5.0e-6
+  head_lr: 5.0e-5
   weight_decay: 0.01
   warmup_ratio: 0.10
   batch_size: 8

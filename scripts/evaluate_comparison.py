@@ -132,9 +132,9 @@ def compute_metrics(labels: list, preds: list, probs: list | None = None) -> dic
         "accuracy":       round(float(acc) * 100, 2),
         "macro_f1":       round(float(macro_f1) * 100, 2),
         "per_class_f1":   {
-            "positive": round(float(per_class_f1[0]) * 100, 2),
-            "neutral":  round(float(per_class_f1[1]) * 100, 2),
-            "negative": round(float(per_class_f1[2]) * 100, 2),
+            "negative": round(float(per_class_f1[LABEL2ID["negative"]]) * 100, 2),
+            "neutral":  round(float(per_class_f1[LABEL2ID["neutral"]]) * 100, 2),
+            "positive": round(float(per_class_f1[LABEL2ID["positive"]]) * 100, 2),
         },
         "accuracy_ci95": [round(v * 100, 2) for v in ci["accuracy_ci95"]],
         "macro_f1_ci95": [round(v * 100, 2) for v in ci["macro_f1_ci95"]],
