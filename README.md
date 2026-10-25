@@ -6,17 +6,17 @@ Production-grade Aspect-Based Sentiment Analysis (ABSA) platform powered by a **
 
 ## 1. Key Performance Benchmarks
 
-> Benchmarks validated on deduplicated, leakage-free datasets (see [`benchmarks/roberta_vs_deberta_experts_comparison.md`](benchmarks/roberta_vs_deberta_experts_comparison.md)).
+> Benchmarks validated on deduplicated, leakage-free datasets (see [`benchmarks/moe_vs_generic_comparison.md`](benchmarks/moe_vs_generic_comparison.md)).
 > Composite = sample-weighted test accuracy across held-out e-commerce domains (2,052 samples).
 
 | Domain Vertical | Specialist Model | Held-Out Test Accuracy | In-Domain Win Lift |
 | :--- | :--- | :---: | :---: |
-| **Tech Hardware** | DeBERTa-v3 Tech Specialist (`Laptop14`, 638 samples) | **82.92%** (Macro-F1 78.77%) | +1.10% over generic foundation |
-| **Home Electronics** | DeBERTa-v3 Home Specialist (`Television`, 942 samples) | **92.14%** (Macro-F1 79.35%) | +1.38% over RoBERTa |
-| **Apparel & Fashion** | DeBERTa-v3 Apparel Specialist (`T-Shirt`, 472 samples) | **94.49%** (Macro-F1 76.00%) | +2.12% over RoBERTa |
-| **Universal Fallback** | DeBERTa-v3 MAMS Foundation (1,336 samples) | **83.38%** (Macro-F1 82.99%) | Multi-aspect challenge benchmark |
-| **MoE (Autonomous Routing)** | **ProductLens MoE (no category metadata)** | **89.47%** | **+7.35% over RoBERTa (82.12%)** |
-| **MoE (Metadata Guided)** | **ProductLens MoE (with category metadata)** | **89.81% 🏆** | **+1.36% over RoBERTa (88.45%)** |
+| **Tech Hardware** | DeBERTa-v3 Tech Specialist (`Laptop14`, 638 samples) | **82.92%** (Macro-F1: 78.77%) | +1.10% over generic foundation (81.82%) |
+| **Home Electronics** | DeBERTa-v3 Home Specialist (`Television`, 942 samples) | **92.14%** (Macro-F1: 79.35%) | +0.31% over generic foundation (91.83%) |
+| **Apparel & Fashion** | DeBERTa-v3 Apparel Specialist (`T-Shirt`, 472 samples) | **94.49%** (Macro-F1: 76.00%) | Matches foundation (94.49%) |
+| **Universal Fallback** | DeBERTa-v3 MAMS Foundation (1,336 samples) | **83.38%** (Macro-F1: 82.99%) | Multi-aspect challenge benchmark |
+| **MoE (Autonomous Routing)** | **ProductLens MoE (no category metadata)** | **89.47%** | **+0.14% over foundation composite (89.33%)** |
+| **MoE (Metadata Guided)** | **ProductLens MoE (with category metadata)** | **89.81% 🏆** | **+0.48% over foundation composite (89.33%)** |
 
 ---
 
