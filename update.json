@@ -21,8 +21,16 @@
     "Sync final code and benchmark reports to GitHub via gh cli"
   ],
   "metrics": {
-    "baseline_composite_accuracy": 89.81,
+    "baseline_composite_accuracy": 89.33,
     "current_composite_accuracy": 89.67,
+    "net_test_samples_flipped": 7,
+    "total_benchmark_samples": 2052,
+    "diagnostic_profiling": {
+      "average_base_logit_magnitude": 2.134,
+      "average_aspect_logit_magnitude": 0.137,
+      "aspect_head_decision_flip_rate": "1 / 638 (0.16%)",
+      "root_cause": "Additive residual (base_logits + aspect_logits) is heavily dominated by pretrained base_logits (15.5x larger); aspect head rarely has enough gradient mass to override base predictions."
+    },
     "tech_improvements": {
       "accuracy": "82.92% -> 83.23% (+0.31%)",
       "macro_f1": "78.70% -> 79.06% (+0.36%)",
