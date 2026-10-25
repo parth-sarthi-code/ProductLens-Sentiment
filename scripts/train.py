@@ -41,25 +41,25 @@ def set_seed(seed: int = 42) -> None:
     torch.cuda.manual_seed_all(seed)
 
 DATA_MAP = {
+    "unified": "data/benchmarks/unified_ecommerce",
     "generic": "data/benchmarks/multi_aspect_mams",
     "tech": "data/benchmarks/tech_laptop",
     "home": "data/benchmarks/home_television",
     "apparel": "data/benchmarks/apparel_tshirt",
-    "unified": "data/benchmarks/unified_ecommerce",
 }
 
 OUTPUT_MAP = {
-    "generic": "models/category_experts/foundation_mams",
-    "tech": "models/category_experts/expert_tech",
-    "home": "models/category_experts/expert_home",
-    "apparel": "models/category_experts/expert_apparel",
     "unified": "models/unified_backbone",
+    "generic": "models/benchmarks/foundation_mams",
+    "tech": "models/benchmarks/tech_laptop",
+    "home": "models/benchmarks/home_television",
+    "apparel": "models/benchmarks/apparel_tshirt",
 }
 
 
 def main():
     parser = argparse.ArgumentParser(description="Train ProductLens ABSA Models")
-    parser.add_argument("--domain", choices=["generic", "tech", "home", "apparel", "unified"], required=True)
+    parser.add_argument("--domain", choices=["unified", "generic", "tech", "home", "apparel"], default="unified")
     parser.add_argument("--backbone", default="yangheng/deberta-v3-base-absa-v1.1")
     parser.add_argument("--epochs", type=int, default=5)
     parser.add_argument("--batch_size", type=int, default=8)

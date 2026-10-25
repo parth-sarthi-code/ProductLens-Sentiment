@@ -49,26 +49,18 @@ ProductLens-Sentiment/
 
 ```mermaid
 flowchart TD
-    Review["Input: Customer Review + Optional Category"] --> Extractor["Aspect Extractor (productlens/aspects/extractor.py)"]
-    Review --> Router{"MoE Router (productlens/sentiment/router.py)"}
-    
+    Review["Input: Customer Review"] --> Extractor["Aspect Extractor (productlens/aspects/extractor.py)"]
     Extractor --> Spans["Aspect Mentions & Evidence Snippets"]
     
-    Router -->|"Level 1: Exact Category Tag"| TechExpert["Tech Specialist (DeBERTa-v3)"]
-    Router -->|"Level 1: Exact Category Tag"| HomeExpert["Home Specialist (DeBERTa-v3)"]
-    Router -->|"Level 1: Exact Category Tag"| ApparelExpert["Apparel Specialist (DeBERTa-v3)"]
-    Router -->|"Level 2: Keyword Match"| Experts["Specialist Suite"]
-    Router -->|"Level 3: Universal Fallback"| Fallback["Universal MAMS Foundation"]
+    Review --> Pipeline["Unified Sentiment Pipeline (productlens/sentiment/pipeline.py)"]
+    Spans --> Pipeline
     
-    Spans --> Pipeline["MoE Pipeline (productlens/sentiment/pipeline.py)"]
-    TechExpert --> Pipeline
-    HomeExpert --> Pipeline
-    ApparelExpert --> Pipeline
-    Fallback --> Pipeline
-    
-    Pipeline --> Pooling["Aspect-Targeted Attention Pooling (Boost=3.5)"]
-    Pooling --> Classifier["Classification Head"]
-    Classifier --> Report["Output: ReviewAnalysisReport"]
+    Pipeline --> Windowing["Aspect-Focused Dynamic Windowing (256 tokens)"]
+    Windowing --> Backbone["Unified DeBERTa-v3 Multi-Domain Model"]
+    Backbone --> Pooling["Aspect-Targeted Attention Pooling (Boost=3.5)"]
+    Pooling --> Classifier["Classification Head (Negative / Neutral / Positive)"]
+    Classifier --> Calibration["Temperature Scaling (T=0.82)"]
+    Calibration --> Report["Output: ReviewAnalysisReport"]
 ```
 
 ---
@@ -119,6 +111,7 @@ flowchart TD
   - `POST /api/v1/analyze`: Accepts `{ "text": str, "category": Optional[str] }` and returns `ReviewAnalysisReport`.
   - `POST /api/v1/analyze/batch`: Batch review processing.
 - **CLI Scripts**:
-  - `scripts/train_all_experts.py`: Trains all domain specialist heads.
-  - `scripts/evaluate_comparison.py`: Benchmarks MoE system vs single generic baseline.
-  - `scripts/test_sample_review.py`: Quick verification script.
+  - `scripts/train.py`: Unified multi-domain and benchmark training pipeline.
+  - `scripts/evaluate_unified.py`: Evaluates unified backbone across benchmarks.
+  - `scripts/benchmark_latency.py`: Measures single vs batched GPU/CPU latency.
+  - `scripts/test_sample_review.py`: End-to-end sentiment verification script.

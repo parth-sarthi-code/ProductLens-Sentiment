@@ -77,7 +77,7 @@ def main():
             f"> **Review Text**: *\"{text}\"*",
             f"> **Input Category Tag**: `{cat or 'None (Universal Fallback)'}` | **Summary Sentiment**: **`{report.summary_sentiment.upper()}`** | **Latency**: `{report.execution_time_ms}ms`",
             "",
-            "| Aspect Term | Self-Extracted Evidence Snippet | Predicted Sentiment | Confidence | Routed Specialist Expert |",
+            "| Aspect Term | Self-Extracted Evidence Snippet | Predicted Sentiment | Confidence | Active Backbone |",
             "| :--- | :--- | :---: | :---: | :--- |",
         ])
 
@@ -89,13 +89,17 @@ def main():
 
         md_lines.append("\n---\n")
 
+    base_dir = Path(__file__).resolve().parent.parent
+    samples_dir = base_dir / "samples"
+    samples_dir.mkdir(parents=True, exist_ok=True)
+
     # Save JSON Output
-    json_path = Path("/home/parth/ProductLens-Sentiment/samples/cross_database_evidence_samples.json")
+    json_path = samples_dir / "cross_database_evidence_samples.json"
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(all_database_reports, f, indent=2)
 
     # Save Markdown Output
-    md_path = Path("/home/parth/ProductLens-Sentiment/samples/cross_database_evidence_samples.md")
+    md_path = samples_dir / "cross_database_evidence_samples.md"
     with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
 

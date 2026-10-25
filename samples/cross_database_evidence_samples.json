@@ -3,8 +3,8 @@
     "database": "Tech Hardware (Laptop14)",
     "category": "Electronics",
     "review_text": "Boot time is super fast , around anywhere from 35 seconds to 1 minute . The keyboard is backlit and keys have good travel , but the touchpad feels sticky .",
-    "summary_sentiment": "mixed",
-    "execution_time_ms": 1084.34,
+    "summary_sentiment": "positive",
+    "execution_time_ms": 202.92,
     "aspect_results": [
       {
         "aspect": "Boot time",
@@ -12,14 +12,16 @@
         "end_char": 9,
         "evidence_snippet": "Boot time is super fast , around anywhere from 35 seconds to 1 minute .",
         "sentiment": "positive",
-        "confidence": 0.9980929493904114,
+        "confidence": 0.9851839542388916,
         "probabilities": {
-          "positive": 0.9980929493904114,
-          "neutral": 0.001229703426361084,
-          "negative": 0.0006773762288503349
+          "positive": 0.9851839542388916,
+          "neutral": 0.008302103728055954,
+          "negative": 0.006513959728181362
         },
-        "routed_expert": "tech",
-        "routing_reason": "metadata_match:tech"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "keyboard",
@@ -27,14 +29,16 @@
         "end_char": 84,
         "evidence_snippet": "The keyboard is backlit and keys have good travel , but the touchpad feels sticky .",
         "sentiment": "positive",
-        "confidence": 0.9952184557914734,
+        "confidence": 0.9872967004776001,
         "probabilities": {
-          "positive": 0.9952184557914734,
-          "neutral": 0.00392296863719821,
-          "negative": 0.0008585592731833458
+          "positive": 0.9872967004776001,
+          "neutral": 0.009111959487199783,
+          "negative": 0.0035913968458771706
         },
-        "routed_expert": "tech",
-        "routing_reason": "metadata_match:tech"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "touchpad",
@@ -42,14 +46,16 @@
         "end_char": 140,
         "evidence_snippet": "The keyboard is backlit and keys have good travel , but the touchpad feels sticky .",
         "sentiment": "negative",
-        "confidence": 0.99089115858078,
+        "confidence": 0.9837444424629211,
         "probabilities": {
-          "positive": 0.005938985850661993,
-          "neutral": 0.003169809700921178,
-          "negative": 0.99089115858078
+          "positive": 0.010730205103754997,
+          "neutral": 0.005525310058146715,
+          "negative": 0.9837444424629211
         },
-        "routed_expert": "tech",
-        "routing_reason": "metadata_match:tech"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       }
     ]
   },
@@ -57,8 +63,8 @@
     "database": "Home Electronics (Television)",
     "category": "Home_and_Kitchen",
     "review_text": "very good, cast screen working properly, best sound and picture quality. Remote sensor has slight lag though.",
-    "summary_sentiment": "mixed",
-    "execution_time_ms": 1311.58,
+    "summary_sentiment": "positive",
+    "execution_time_ms": 51.32,
     "aspect_results": [
       {
         "aspect": "cast screen",
@@ -66,14 +72,16 @@
         "end_char": 22,
         "evidence_snippet": "very good, cast screen working properly, best sound and picture quality.",
         "sentiment": "positive",
-        "confidence": 0.9976416826248169,
+        "confidence": 0.9878518581390381,
         "probabilities": {
-          "positive": 0.9976416826248169,
-          "neutral": 0.0015165306394919753,
-          "negative": 0.0008417243952862918
+          "positive": 0.9878518581390381,
+          "neutral": 0.006876943167299032,
+          "negative": 0.005271251779049635
         },
-        "routed_expert": "home",
-        "routing_reason": "metadata_match:home"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "sound",
@@ -81,14 +89,16 @@
         "end_char": 51,
         "evidence_snippet": "very good, cast screen working properly, best sound and picture quality.",
         "sentiment": "positive",
-        "confidence": 0.9971370697021484,
+        "confidence": 0.9871770143508911,
         "probabilities": {
-          "positive": 0.9971370697021484,
-          "neutral": 0.001832650974392891,
-          "negative": 0.0010302490554749966
+          "positive": 0.9871770143508911,
+          "neutral": 0.006582281552255154,
+          "negative": 0.006240777671337128
         },
-        "routed_expert": "home",
-        "routing_reason": "metadata_match:home"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "picture quality",
@@ -96,14 +106,16 @@
         "end_char": 71,
         "evidence_snippet": "very good, cast screen working properly, best sound and picture quality.",
         "sentiment": "positive",
-        "confidence": 0.9978740215301514,
+        "confidence": 0.9889417290687561,
         "probabilities": {
-          "positive": 0.9978740215301514,
-          "neutral": 0.0014705059584230185,
-          "negative": 0.000655394745990634
+          "positive": 0.9889417290687561,
+          "neutral": 0.005680593196302652,
+          "negative": 0.005377774592489004
         },
-        "routed_expert": "home",
-        "routing_reason": "metadata_match:home"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "Remote sensor",
@@ -111,14 +123,16 @@
         "end_char": 86,
         "evidence_snippet": "Remote sensor has slight lag though.",
         "sentiment": "negative",
-        "confidence": 0.9973917007446289,
+        "confidence": 0.9782031774520874,
         "probabilities": {
-          "positive": 0.0011888946173712611,
-          "neutral": 0.0014193888055160642,
-          "negative": 0.9973917007446289
+          "positive": 0.007729122415184975,
+          "neutral": 0.014067759737372398,
+          "negative": 0.9782031774520874
         },
-        "routed_expert": "home",
-        "routing_reason": "metadata_match:home"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       }
     ]
   },
@@ -126,8 +140,8 @@
     "database": "Apparel & Fashion (T-Shirt)",
     "category": "Clothing_Shoes_and_Jewelry",
     "review_text": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
-    "summary_sentiment": "mixed",
-    "execution_time_ms": 885.87,
+    "summary_sentiment": "negative",
+    "execution_time_ms": 19.94,
     "aspect_results": [
       {
         "aspect": "cloth",
@@ -135,14 +149,16 @@
         "end_char": 5,
         "evidence_snippet": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
         "sentiment": "positive",
-        "confidence": 0.9627572894096375,
+        "confidence": 0.983309805393219,
         "probabilities": {
-          "positive": 0.9627572894096375,
-          "neutral": 0.014097344130277634,
-          "negative": 0.023145370185375214
+          "positive": 0.983309805393219,
+          "neutral": 0.0059415427967906,
+          "negative": 0.010748734697699547
         },
-        "routed_expert": "apparel",
-        "routing_reason": "metadata_match:apparel"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "colored dye",
@@ -150,14 +166,16 @@
         "end_char": 80,
         "evidence_snippet": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
         "sentiment": "negative",
-        "confidence": 0.980888307094574,
+        "confidence": 0.9781802892684937,
         "probabilities": {
-          "positive": 0.003506582463160157,
-          "neutral": 0.015605141408741474,
-          "negative": 0.980888307094574
+          "positive": 0.0070831370539963245,
+          "neutral": 0.014736545272171497,
+          "negative": 0.9781802892684937
         },
-        "routed_expert": "apparel",
-        "routing_reason": "metadata_match:apparel"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "collar",
@@ -165,14 +183,16 @@
         "end_char": 103,
         "evidence_snippet": "cloth is very comfortable and soft, but when we clean the tshirt the colored dye is released and collar stretched out.",
         "sentiment": "negative",
-        "confidence": 0.97675621509552,
+        "confidence": 0.984594464302063,
         "probabilities": {
-          "positive": 0.003514722688123584,
-          "neutral": 0.019729088991880417,
-          "negative": 0.97675621509552
+          "positive": 0.00872125569730997,
+          "neutral": 0.006684277672320604,
+          "negative": 0.984594464302063
         },
-        "routed_expert": "apparel",
-        "routing_reason": "metadata_match:apparel"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       }
     ]
   },
@@ -181,7 +201,7 @@
     "category": null,
     "review_text": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
     "summary_sentiment": "mixed",
-    "execution_time_ms": 682.76,
+    "execution_time_ms": 24.75,
     "aspect_results": [
       {
         "aspect": "food",
@@ -189,14 +209,16 @@
         "end_char": 8,
         "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
         "sentiment": "positive",
-        "confidence": 0.9771585464477539,
+        "confidence": 0.9902918934822083,
         "probabilities": {
-          "positive": 0.9771585464477539,
-          "neutral": 0.01920592039823532,
-          "negative": 0.003635588800534606
+          "positive": 0.9902918934822083,
+          "neutral": 0.005019435193389654,
+          "negative": 0.0046886540949344635
         },
-        "routed_expert": "fallback",
-        "routing_reason": "mams_foundation_fallback"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "appetizers",
@@ -204,14 +226,16 @@
         "end_char": 43,
         "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
         "sentiment": "positive",
-        "confidence": 0.9902979731559753,
+        "confidence": 0.9909890294075012,
         "probabilities": {
-          "positive": 0.9902979731559753,
-          "neutral": 0.007140045054256916,
-          "negative": 0.0025619524531066418
+          "positive": 0.9909890294075012,
+          "neutral": 0.00371034094132483,
+          "negative": 0.005300604272633791
         },
-        "routed_expert": "fallback",
-        "routing_reason": "mams_foundation_fallback"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "wait staff",
@@ -219,14 +243,16 @@
         "end_char": 76,
         "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
         "sentiment": "negative",
-        "confidence": 0.9972847700119019,
+        "confidence": 0.9881775975227356,
         "probabilities": {
-          "positive": 0.0016916765598580241,
-          "neutral": 0.001023622346110642,
-          "negative": 0.9972847700119019
+          "positive": 0.006391615606844425,
+          "neutral": 0.005430865101516247,
+          "negative": 0.9881775975227356
         },
-        "routed_expert": "fallback",
-        "routing_reason": "mams_foundation_fallback"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       },
       {
         "aspect": "noise level",
@@ -234,14 +260,16 @@
         "end_char": 112,
         "evidence_snippet": "The food was served promptly and appetizers were divine , but the wait staff was rather cold and the noise level was unbearable .",
         "sentiment": "negative",
-        "confidence": 0.9965788722038269,
+        "confidence": 0.9850926995277405,
         "probabilities": {
-          "positive": 0.0020210882648825645,
-          "neutral": 0.0014000965747982264,
-          "negative": 0.9965788722038269
+          "positive": 0.00870696920901537,
+          "neutral": 0.006200273055583239,
+          "negative": 0.9850926995277405
         },
-        "routed_expert": "fallback",
-        "routing_reason": "mams_foundation_fallback"
+        "routed_expert": "unified",
+        "routing_reason": "unified_calibrated_backbone",
+        "aspect_mask_fallback": false,
+        "calibrated": true
       }
     ]
   }

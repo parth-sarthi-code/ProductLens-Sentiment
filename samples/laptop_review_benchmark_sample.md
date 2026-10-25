@@ -2,7 +2,7 @@
 
 ### Review Subject: Gaming Laptop Multi-Aspect Evaluation
 
-**Summary Sentiment**: **NEGATIVE** (Processed in 256.3ms)
+**Summary Sentiment**: **NEGATIVE** (Processed in 260.2ms)
 
 | Target Aspect | Human Ground Truth | Predicted Sentiment | Calibrated Confidence |
 | :--- | :---: | :---: | :---: |
