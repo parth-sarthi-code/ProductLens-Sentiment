@@ -10,6 +10,8 @@ from torch.utils.data import DataLoader
 from transformers import AutoTokenizer, get_linear_schedule_with_warmup
 from sklearn.metrics import accuracy_score, f1_score
 
+from productlens.constants import LABEL2ID
+from productlens.sentiment.calibration import TemperatureScaler, compute_calibration_metrics
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.training.loss import JointABSALoss
 from productlens.training.dataset import AspectSentimentDataset
@@ -21,7 +23,8 @@ class AspectSentimentTrainer:
     """
     End-to-end trainer for Aspect-Targeted Sentiment Models.
     Supports differential learning rates (backbone vs head), linear warmup,
-    sub-epoch validation checkpointing, and early stopping.
+    class-weighted loss, composite neutral-aware checkpointing,
+    post-hoc temperature calibration, and early stopping.
     """
 
     def __init__(
@@ -34,6 +37,10 @@ class AspectSentimentTrainer:
         weight_decay: float = 0.01,
         lambda_scl: float = 0.10,
         scl_temp: float = 0.07,
+        class_weights: Optional[torch.Tensor] = None,
+        w_macro: float = 0.7,
+        w_neutral: float = 0.3,
+        calibrate: bool = True,
     ):
         self.model = model.to(device)
         self.tokenizer = tokenizer
@@ -43,7 +50,15 @@ class AspectSentimentTrainer:
         self.weight_decay = weight_decay
         self.lambda_scl = lambda_scl
         self.scl_temp = scl_temp
-        self.criterion = JointABSALoss(lambda_scl=lambda_scl, temperature=scl_temp)
+        self.class_weights = class_weights.to(device) if class_weights is not None else None
+        self.w_macro = w_macro
+        self.w_neutral = w_neutral
+        self.calibrate = calibrate
+        self.criterion = JointABSALoss(
+            class_weights=self.class_weights,
+            lambda_scl=lambda_scl,
+            temperature=scl_temp,
+        )
 
     def train(
         self,
@@ -79,12 +94,19 @@ class AspectSentimentTrainer:
         # Step-0 Evaluation: assess baseline before training steps
         logger.info("Running Step-0 baseline evaluation on validation set...")
         step0_metrics = self.evaluate(val_dataset, batch_size=batch_size)
+        best_composite_score = step0_metrics["composite_score"]
         best_val_f1 = step0_metrics["macro_f1"]
+        best_val_neutral_f1 = step0_metrics["neutral_f1"]
         best_val_acc = step0_metrics["accuracy"]
+        selection_reason = "Step 0 baseline saved"
         logger.info(
-            "Step 0 Baseline: Val Acc=%.4f, Val Macro F1=%.4f",
+            "Step 0 Baseline: Val Acc=%.4f, Val Macro F1=%.4f, Val Neutral F1=%.4f, Composite Score=%.4f (w_macro=%.2f, w_neutral=%.2f)",
             best_val_acc,
             best_val_f1,
+            best_val_neutral_f1,
+            best_composite_score,
+            self.w_macro,
+            self.w_neutral,
         )
         torch.save(self.model.state_dict(), best_model_path)
 
@@ -128,23 +150,36 @@ class AspectSentimentTrainer:
                     val_metrics = self.evaluate(val_dataset, batch_size=batch_size)
                     val_acc = val_metrics["accuracy"]
                     val_f1 = val_metrics["macro_f1"]
+                    val_neutral_f1 = val_metrics["neutral_f1"]
+                    composite_score = val_metrics["composite_score"]
                     logger.info(
-                        "Step %d (Epoch %.2f): Val Acc=%.4f, Val Macro F1=%.4f",
+                        "Step %d (Epoch %.2f): Val Acc=%.4f, Val Macro F1=%.4f, Val Neutral F1=%.4f, Composite Score=%.4f",
                         global_step,
                         global_step / len(train_loader),
                         val_acc,
                         val_f1,
+                        val_neutral_f1,
+                        composite_score,
                     )
 
-                    if val_f1 > best_val_f1:
+                    if composite_score > best_composite_score:
+                        selection_reason = (
+                            f"Step {global_step}: composite score improved from {best_composite_score:.4f} "
+                            f"to {composite_score:.4f} (Macro F1: {val_f1:.4f}, Neutral F1: {val_neutral_f1:.4f})"
+                        )
+                        best_composite_score = composite_score
                         best_val_f1 = val_f1
+                        best_val_neutral_f1 = val_neutral_f1
                         patience_counter = 0
                         torch.save(self.model.state_dict(), best_model_path)
-                        logger.info("Saved new best model checkpoint to %s (Val F1: %.4f)", best_model_path, best_val_f1)
+                        logger.info("Saved new best model checkpoint to %s [%s]", best_model_path, selection_reason)
                     else:
                         patience_counter += 1
                         if patience_counter >= patience:
-                            logger.info("Early stopping triggered at step %d. Best Val F1: %.4f", global_step, best_val_f1)
+                            logger.info(
+                                "Early stopping triggered at step %d. Best Composite Score: %.4f (Val Macro F1: %.4f, Neutral F1: %.4f)",
+                                global_step, best_composite_score, best_val_f1, best_val_neutral_f1
+                            )
                             break
 
             if patience_counter >= patience:
@@ -154,12 +189,65 @@ class AspectSentimentTrainer:
         if best_model_path.exists():
             self.model.load_state_dict(torch.load(best_model_path, map_location=self.device, weights_only=True))
 
-        return {"best_val_macro_f1": best_val_f1, "best_checkpoint": str(best_model_path)}
+        calibration_info: Dict[str, Any] = {}
+        if self.calibrate:
+            logger.info("Fitting post-hoc temperature scaling on validation set...")
+            val_eval = self.evaluate(val_dataset, batch_size=batch_size, return_logits=True)
+            scaler_mod = TemperatureScaler()
+            val_logits = val_eval["logits"]
+            val_labels = val_eval["labels"]
 
-    def evaluate(self, dataset: AspectSentimentDataset, batch_size: int = 32) -> Dict[str, float]:
+            uncal_probs = torch.softmax(torch.tensor(val_logits), dim=-1).numpy()
+            uncal_metrics = compute_calibration_metrics(uncal_probs, val_labels)
+
+            opt_temp = scaler_mod.fit(val_logits, val_labels)
+
+            cal_probs = torch.softmax(torch.tensor(val_logits) / opt_temp, dim=-1).numpy()
+            cal_metrics = compute_calibration_metrics(cal_probs, val_labels)
+
+            calib_file = output_dir / "calibration.json"
+            scaler_mod.save(
+                calib_file,
+                metadata={
+                    "uncalibrated": uncal_metrics,
+                    "calibrated": cal_metrics,
+                    "selection_reason": selection_reason,
+                },
+            )
+            calibration_info = {
+                "temperature": opt_temp,
+                "val_ece_before": uncal_metrics["ece"],
+                "val_ece_after": cal_metrics["ece"],
+                "calibration_file": str(calib_file),
+            }
+            logger.info(
+                "Calibration complete: T=%.4f | Val ECE: %.4f -> %.4f | Val NLL: %.4f -> %.4f",
+                opt_temp,
+                uncal_metrics["ece"],
+                cal_metrics["ece"],
+                uncal_metrics["nll"],
+                cal_metrics["nll"],
+            )
+
+        return {
+            "best_val_macro_f1": best_val_f1,
+            "best_val_neutral_f1": best_val_neutral_f1,
+            "best_composite_score": best_composite_score,
+            "selection_reason": selection_reason,
+            "best_checkpoint": str(best_model_path),
+            **calibration_info,
+        }
+
+    def evaluate(
+        self,
+        dataset: AspectSentimentDataset,
+        batch_size: int = 32,
+        return_logits: bool = False,
+    ) -> Dict[str, Any]:
         self.model.eval()
         loader = DataLoader(dataset, batch_size=batch_size, shuffle=False)
         all_preds, all_labels = [], []
+        all_logits = []
 
         device_type = self.device.split(":")[0]  # handles "cuda:0", "mps", "cpu"
         with torch.no_grad():
@@ -174,7 +262,31 @@ class AspectSentimentTrainer:
                 preds = torch.argmax(logits, dim=-1).cpu().numpy()
                 all_preds.extend(preds)
                 all_labels.extend(labels.cpu().numpy())
+                if return_logits:
+                    all_logits.extend(logits.cpu().numpy())
 
-        acc = accuracy_score(all_labels, all_preds)
-        macro_f1 = f1_score(all_labels, all_preds, average="macro", zero_division=0)
-        return {"accuracy": float(acc), "macro_f1": float(macro_f1)}
+        all_labels_arr = np.array(all_labels)
+        all_preds_arr = np.array(all_preds)
+        acc = float(accuracy_score(all_labels_arr, all_preds_arr))
+        macro_f1 = float(f1_score(all_labels_arr, all_preds_arr, average="macro", zero_division=0))
+        micro_f1 = float(f1_score(all_labels_arr, all_preds_arr, average="micro", zero_division=0))
+        per_class_f1 = f1_score(all_labels_arr, all_preds_arr, average=None, labels=[0, 1, 2], zero_division=0)
+        neutral_f1 = float(per_class_f1[LABEL2ID["neutral"]])
+        composite_score = float(self.w_macro * macro_f1 + self.w_neutral * neutral_f1)
+
+        result: Dict[str, Any] = {
+            "accuracy": acc,
+            "macro_f1": macro_f1,
+            "micro_f1": micro_f1,
+            "neutral_f1": neutral_f1,
+            "composite_score": composite_score,
+            "per_class_f1": {
+                "negative": float(per_class_f1[LABEL2ID["negative"]]),
+                "neutral": neutral_f1,
+                "positive": float(per_class_f1[LABEL2ID["positive"]]),
+            },
+        }
+        if return_logits:
+            result["logits"] = np.array(all_logits)
+            result["labels"] = all_labels_arr
+        return result

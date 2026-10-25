@@ -1,8 +1,61 @@
-from __future__ import annotations
-
+from typing import Optional, Sequence, Union
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+
+def compute_class_weights(
+    labels: Union[Sequence[int], torch.Tensor, np.ndarray],
+    strategy: Optional[str] = "none",
+    beta: float = 0.999,
+    num_classes: int = 3,
+) -> Optional[torch.Tensor]:
+    """
+    Computes class weights from train labels to mitigate class imbalance.
+
+    Strategies:
+      - 'none' (or None): Returns None (unweighted CE loss).
+      - 'inverse_freq': Weight proportional to inverse class frequency:
+            w_c = (N / (num_classes * N_c)), normalized so sum(w_c) == num_classes.
+      - 'effective_num': Weight based on effective number of samples (Cui et al., CVPR 2019):
+            E_n = (1 - beta^N_c) / (1 - beta)
+            w_c = 1 / E_n, normalized so sum(w_c) == num_classes.
+    """
+    if strategy is None or str(strategy).lower() == "none":
+        return None
+
+    strat = str(strategy).lower()
+
+    if isinstance(labels, torch.Tensor):
+        labels_arr = labels.detach().cpu().numpy()
+    elif isinstance(labels, np.ndarray):
+        labels_arr = labels
+    else:
+        labels_arr = np.array(list(labels))
+
+    counts = np.zeros(num_classes, dtype=np.float64)
+    for c in range(num_classes):
+        counts[c] = np.sum(labels_arr == c)
+
+    # Guard against zero count
+    counts = np.maximum(counts, 1.0)
+    total_samples = float(np.sum(counts))
+
+    if strat == "inverse_freq":
+        weights = total_samples / (num_classes * counts)
+    elif strat == "effective_num":
+        effective_num = (1.0 - np.power(beta, counts)) / (1.0 - beta)
+        weights = 1.0 / effective_num
+    else:
+        raise ValueError(
+            f"Unsupported class weight strategy: '{strategy}'. "
+            "Supported strategies are: 'none', 'inverse_freq', 'effective_num'."
+        )
+
+    # Normalize weights so they sum to num_classes (mean weight is 1.0)
+    weights = (weights / np.sum(weights)) * num_classes
+    return torch.tensor(weights, dtype=torch.float32)
 
 
 class SupervisedContrastiveLoss(nn.Module):

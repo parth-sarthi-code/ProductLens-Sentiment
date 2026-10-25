@@ -105,15 +105,14 @@ class ProductLensEngine:
         results: List[AspectSentimentResult] = []
         pos_count, neg_count, neu_count = 0, 0, 0
 
-        for mention in aspect_mentions:
-            pred = self.pipeline.predict(
-                text=text,
-                aspect=mention.aspect,
-                category=category,
-                aspect_start=mention.start_char,
-                aspect_end=mention.end_char,
-            )
+        aspect_tuples = [(m.aspect, m.start_char, m.end_char) for m in aspect_mentions]
+        predictions = self.pipeline.predict_aspects(
+            text=text,
+            aspects=aspect_tuples,
+            category=category,
+        )
 
+        for mention, pred in zip(aspect_mentions, predictions):
             # Self-extract evidence snippet
             evidence = extract_evidence_snippet(text, mention.start_char, mention.end_char)
 
@@ -135,6 +134,8 @@ class ProductLensEngine:
                     probabilities=pred.probabilities,
                     routed_expert=pred.routed_expert,
                     routing_reason=pred.routing_reason,
+                    aspect_mask_fallback=pred.aspect_mask_fallback,
+                    calibrated=pred.calibrated,
                 )
             )
 

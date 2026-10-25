@@ -18,8 +18,10 @@ import torch
 from sklearn.model_selection import GroupShuffleSplit
 from transformers import AutoTokenizer
 
+from productlens.constants import LABEL2ID
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.training.dataset import AspectSentimentDataset
+from productlens.training.loss import compute_class_weights
 from productlens.training.trainer import AspectSentimentTrainer
 
 
@@ -56,6 +58,11 @@ def main():
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--output_dir", default=None, help="Optional custom output directory")
     parser.add_argument("--max_samples", type=int, default=None, help="Optional sample limit for quick flow verification")
+    parser.add_argument("--class_weight_strategy", choices=["none", "inverse_freq", "effective_num"], default="none", help="Class imbalance handling strategy")
+    parser.add_argument("--beta", type=float, default=0.999, help="Beta parameter for effective_num class weighting")
+    parser.add_argument("--w_macro", type=float, default=0.7, help="Weight for Macro F1 in composite checkpoint selection")
+    parser.add_argument("--w_neutral", type=float, default=0.3, help="Weight for Neutral F1 in composite checkpoint selection")
+    parser.add_argument("--no_calibration", action="store_true", help="Disable post-hoc temperature scaling")
     args = parser.parse_args()
 
     set_seed(args.seed)
@@ -66,6 +73,9 @@ def main():
     print(f"=== Training {args.domain.upper()} Model ===")
     print(f"Data Dir: {data_dir}")
     print(f"Output Dir: {out_dir}")
+    print(f"Class Weight Strategy: {args.class_weight_strategy}")
+    print(f"Checkpoint Selection: w_macro={args.w_macro}, w_neutral={args.w_neutral}")
+    print(f"Post-hoc Calibration: {not args.no_calibration}")
 
     train_df = pd.read_parquet(data_dir / "train.parquet")
     val_path = data_dir / "val.parquet"
@@ -87,12 +97,25 @@ def main():
         val_df = val_df.iloc[:val_limit].reset_index(drop=True)
         print(f"Verification Mode: subsampled to {len(train_df)} train / {len(val_df)} val samples.")
 
+    # Calculate class weights if enabled
+    train_labels = [LABEL2ID.get(str(s).lower(), 1) for s in train_df["sentiment"]]
+    class_weights = compute_class_weights(train_labels, strategy=args.class_weight_strategy, beta=args.beta)
+    if class_weights is not None:
+        print(f"Computed Class Weights: {class_weights.tolist()}")
+
     tokenizer = AutoTokenizer.from_pretrained(args.backbone)
     train_ds = AspectSentimentDataset(train_df, tokenizer)
     val_ds = AspectSentimentDataset(val_df, tokenizer)
 
     model = AspectTargetedSentimentModel(backbone_name=args.backbone, num_labels=3, aspect_boost=3.5)
-    trainer = AspectSentimentTrainer(model=model, tokenizer=tokenizer)
+    trainer = AspectSentimentTrainer(
+        model=model,
+        tokenizer=tokenizer,
+        class_weights=class_weights,
+        w_macro=args.w_macro,
+        w_neutral=args.w_neutral,
+        calibrate=not args.no_calibration,
+    )
 
     results = trainer.train(
         train_dataset=train_ds,

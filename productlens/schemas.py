@@ -19,6 +19,8 @@ class SentimentPrediction(BaseModel):
     probabilities: Dict[str, float] = Field(..., description="Class probabilities {positive, neutral, negative}")
     routed_expert: str = Field(..., description="Specialist model key ('tech', 'home', 'apparel', 'fallback')")
     routing_reason: str = Field(..., description="Rationale for expert selection")
+    aspect_mask_fallback: bool = Field(default=False, description="True if aspect term was not found in offsets and fell back to CLS")
+    calibrated: bool = Field(default=False, description="True if post-hoc temperature calibration was applied")
 
 
 class AspectSentimentResult(BaseModel):
@@ -32,6 +34,8 @@ class AspectSentimentResult(BaseModel):
     probabilities: Dict[str, float]
     routed_expert: str
     routing_reason: str
+    aspect_mask_fallback: bool = Field(default=False, description="True if aspect term was not found in offsets and fell back to CLS")
+    calibrated: bool = Field(default=False, description="True if post-hoc temperature calibration was applied")
 
 
 class ReviewAnalysisReport(BaseModel):

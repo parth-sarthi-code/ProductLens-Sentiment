@@ -12,21 +12,20 @@ global_defaults:
   warmup_ratio: 0.10
   batch_size: 8
   max_length: 128
+  # Class imbalance strategy: "none", "inverse_freq", "effective_num"
+  class_weight_strategy: "none"
+  effective_num_beta: 0.999
+  # Composite checkpoint selection weights
+  w_macro: 0.7
+  w_neutral: 0.3
+  # Post-hoc temperature calibration
+  calibrate: true
   # Reproducibility seed — passed to train_all_experts.py and GroupShuffleSplit
   seed: 42
 
 models:
-  generic_foundation:
-    domain: "MAMS Challenge (Universal Multi-Aspect)"
-    train_data: "data/benchmarks/multi_aspect_mams/train.parquet"
-    val_data: "data/benchmarks/multi_aspect_mams/val.parquet"
-    test_data: "data/benchmarks/multi_aspect_mams/test.parquet"
-    output_checkpoint: "models/category_experts/foundation_mams/best_model.pt"
-    epochs: 5
-    eval_every_steps: 150
-    patience: 4
-    # benchmark_accuracy is not stored here — regenerate with:
-    #   python scripts/evaluate_comparison.py
+  # Note: Fallback uses canonical pretrained backbone 'yangheng/deberta-v3-base-absa-v1.1' directly.
+  # No redundant re-training on MAMS is needed.
 
   expert_tech:
     domain: "Tech & Hardware (SemEval Laptop14)"

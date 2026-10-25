@@ -1,0 +1,15 @@
+{
+  "temperature": 1.141,
+  "domain": "tech",
+  "val_samples": 221,
+  "uncalibrated": {
+    "ece": 0.0227,
+    "nll": 0.0814,
+    "brier": 0.0404
+  },
+  "calibrated": {
+    "ece": 0.0221,
+    "nll": 0.0754,
+    "brier": 0.0393
+  }
+}

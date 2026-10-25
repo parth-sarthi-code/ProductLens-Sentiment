@@ -11,8 +11,7 @@ models:
     tech: "models/category_experts/expert_tech/best_model.pt"
     home: "models/category_experts/expert_home/best_model.pt"
     apparel: "models/category_experts/expert_apparel/best_model.pt"
-    beauty: "models/category_experts/foundation_mams/best_model.pt"
-    fallback: "models/category_experts/foundation_mams/best_model.pt"
+    fallback: null
 
 aspect_extraction:
   min_length: 2

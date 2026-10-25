@@ -34,6 +34,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from transformers import AutoTokenizer
 
 from productlens.constants import DEFAULT_BACKBONE
+from productlens.sentiment.calibration import compute_calibration_metrics
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.sentiment.pipeline import ProductLensMoEPipeline
 from productlens.training.dataset import AspectSentimentDataset, LABEL2ID
@@ -45,13 +46,12 @@ DATA_PATHS = {
     "Laptop14 (Tech)":    BASE_DIR / "data/benchmarks/tech_laptop/test.parquet",
     "Television (Home)":  BASE_DIR / "data/benchmarks/home_television/test.parquet",
     "T-Shirt (Apparel)":  BASE_DIR / "data/benchmarks/apparel_tshirt/test.parquet",
-    "MAMS Challenge":     BASE_DIR / "data/benchmarks/multi_aspect_mams/test.parquet",
 }
 
 OOD_FIXTURE_PATH = BASE_DIR / "data/benchmarks/ood_fixture"
 
 CHECKPOINTS = {
-    "Generic Foundation (MAMS)":    BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
+    "Canonical Backbone (PyABSA DeBERTa-v3)": None,
     "Tech Specialist (Laptop14)":   BASE_DIR / "models/category_experts/expert_tech/best_model.pt",
     "Home Specialist (Television)": BASE_DIR / "models/category_experts/expert_home/best_model.pt",
     "Apparel Specialist (T-Shirt)": BASE_DIR / "models/category_experts/expert_apparel/best_model.pt",
@@ -62,7 +62,7 @@ DOMAIN_TRUTH = {
     "Laptop14 (Tech)":   "tech",
     "Television (Home)": "home",
     "T-Shirt (Apparel)": "apparel",
-    "MAMS Challenge":    "fallback",
+    "OOD":               "fallback",
 }
 
 # Category strings supplied during the moe_with_cat evaluation
@@ -70,7 +70,6 @@ CATEGORY_MAP = {
     "Laptop14 (Tech)":   "Electronics",
     "Television (Home)": "Home_and_Kitchen",
     "T-Shirt (Apparel)": "Clothing_Shoes_and_Jewelry",
-    "MAMS Challenge":    None,
 }
 
 
@@ -83,21 +82,6 @@ def set_seed(seed: int) -> None:
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
-
-
-def compute_ece(probs: np.ndarray, labels: np.ndarray, n_bins: int = 10) -> float:
-    confidences = np.max(probs, axis=-1)
-    predictions = np.argmax(probs, axis=-1)
-    accuracies = (predictions == labels).astype(float)
-    bin_boundaries = np.linspace(0, 1, n_bins + 1)
-    ece = 0.0
-    for i in range(n_bins):
-        in_bin = (confidences > bin_boundaries[i]) & (confidences <= bin_boundaries[i + 1])
-        if np.any(in_bin):
-            acc_in_bin = np.mean(accuracies[in_bin])
-            avg_conf_in_bin = np.mean(confidences[in_bin])
-            ece += np.abs(avg_conf_in_bin - acc_in_bin) * np.mean(in_bin)
-    return float(ece)
 
 
 def bootstrap_ci(
@@ -122,15 +106,21 @@ def bootstrap_ci(
 
 
 def compute_metrics(labels: list, preds: list, probs: list | None = None) -> dict:
-    """Compute accuracy, per-class F1, macro-F1, ECE, and bootstrap CIs."""
-    acc = accuracy_score(labels, preds)
-    per_class_f1 = f1_score(labels, preds, average=None, labels=[0, 1, 2], zero_division=0)
-    macro_f1 = f1_score(labels, preds, average="macro", zero_division=0)
+    """Compute accuracy, micro-F1, per-class F1, macro-F1, neutral-F1, ECE, NLL, Brier, and bootstrap CIs."""
+    labels_arr = np.array(labels)
+    preds_arr = np.array(preds)
+    acc = accuracy_score(labels_arr, preds_arr)
+    per_class_f1 = f1_score(labels_arr, preds_arr, average=None, labels=[0, 1, 2], zero_division=0)
+    macro_f1 = f1_score(labels_arr, preds_arr, average="macro", zero_division=0)
+    micro_f1 = f1_score(labels_arr, preds_arr, average="micro", zero_division=0)
+    neutral_f1 = float(per_class_f1[LABEL2ID["neutral"]])
     ci = bootstrap_ci(labels, preds)
 
     result = {
         "accuracy":       round(float(acc) * 100, 2),
+        "micro_f1":       round(float(micro_f1) * 100, 2),
         "macro_f1":       round(float(macro_f1) * 100, 2),
+        "neutral_f1":     round(neutral_f1 * 100, 2),
         "per_class_f1":   {
             "negative": round(float(per_class_f1[LABEL2ID["negative"]]) * 100, 2),
             "neutral":  round(float(per_class_f1[LABEL2ID["neutral"]]) * 100, 2),
@@ -141,7 +131,11 @@ def compute_metrics(labels: list, preds: list, probs: list | None = None) -> dic
     }
 
     if probs is not None:
-        result["ece"] = round(compute_ece(np.array(probs), np.array(labels)) * 100, 2)
+        probs_arr = np.array(probs)
+        calib = compute_calibration_metrics(probs_arr, labels_arr)
+        result["ece"] = round(calib["ece"] * 100, 2)
+        result["nll"] = calib["nll"]
+        result["brier"] = calib["brier"]
 
     return result
 
@@ -162,6 +156,7 @@ def weighted_composite(results_by_domain: dict, domains: list, n_samples: dict) 
 def evaluate_single_model(
     model: AspectTargetedSentimentModel,
     dataset: AspectSentimentDataset,
+    temperature: float = 1.0,
 ) -> dict:
     model.eval()
     loader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=False)
@@ -175,7 +170,8 @@ def evaluate_single_model(
             labels        = batch["label"].to(DEVICE)
 
             logits, _ = model(input_ids, attention_mask, aspect_mask)
-            probs = F.softmax(logits, dim=-1).cpu().numpy()
+            scaled_logits = logits / temperature
+            probs = F.softmax(scaled_logits, dim=-1).cpu().numpy()
             preds = np.argmax(probs, axis=-1)
 
             all_preds.extend(preds)
@@ -199,9 +195,9 @@ def evaluate_moe_pipeline(
                   If None, router decides from text only (tests Levels 2/3).
 
     Returns:
-        Metrics dict, plus 'routing_accuracy' when category is None.
+        Metrics dict, plus 'routing_accuracy', 'fallback_rate', and 'aspect_mask_fallback_rate'.
     """
-    all_preds, all_labels, routed_experts = [], [], []
+    all_preds, all_labels, all_probs, routed_experts, aspect_mask_fallbacks = [], [], [], [], []
     true_domain = DOMAIN_TRUTH[domain_key]
 
     for _, row in df.iterrows():
@@ -221,13 +217,22 @@ def evaluate_moe_pipeline(
 
         all_preds.append(LABEL2ID[pred.sentiment])
         all_labels.append(gold_label)
+        all_probs.append([
+            pred.probabilities["negative"],
+            pred.probabilities["neutral"],
+            pred.probabilities["positive"],
+        ])
         routed_experts.append(pred.routed_expert)
+        aspect_mask_fallbacks.append(pred.aspect_mask_fallback)
 
-    metrics = compute_metrics(all_labels, all_preds)
+    metrics = compute_metrics(all_labels, all_preds, all_probs)
+    total_preds = len(routed_experts)
+    metrics["fallback_rate"] = round(sum(e == "fallback" for e in routed_experts) / total_preds * 100, 2)
+    metrics["aspect_mask_fallback_rate"] = round(sum(aspect_mask_fallbacks) / total_preds * 100, 2)
 
     if category is None:
         correct_routes = sum(e == true_domain for e in routed_experts)
-        metrics["routing_accuracy"] = round(correct_routes / len(routed_experts) * 100, 2)
+        metrics["routing_accuracy"] = round(correct_routes / total_preds * 100, 2)
         from collections import Counter
         metrics["routing_distribution"] = dict(Counter(routed_experts))
 
@@ -255,7 +260,7 @@ def main():
         domain: AspectSentimentDataset(df, tokenizer) for domain, df in datasets_raw.items()
     }
 
-    ecom_domains = [d for d in datasets_raw if d != "MAMS Challenge"]
+    ecom_domains = list(datasets_raw.keys())
     results = {}
 
     # -----------------------------------------------------------------------
@@ -264,17 +269,30 @@ def main():
     for model_name, ckpt_path in CHECKPOINTS.items():
         print(f"Evaluating: {model_name}...")
         model = AspectTargetedSentimentModel(backbone_name=DEFAULT_BACKBONE, num_labels=3)
-        model.load_state_dict(torch.load(ckpt_path, map_location=DEVICE, weights_only=True))
+        temp = 1.0
+        if ckpt_path is not None and ckpt_path.exists():
+            model.load_state_dict(torch.load(ckpt_path, map_location=DEVICE, weights_only=True))
+            calib_file = ckpt_path.parent / "calibration.json"
+            if calib_file.exists():
+                try:
+                    with open(calib_file, "r", encoding="utf-8") as f:
+                        temp = float(json.load(f).get("temperature", 1.0))
+                    print(f"  [Calibration] Loaded T={temp:.4f} from {calib_file}")
+                except Exception:
+                    temp = 1.0
+        else:
+            print(f"  [Pretrained Backbone] Evaluating canonical {DEFAULT_BACKBONE} directly (T={temp:.4f})")
         model.to(DEVICE)
 
         results[model_name] = {}
         for domain, ds in tokenized_datasets.items():
-            metrics = evaluate_single_model(model, ds)
+            metrics = evaluate_single_model(model, ds, temperature=temp)
             results[model_name][domain] = metrics
             print(
                 f"  -> {domain}: Acc={metrics['accuracy']}% "
                 f"[{metrics['accuracy_ci95'][0]}–{metrics['accuracy_ci95'][1]}] "
-                f"MacroF1={metrics['macro_f1']}%"
+                f"MacroF1={metrics['macro_f1']}% NeutralF1={metrics['neutral_f1']}% "
+                f"ECE={metrics.get('ece', 0.0)}% NLL={metrics.get('nll', 0.0):.4f} Brier={metrics.get('brier', 0.0):.4f}"
             )
 
         results[model_name]["E-Commerce Composite (weighted)"] = weighted_composite(
@@ -309,9 +327,11 @@ def main():
             routing_note = ""
             if "routing_accuracy" in metrics:
                 routing_note = f" | Routing Acc={metrics['routing_accuracy']}%"
+            fallback_note = f" | Fallback Rate={metrics['fallback_rate']}% | AspectMask Fallback Rate={metrics['aspect_mask_fallback_rate']}%"
             print(
                 f"  -> {domain}: Acc={metrics['accuracy']}% "
-                f"MacroF1={metrics['macro_f1']}%{routing_note}"
+                f"MacroF1={metrics['macro_f1']}% NeutralF1={metrics['neutral_f1']}% "
+                f"ECE={metrics.get('ece', 0.0)}%{routing_note}{fallback_note}"
             )
 
         results[mode_label]["E-Commerce Composite (weighted)"] = weighted_composite(
@@ -327,7 +347,7 @@ def main():
         for fixture_file in sorted(OOD_FIXTURE_PATH.glob("*.parquet")):
             ood_df = pd.read_parquet(fixture_file)
             ood_name = fixture_file.stem
-            metrics = evaluate_moe_pipeline(pipeline, "MAMS Challenge", ood_df, None)
+            metrics = evaluate_moe_pipeline(pipeline, "OOD", ood_df, None)
             results["OOD Fixture"][ood_name] = metrics
             print(f"  -> {ood_name}: Acc={metrics['accuracy']}% MacroF1={metrics['macro_f1']}%")
     else:
@@ -348,7 +368,8 @@ def main():
     # -----------------------------------------------------------------------
     # 5. Generate Markdown — all numbers from results dict, none hardcoded
     # -----------------------------------------------------------------------
-    gen_composite  = results["Generic Foundation (MAMS)"]["E-Commerce Composite (weighted)"]
+    base_name = "Canonical Backbone (PyABSA DeBERTa-v3)"
+    gen_composite  = results[base_name]["E-Commerce Composite (weighted)"]
     moe_nc_composite = results["ProductLens MoE (no category)"]["E-Commerce Composite (weighted)"]
     moe_wc_composite = results["ProductLens MoE (with category)"]["E-Commerce Composite (weighted)"]
     net_lift_nc    = round(moe_nc_composite - gen_composite, 2)
@@ -357,7 +378,7 @@ def main():
     def acc(model, domain):
         return results[model][domain]["accuracy"]
 
-    md_content = f"""# ProductLens Benchmark: Generic Foundation vs Specialists vs MoE Pipeline
+    md_content = f"""# ProductLens Benchmark: Canonical Backbone vs Specialists vs MoE Pipeline
 
 > Generated by `scripts/evaluate_comparison.py` — do not edit manually.
 > Composite = sample-weighted accuracy across e-commerce domains.
@@ -365,18 +386,28 @@ def main():
 
 ## Test Accuracy Transfer Matrix (%)
 
-| Model | Laptop14 (Tech, {n_samples['Laptop14 (Tech)']}) | Television (Home, {n_samples['Television (Home)']}) | T-Shirt (Apparel, {n_samples['T-Shirt (Apparel)']}) | MAMS ({n_samples['MAMS Challenge']}) | E-Com Composite |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Generic Foundation (MAMS) | {acc('Generic Foundation (MAMS)', 'Laptop14 (Tech)')}% | {acc('Generic Foundation (MAMS)', 'Television (Home)')}% | {acc('Generic Foundation (MAMS)', 'T-Shirt (Apparel)')}% | {acc('Generic Foundation (MAMS)', 'MAMS Challenge')}% | {gen_composite}% |
-| Tech Specialist (Laptop14) | {acc('Tech Specialist (Laptop14)', 'Laptop14 (Tech)')}% | {acc('Tech Specialist (Laptop14)', 'Television (Home)')}% | {acc('Tech Specialist (Laptop14)', 'T-Shirt (Apparel)')}% | {acc('Tech Specialist (Laptop14)', 'MAMS Challenge')}% | {results['Tech Specialist (Laptop14)']['E-Commerce Composite (weighted)']}% |
-| Home Specialist (Television) | {acc('Home Specialist (Television)', 'Laptop14 (Tech)')}% | {acc('Home Specialist (Television)', 'Television (Home)')}% | {acc('Home Specialist (Television)', 'T-Shirt (Apparel)')}% | {acc('Home Specialist (Television)', 'MAMS Challenge')}% | {results['Home Specialist (Television)']['E-Commerce Composite (weighted)']}% |
-| Apparel Specialist (T-Shirt) | {acc('Apparel Specialist (T-Shirt)', 'Laptop14 (Tech)')}% | {acc('Apparel Specialist (T-Shirt)', 'Television (Home)')}% | {acc('Apparel Specialist (T-Shirt)', 'T-Shirt (Apparel)')}% | {acc('Apparel Specialist (T-Shirt)', 'MAMS Challenge')}% | {results['Apparel Specialist (T-Shirt)']['E-Commerce Composite (weighted)']}% |
-| **ProductLens MoE (with category)** | {acc('ProductLens MoE (with category)', 'Laptop14 (Tech)')}% | {acc('ProductLens MoE (with category)', 'Television (Home)')}% | {acc('ProductLens MoE (with category)', 'T-Shirt (Apparel)')}% | {acc('ProductLens MoE (with category)', 'MAMS Challenge')}% | **{moe_wc_composite}% (+{net_lift_wc}% vs foundation)** |
-| **ProductLens MoE (no category)** | {acc('ProductLens MoE (no category)', 'Laptop14 (Tech)')}% | {acc('ProductLens MoE (no category)', 'Television (Home)')}% | {acc('ProductLens MoE (no category)', 'T-Shirt (Apparel)')}% | {acc('ProductLens MoE (no category)', 'MAMS Challenge')}% | **{moe_nc_composite}% (+{net_lift_nc}% vs foundation)** |
+| Model | Laptop14 (Tech, {n_samples['Laptop14 (Tech)']}) | Television (Home, {n_samples['Television (Home)']}) | T-Shirt (Apparel, {n_samples['T-Shirt (Apparel)']}) | E-Com Composite |
+| :--- | :---: | :---: | :---: | :---: |
+| Canonical Backbone (PyABSA DeBERTa-v3) | {acc(base_name, 'Laptop14 (Tech)')}% | {acc(base_name, 'Television (Home)')}% | {acc(base_name, 'T-Shirt (Apparel)')}% | {gen_composite}% |
+| Tech Specialist (Laptop14) | {acc('Tech Specialist (Laptop14)', 'Laptop14 (Tech)')}% | {acc('Tech Specialist (Laptop14)', 'Television (Home)')}% | {acc('Tech Specialist (Laptop14)', 'T-Shirt (Apparel)')}% | {results['Tech Specialist (Laptop14)']['E-Commerce Composite (weighted)']}% |
+| Home Specialist (Television) | {acc('Home Specialist (Television)', 'Laptop14 (Tech)')}% | {acc('Home Specialist (Television)', 'Television (Home)')}% | {acc('Home Specialist (Television)', 'T-Shirt (Apparel)')}% | {results['Home Specialist (Television)']['E-Commerce Composite (weighted)']}% |
+| Apparel Specialist (T-Shirt) | {acc('Apparel Specialist (T-Shirt)', 'Laptop14 (Tech)')}% | {acc('Apparel Specialist (T-Shirt)', 'Television (Home)')}% | {acc('Apparel Specialist (T-Shirt)', 'T-Shirt (Apparel)')}% | {results['Apparel Specialist (T-Shirt)']['E-Commerce Composite (weighted)']}% |
+| **ProductLens MoE (with category)** | {acc('ProductLens MoE (with category)', 'Laptop14 (Tech)')}% | {acc('ProductLens MoE (with category)', 'Television (Home)')}% | {acc('ProductLens MoE (with category)', 'T-Shirt (Apparel)')}% | **{moe_wc_composite}% (+{net_lift_wc}% vs backbone)** |
+| **ProductLens MoE (no category)** | {acc('ProductLens MoE (no category)', 'Laptop14 (Tech)')}% | {acc('ProductLens MoE (no category)', 'Television (Home)')}% | {acc('ProductLens MoE (no category)', 'T-Shirt (Apparel)')}% | **{moe_nc_composite}% (+{net_lift_nc}% vs backbone)** |
+
+## Detailed F1 & Calibration Metrics (No Category Mode)
+
+| Domain | Accuracy (%) | Macro-F1 (%) | Neutral-F1 (%) | ECE (%) | NLL | Brier | Fallback Rate (%) | AspectMask Fallback (%) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Laptop14 (Tech) | {results['ProductLens MoE (no category)']['Laptop14 (Tech)']['accuracy']}% | {results['ProductLens MoE (no category)']['Laptop14 (Tech)']['macro_f1']}% | {results['ProductLens MoE (no category)']['Laptop14 (Tech)']['neutral_f1']}% | {results['ProductLens MoE (no category)']['Laptop14 (Tech)'].get('ece', 0.0)}% | {results['ProductLens MoE (no category)']['Laptop14 (Tech)'].get('nll', 0.0):.4f} | {results['ProductLens MoE (no category)']['Laptop14 (Tech)'].get('brier', 0.0):.4f} | {results['ProductLens MoE (no category)']['Laptop14 (Tech)'].get('fallback_rate', 0.0)}% | {results['ProductLens MoE (no category)']['Laptop14 (Tech)'].get('aspect_mask_fallback_rate', 0.0)}% |
+| Television (Home) | {results['ProductLens MoE (no category)']['Television (Home)']['accuracy']}% | {results['ProductLens MoE (no category)']['Television (Home)']['macro_f1']}% | {results['ProductLens MoE (no category)']['Television (Home)']['neutral_f1']}% | {results['ProductLens MoE (no category)']['Television (Home)'].get('ece', 0.0)}% | {results['ProductLens MoE (no category)']['Television (Home)'].get('nll', 0.0):.4f} | {results['ProductLens MoE (no category)']['Television (Home)'].get('brier', 0.0):.4f} | {results['ProductLens MoE (no category)']['Television (Home)'].get('fallback_rate', 0.0)}% | {results['ProductLens MoE (no category)']['Television (Home)'].get('aspect_mask_fallback_rate', 0.0)}% |
+| T-Shirt (Apparel) | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)']['accuracy']}% | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)']['macro_f1']}% | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)']['neutral_f1']}% | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)'].get('ece', 0.0)}% | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)'].get('nll', 0.0):.4f} | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)'].get('brier', 0.0):.4f} | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)'].get('fallback_rate', 0.0)}% | {results['ProductLens MoE (no category)']['T-Shirt (Apparel)'].get('aspect_mask_fallback_rate', 0.0)}% |
 
 ## Notes
-- **Routing Accuracy** (no-category run): see JSON for per-domain routing distributions.
-- **Restaurant-trained Fallback (MAMS)**: the fallback expert was trained on restaurant reviews (MAMS dataset), not on a mixed or universal corpus. It serves as a general-purpose fallback only.
+- **Fallback Architecture**: Uses canonical pretrained backbone (`yangheng/deberta-v3-base-absa-v1.1`) directly for unrouted or OOD domains.
+- **Specialist Domain Lifts**: Domain specialists provide targeted improvements on in-domain terms and neutral ambiguity resolution.
+- **Routing Accuracy & Distribution**: Evaluated when no category metadata is provided.
+- **Post-Hoc Calibration**: Probabilities calibrated via temperature scaling minimizing validation NLL and ECE.
 - All confidence intervals are 95% bootstrap (n=1000).
 - Composite = sample-weighted mean; weights are test-set sizes.
 """

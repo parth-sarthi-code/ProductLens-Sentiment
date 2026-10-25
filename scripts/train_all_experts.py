@@ -22,9 +22,10 @@ import torch
 from sklearn.model_selection import GroupShuffleSplit
 from transformers import AutoTokenizer
 
-from productlens.constants import DEFAULT_BACKBONE
+from productlens.constants import DEFAULT_BACKBONE, LABEL2ID
 from productlens.sentiment.model import AspectTargetedSentimentModel
 from productlens.training.dataset import AspectSentimentDataset
+from productlens.training.loss import compute_class_weights
 from productlens.training.trainer import AspectSentimentTrainer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,6 +74,17 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
     train_ds = AspectSentimentDataset(train_df, tokenizer, max_length=global_defaults.get("max_length", 128))
     val_ds = AspectSentimentDataset(val_df, tokenizer, max_length=global_defaults.get("max_length", 128))
 
+    class_weight_strat = m_cfg.get("class_weight_strategy", global_defaults.get("class_weight_strategy", "none"))
+    beta = float(m_cfg.get("effective_num_beta", global_defaults.get("effective_num_beta", 0.999)))
+    w_macro = float(m_cfg.get("w_macro", global_defaults.get("w_macro", 0.7)))
+    w_neutral = float(m_cfg.get("w_neutral", global_defaults.get("w_neutral", 0.3)))
+    calibrate = bool(m_cfg.get("calibrate", global_defaults.get("calibrate", True)))
+
+    train_labels = [LABEL2ID.get(str(s).lower(), 1) for s in train_df["sentiment"]]
+    class_weights = compute_class_weights(train_labels, strategy=class_weight_strat, beta=beta)
+    if class_weights is not None:
+        print(f"Class Weights ({class_weight_strat}): {class_weights.tolist()}")
+
     model = AspectTargetedSentimentModel(
         backbone_name=backbone,
         num_labels=3,
@@ -87,6 +99,10 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
         weight_decay=global_defaults.get("weight_decay", 0.01),
         lambda_scl=global_defaults.get("lambda_scl", 0.10),
         scl_temp=global_defaults.get("scl_temperature", 0.07),
+        class_weights=class_weights,
+        w_macro=w_macro,
+        w_neutral=w_neutral,
+        calibrate=calibrate,
     )
 
     results = trainer.train(
@@ -100,7 +116,10 @@ def train_model_from_config(model_key: str, config: dict, global_defaults: dict)
     )
 
     print(f"Successfully generated checkpoint: {output_ckpt}")
-    print(f"Best Validation Macro F1: {results['best_val_macro_f1']:.4f}")
+    print(f"Selection Reason: {results.get('selection_reason', 'N/A')}")
+    print(f"Best Validation Macro F1: {results['best_val_macro_f1']:.4f} | Neutral F1: {results.get('best_val_neutral_f1', 0.0):.4f} | Composite Score: {results.get('best_composite_score', 0.0):.4f}")
+    if "temperature" in results:
+        print(f"Post-Hoc Calibration: T={results['temperature']:.4f} (ECE: {results.get('val_ece_before', 0.0):.4f} -> {results.get('val_ece_after', 0.0):.4f})")
     return results
 
 
@@ -108,10 +127,10 @@ def main():
     parser = argparse.ArgumentParser(description="ProductLens Model Suite Generator")
     parser.add_argument(
         "--model",
-        choices=["generic_foundation", "expert_tech", "expert_home", "expert_apparel", "generic", "tech", "home", "apparel"],
-        help="Specify which model to generate",
+        choices=["expert_tech", "expert_home", "expert_apparel", "tech", "home", "apparel"],
+        help="Specify which domain specialist to generate",
     )
-    parser.add_argument("--all", action="store_true", help="Generate all 4 models sequentially")
+    parser.add_argument("--all", action="store_true", help="Generate all 3 domain specialists sequentially")
     parser.add_argument("--seed", type=int, default=42, help="Random seed for reproducibility")
     args = parser.parse_args()
 
@@ -123,14 +142,13 @@ def main():
     defaults = config.get("global_defaults", {})
 
     alias_map = {
-        "generic": "generic_foundation",
         "tech": "expert_tech",
         "home": "expert_home",
         "apparel": "expert_apparel",
     }
 
     if args.all:
-        for m_key in ["generic_foundation", "expert_tech", "expert_home", "expert_apparel"]:
+        for m_key in ["expert_tech", "expert_home", "expert_apparel"]:
             train_model_from_config(m_key, config, defaults)
     elif args.model:
         m_key = alias_map.get(args.model, args.model)

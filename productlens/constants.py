@@ -6,6 +6,7 @@ always use the same values, preventing silent train/inference mismatches.
 """
 
 from pathlib import Path
+from typing import Optional
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,12 +17,13 @@ MAX_SEQ_LEN: int = 128
 # Canonical pretrained backbone for aspect-targeted sentiment analysis
 DEFAULT_BACKBONE: str = "yangheng/deberta-v3-base-absa-v1.1"
 
-# Default paths to canonical DeBERTa-v3 domain specialists and foundation fallback
-DEFAULT_CHECKPOINT_PATHS: dict[str, Path] = {
+# Default paths to canonical DeBERTa-v3 domain specialists and fallback
+# Fallback uses the canonical pretrained backbone directly (None = pure pretrained model)
+DEFAULT_CHECKPOINT_PATHS: dict[str, Optional[Path]] = {
     "tech": BASE_DIR / "models/category_experts/expert_tech/best_model.pt",
     "home": BASE_DIR / "models/category_experts/expert_home/best_model.pt",
     "apparel": BASE_DIR / "models/category_experts/expert_apparel/best_model.pt",
-    "fallback": BASE_DIR / "models/category_experts/foundation_mams/best_model.pt",
+    "fallback": None,
 }
 
 # Canonical label ↔ id mappings shared by training (dataset.py) and inference (pipeline.py).
