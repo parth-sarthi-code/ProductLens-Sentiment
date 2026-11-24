@@ -57,9 +57,9 @@ flowchart TD
     end
 
     subgraph S2 ["2. NEURAL INFERENCE (LFM3-1.7B)"]
-        SPLIT --> C1["Clause 1: Camera & Optics"]
-        SPLIT --> C2["Clause 2: Gaming & Gyro Delay"]
-        SPLIT --> C3["Clause 3: Display & Battery"]
+        SPLIT --> C1["Clause Segment 1\n(Atomic Sentence Span)"]
+        SPLIT --> C2["Clause Segment 2\n(Contrastive Clause Span)"]
+        SPLIT --> C3["Clause Segment 3\n(Concluding Attribute Span)"]
         
         C1 --> LFM["LiquidAI LFM3-1.7B Engine\n(Continuous-Time Dynamical State Space)"]
         C2 --> LFM

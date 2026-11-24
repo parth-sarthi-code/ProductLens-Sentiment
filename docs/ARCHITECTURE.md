@@ -22,9 +22,9 @@ flowchart TD
     end
 
     subgraph Inference ["2. DYNAMICAL STATE-SPACE INFERENCE"]
-        S --> C1["Clause 1: Optical Hardware"]
-        S --> C2["Clause 2: Performance & Latency"]
-        S --> C3["Clause 3: Display & Power Delivery"]
+        S --> C1["Clause Segment 1\n(Atomic Feature Span)"]
+        S --> C2["Clause Segment 2\n(Contrastive Sub-Clause)"]
+        S --> C3["Clause Segment 3\n(Concluding Evaluation)"]
         
         C1 --> LFM["LiquidAI LFM3-1.7B Engine\nContinuous Dynamical State Space\n(NF4 / bfloat16)"]
         C2 --> LFM
@@ -275,28 +275,28 @@ During real-world stress testing on unstructured multi-sentence e-commerce revie
 ```mermaid
 flowchart TD
     subgraph MonolithicFailure ["Failure Mode: Monolithic Prompt Input"]
-        M_IN["150-Word Multi-Sentence Review\n(7 Unrelated Technical Topics Concatenated)"]
-        M_IN --> M_ATTN["Attention Entropy Dispersion\n(Long Sequence Length L = 180 Tokens)"]
-        M_ATTN --> M_OUT["Middle Nuances Omitted ('gyro delay' dropped)\nEchoes Entire 150-Word Review as Evidence Quote"]
+        M_IN["Multi-Sentence Review\n(Multiple Distinct Topics Concatenated)"]
+        M_IN --> M_ATTN["Attention Entropy Dispersion\n(Long Sequence Length L >> 30 Tokens)"]
+        M_ATTN --> M_OUT["Middle Nuances Omitted (Intermediate Defects Dropped)\nEchoes Entire Review Blob as Evidence Quote"]
     end
 
     subgraph ClauseSuccess ["Core Innovation: Clause Attention Segmentation"]
-        C_IN["150-Word Multi-Sentence Review"]
+        C_IN["Multi-Sentence Review"]
         C_IN --> SPLIT["Clause Segmentation Parser\nSplits on newlines & sentence delimiters"]
         
-        SPLIT --> S1["Clause 1: Camera Optics (18 tokens)"]
-        SPLIT --> S2["Clause 2: Gaming & Gyro (24 tokens)"]
-        SPLIT --> S3["Clause 3: Display & Battery (12 tokens)"]
+        SPLIT --> S1["Clause 1\n(Atomic Feature Span, L1 <= 30)"]
+        SPLIT --> S2["Clause 2\n(Contrastive Sub-Clause, L2 <= 30)"]
+        SPLIT --> S3["Clause 3\n(Secondary Attribute, L3 <= 30)"]
         
-        S1 --> A1["Focused Receptive Field\n-> Camera (Positive)"]
-        S2 --> A2["Focused Receptive Field\n-> Gyro Delay (Negative)"]
-        S3 --> A3["Focused Receptive Field\n-> Display (Pos), Battery (Pos)"]
+        S1 --> A1["Focused Receptive Field\n-> Aspect Quad 1"]
+        S2 --> A2["Focused Receptive Field\n-> Aspect Quad 2"]
+        S3 --> A3["Focused Receptive Field\n-> Aspect Quad 3"]
         
         A1 --> PROJ["Coordinate Projection Matrix\nLocal Clause Offsets -> Global Document Offsets"]
         A2 --> PROJ
         A3 --> PROJ
         
-        PROJ --> FINAL["8 of 8 Aspects Extracted\nTight 1:1 Verbatim Supporting Quotes"]
+        PROJ --> FINAL["All Aspects Fully Extracted\nTight 1:1 Verbatim Supporting Quotes"]
     end
 
     style MonolithicFailure fill:#382424,stroke:#ea6962,stroke-width:1px,color:#fb4934
