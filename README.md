@@ -103,9 +103,13 @@ flowchart TD
    - *Why it matters:* Generative language models frequently hallucinate or modify quotes (for instance, changing punctuation or rewording phrases). The validator acts as a strict auditor: if a quote does not exist verbatim in the original customer review, it is rejected. Zero fabricated quotes or broken text offsets enter the database.
 
 4. **Bayesian Aggregation and Defect Prioritization:**
-   - *Technical formulation:* Individual sentiment instances are aggregated using a confidence-weighted Bayesian shrinkage formula:
-     $$\hat{s}_f = \frac{\sum_{i=1}^{n_f} c_i^2 \cdot s_i + \lambda \cdot s_0}{\sum_{i=1}^{n_f} c_i^2 + \lambda}$$
-     where $\lambda = 3.0$ represents a neutral prior and $c_i^2$ penalizes low-confidence extractions.
+   - *Technical formulation:* Individual sentiment instances are aggregated using a confidence-weighted Bayesian shrinkage estimator:
+
+$$
+\hat{s}_f = \frac{\sum_{i=1}^{n_f} c_i^2 \cdot s_i + \lambda \cdot s_0}{\sum_{i=1}^{n_f} c_i^2 + \lambda}
+$$
+
+   where $\lambda = 3.0$ represents a neutral prior and $c_i^2$ penalizes low-confidence extractions.
    - *Why it matters:* Simple averages can be misled by a single anomalous 1-star review (e.g., someone complaining about a damaged delivery box). Bayesian shrinkage conservatively pulls low-support complaints toward neutral until multiple independent reviews corroborate the issue. When 20 customers report the same defect, the mathematical score escalates and surfaces the issue as a top-priority fix.
 
 5. **Linguistic Inspection Workbench:**
