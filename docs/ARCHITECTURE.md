@@ -16,35 +16,35 @@ In enterprise deployments, standard autoregressive Large Language Models (LLMs) 
 ```mermaid
 flowchart TD
     subgraph Ingestion ["1. INGESTION & CLAUSE SEGMENTATION"]
-        R["Raw Customer Review\n(Multi-Sentence / Unstructured)"]
-        S["Clause Segmentation Engine\nDeterministic splitting on delimiters"]
+        R["Raw Customer Review<br/>(Multi-Sentence / Unstructured)"]
+        S["Clause Segmentation Engine<br/>Deterministic splitting on delimiters"]
         R --> S
     end
 
     subgraph Inference ["2. DYNAMICAL STATE-SPACE INFERENCE"]
-        S --> C1["Clause Segment 1\n(Atomic Feature Span)"]
-        S --> C2["Clause Segment 2\n(Contrastive Sub-Clause)"]
-        S --> C3["Clause Segment 3\n(Concluding Evaluation)"]
+        S --> C1["Clause Segment 1<br/>(Atomic Feature Span)"]
+        S --> C2["Clause Segment 2<br/>(Contrastive Sub-Clause)"]
+        S --> C3["Clause Segment 3<br/>(Concluding Evaluation)"]
         
-        C1 --> LFM["LiquidAI LFM3-1.7B Engine\nContinuous Dynamical State Space\n(NF4 / bfloat16)"]
+        C1 --> LFM["LiquidAI LFM3-1.7B Engine<br/>Continuous Dynamical State Space<br/>(NF4 / bfloat16)"]
         C2 --> LFM
         C3 --> LFM
         
-        LFM --> RAW["Compact Quad String\naspect|category|sentiment|confidence|evidence"]
+        LFM --> RAW["Compact Quad String<br/>aspect, category, sentiment, confidence, evidence"]
     end
 
     subgraph Verification ["3. DETERMINISTIC VERBATIM GROUNDING"]
-        RAW --> SV["SubstringValidator Engine\n5-Tier Normalization & Snapping"]
-        SV --> PROJ["Coordinate Projection Matrix\nLocal Clause Span -> Global Document Span"]
-        PROJ --> QUAD["Validated AspectQuads\nGuaranteed text[start:end] == span"]
+        RAW --> SV["SubstringValidator Engine<br/>5-Tier Normalization & Snapping"]
+        SV --> PROJ["Coordinate Projection Matrix<br/>Local Clause Span to Global Document Span"]
+        PROJ --> QUAD["Validated AspectQuads<br/>Guaranteed exact verbatim span"]
     end
 
     subgraph Aggregation ["4. BAYESIAN AGGREGATION & INTERFACE"]
         QUAD --> NORM["Semantic Normalization & Category Clustering"]
-        NORM --> BAYES["Confidence-Weighted Bayesian Aggregator\nRegularization with Neutral Prior (λ = 3.0)"]
+        NORM --> BAYES["Confidence-Weighted Bayesian Aggregator<br/>Regularization with Neutral Prior (lambda = 3.0)"]
         BAYES --> RANK["Defect Prioritization & Jaccard Diversity Filter"]
-        RANK --> SC["Executive Product Scorecards\n(JSON / Structured Reports)"]
-        RANK --> UI["Gruvbox Material Workbench\n(Interactive Human-in-the-Loop UI)"]
+        RANK --> SC["Executive Product Scorecards<br/>(JSON / Structured Reports)"]
+        RANK --> UI["Gruvbox Material Workbench<br/>(Interactive Human-in-the-Loop UI)"]
     end
 
     style LFM fill:#3c3836,stroke:#7daea3,stroke-width:2px,color:#d4be98
@@ -72,13 +72,13 @@ The primary inference backbone of ProductLens 3.0 is **`LiquidAI/LFM3-1.7B`**, a
 ```mermaid
 flowchart TD
     subgraph StandardTransformer ["Traditional Transformer Layer"]
-        T_IN["Input Embeddings"] --> T_ATTN["Full Self-Attention Operator\nQuadratic Complexity O(N²)"]
+        T_IN["Input Embeddings"] --> T_ATTN["Full Self-Attention Operator<br/>Quadratic Complexity O(N^2)"]
         T_ATTN --> T_FFN["Feed-Forward Network (MLP)"]
         T_FFN --> T_OUT["Layer Output"]
     end
 
     subgraph LiquidBlock ["Liquid Foundation Model (LFM) Block"]
-        L_IN["Input Embeddings"] --> LSSM["Continuous-Time State-Space Operator\nInput-Adaptive Dynamic Time-Constant τ(u)"]
+        L_IN["Input Embeddings"] --> LSSM["Continuous-Time State-Space Operator<br/>Input-Adaptive Dynamic Time-Constant tau(u)"]
         LSSM --> GATED["Gated Depthwise Convolution & Channel Mixer"]
         GATED --> L_ATTN["Sparse Local Sliding-Window Attention"]
         L_ATTN --> L_OUT["Layer Output (Sub-Quadratic Scaling)"]
@@ -130,44 +130,31 @@ By interleaving continuous-time state-space operators with sparse, localized sli
 To bridge neural model predictions with enterprise data integrity requirements, ProductLens 3.0 implements a deterministic verification layer: the `SubstringValidator` ([productlens/validator/substring.py](file:///home/parth/Projects/ProjectLens-3.0/productlens/validator/substring.py)).
 
 ```mermaid
-stateDiagram-v2
-    [*] --> ModelOutput: Raw Quad Token Stream (aspect | category | sentiment | evidence)
+flowchart TD
+    START["Raw Quad Candidate Stream<br/>(aspect, category, sentiment, evidence)"] --> TIER1["Tier 1: Exact Binary Scan<br/>Case-sensitive substring lookup"]
     
-    ModelOutput --> Tier1: Initiate Resolution
+    TIER1 -->|Match Found| VERIFIED["Capture Character Offsets [start, end]"]
+    TIER1 -->|Not Found| TIER2["Tier 2: Case-Insensitive Snapping<br/>Compile regex and snap to document casing"]
     
-    state Tier1 {
-        [*] --> ExactBinary: Case-Sensitive Substring Scan
-        ExactBinary --> VerifiedSpan: Exact Offset Found
-        ExactBinary --> Tier2: Search Failed
-    }
+    TIER2 -->|Match Found| VERIFIED
+    TIER2 -->|Not Found| TIER3["Tier 3: Punctuation Normalization<br/>Strip quotes, brackets, and markdown artifacts"]
+    
+    TIER3 -->|Match Found| VERIFIED
+    TIER3 -->|Not Found| TIER4["Tier 4: Dynamic Whitespace Matching<br/>Regex collapse across tabs, spaces, newlines"]
+    
+    TIER4 -->|Match Found| VERIFIED
+    TIER4 -->|Not Found| TIER5["Tier 5: Clause-Level Fallback<br/>Decompose query along punctuation bounds"]
+    
+    TIER5 -->|Match Found| VERIFIED
+    TIER5 -->|Not Found| REJECT["Discard Candidate<br/>(Filtered as Neural Hallucination)"]
+    
+    VERIFIED --> PROJ["Coordinate Projection Matrix<br/>Compute Final Global Offsets"]
+    PROJ --> EMIT["Verified AspectQuad<br/>(100% Verbatim Span Guarantee)"]
 
-    state Tier2 {
-        Tier2 --> CaseInsensitive: Normal Case-Folded Regex
-        CaseInsensitive --> VerifiedSpan: Snap to Document Casing
-        CaseInsensitive --> Tier3: Search Failed
-    }
-
-    state Tier3 {
-        Tier3 --> PunctuationStrip: Strip Extraneous Punctuation / Quotes
-        PunctuationStrip --> VerifiedSpan: Lemma Span Snapped
-        PunctuationStrip --> Tier4: Search Failed
-    }
-
-    state Tier4 {
-        Tier4 --> WhitespaceRegex: Dynamic Space Collapse Regex [\\s+]
-        WhitespaceRegex --> VerifiedSpan: Multi-Line Alignment Snapped
-        WhitespaceRegex --> Tier5: Search Failed
-    }
-
-    state Tier5 {
-        Tier5 --> ClauseAlignment: Clause Decomposition on [,;.]
-        ClauseAlignment --> VerifiedSpan: Longest Contiguous Sub-Clause Matched
-        ClauseAlignment --> Discard: Unresolvable Span
-    }
-
-    VerifiedSpan --> CoordinateProjection: Compute Final Global Offsets [start_char, end_char]
-    CoordinateProjection --> [*]: Verified AspectQuad Emitted
-    Discard --> [*]: Discarded as Neural Hallucination
+    style START fill:#3c3836,stroke:#7daea3,stroke-width:2px,color:#d4be98
+    style VERIFIED fill:#2f3424,stroke:#a9b665,stroke-width:2px,color:#b8bb26
+    style EMIT fill:#2f3424,stroke:#a9b665,stroke-width:2px,color:#b8bb26
+    style REJECT fill:#382424,stroke:#ea6962,stroke-width:2px,color:#fb4934
 ```
 
 ### Algorithmic Progression
@@ -201,19 +188,19 @@ To train the compact `LFM3-1.7B` student without incurring the noise typical of 
 
 ```mermaid
 flowchart TD
-    CORPUS["Raw Unlabeled Review Corpus\n(Electronics & Tech, Fashion & Apparel)"] --> T1["Teacher Pass 1\nQwen-2.5-9B @ T = 0.0\n(Greedy Deterministic Decoding)"]
-    CORPUS --> T2["Teacher Pass 2\nQwen-2.5-9B @ T = 0.2\n(Stochastic Exploratory Decoding)"]
+    CORPUS["Raw Unlabeled Review Corpus<br/>(Electronics & Tech, Fashion & Apparel)"] --> T1["Teacher Pass 1<br/>Qwen-2.5-9B at Temperature = 0.0<br/>(Greedy Deterministic Decoding)"]
+    CORPUS --> T2["Teacher Pass 2<br/>Qwen-2.5-9B at Temperature = 0.2<br/>(Stochastic Exploratory Decoding)"]
 
     T1 --> S1["Candidate Quad Set Q1"]
     T2 --> S2["Candidate Quad Set Q2"]
 
-    S1 --> MATCH{"Consensus Gatekeeper\n1. Identical Category (c1 == c2)?\n2. Identical Polarity (s1 == s2)?\n3. Spatial Overlap: IoU(a1, a2) >= 0.5?"}
+    S1 --> MATCH{"Consensus Gatekeeper<br/>1. Identical Category?<br/>2. Identical Polarity?<br/>3. Aspect IoU &ge; 0.5?"}
     S2 --> MATCH
 
-    MATCH -- Verified --> ACCEPT["Retained in Silver Training Corpus\nConfidence = Mean(p1, p2)"]
-    MATCH -- Divergent --> REJECT["Permanently Discarded\n(Low Confidence / Ambiguous)"]
+    MATCH -->|Verified| ACCEPT["Retained in Silver Training Corpus<br/>Confidence = Mean(p1, p2)"]
+    MATCH -->|Divergent| REJECT["Permanently Discarded<br/>(Low Confidence / Ambiguous)"]
 
-    ACCEPT --> FINAL["6,947 High-Precision Silver Pairs\nZero Leakage Against 350 Gold Set"]
+    ACCEPT --> FINAL["6,947 High-Precision Silver Pairs<br/>Zero Leakage Against 350 Gold Set"]
 
     style MATCH fill:#3c3836,stroke:#7daea3,stroke-width:2px,color:#d4be98
     style ACCEPT fill:#2f3424,stroke:#a9b665,stroke-width:2px,color:#b8bb26
@@ -275,28 +262,28 @@ During real-world stress testing on unstructured multi-sentence e-commerce revie
 ```mermaid
 flowchart TD
     subgraph MonolithicFailure ["Failure Mode: Monolithic Prompt Input"]
-        M_IN["Multi-Sentence Review\n(Multiple Distinct Topics Concatenated)"]
-        M_IN --> M_ATTN["Attention Entropy Dispersion\n(Long Sequence Length L >> 30 Tokens)"]
-        M_ATTN --> M_OUT["Middle Nuances Omitted (Intermediate Defects Dropped)\nEchoes Entire Review Blob as Evidence Quote"]
+        M_IN["Multi-Sentence Review<br/>(Multiple Distinct Topics Concatenated)"]
+        M_IN --> M_ATTN["Attention Entropy Dispersion<br/>(Long Sequence Length L &gt;&gt; 30 Tokens)"]
+        M_ATTN --> M_OUT["Middle Nuances Omitted (Intermediate Defects Dropped)<br/>Echoes Entire Review Blob as Evidence Quote"]
     end
 
     subgraph ClauseSuccess ["Core Innovation: Clause Attention Segmentation"]
         C_IN["Multi-Sentence Review"]
-        C_IN --> SPLIT["Clause Segmentation Parser\nSplits on newlines & sentence delimiters"]
+        C_IN --> SPLIT["Clause Segmentation Parser<br/>Splits on newlines and sentence delimiters"]
         
-        SPLIT --> S1["Clause 1\n(Atomic Feature Span, L1 <= 30)"]
-        SPLIT --> S2["Clause 2\n(Contrastive Sub-Clause, L2 <= 30)"]
-        SPLIT --> S3["Clause 3\n(Secondary Attribute, L3 <= 30)"]
+        SPLIT --> S1["Clause 1<br/>(Atomic Feature Span, L1 &le; 30)"]
+        SPLIT --> S2["Clause 2<br/>(Contrastive Sub-Clause, L2 &le; 30)"]
+        SPLIT --> S3["Clause 3<br/>(Secondary Attribute, L3 &le; 30)"]
         
-        S1 --> A1["Focused Receptive Field\n-> Aspect Quad 1"]
-        S2 --> A2["Focused Receptive Field\n-> Aspect Quad 2"]
-        S3 --> A3["Focused Receptive Field\n-> Aspect Quad 3"]
+        S1 --> A1["Focused Receptive Field<br/>Produces Aspect Quad 1"]
+        S2 --> A2["Focused Receptive Field<br/>Produces Aspect Quad 2"]
+        S3 --> A3["Focused Receptive Field<br/>Produces Aspect Quad 3"]
         
-        A1 --> PROJ["Coordinate Projection Matrix\nLocal Clause Offsets -> Global Document Offsets"]
+        A1 --> PROJ["Coordinate Projection Matrix<br/>Local Clause Offsets to Global Document Offsets"]
         A2 --> PROJ
         A3 --> PROJ
         
-        PROJ --> FINAL["All Aspects Fully Extracted\nTight 1:1 Verbatim Supporting Quotes"]
+        PROJ --> FINAL["All Aspects Fully Extracted<br/>Tight 1:1 Verbatim Supporting Quotes"]
     end
 
     style MonolithicFailure fill:#382424,stroke:#ea6962,stroke-width:1px,color:#fb4934
@@ -346,17 +333,17 @@ To convert hundreds of individual review extractions into actionable product int
 
 ```mermaid
 flowchart LR
-    QUIP["Verified AspectQuads Set\n(Filtered via SubstringValidator)"] --> NORM["Semantic Normalization\n(TF-IDF & Category Clustering)"]
+    QUIP["Verified AspectQuads Set<br/>(Filtered via SubstringValidator)"] --> NORM["Semantic Normalization<br/>(TF-IDF & Category Clustering)"]
     
-    NORM --> GROUP["Grouped Product Features\nDISPLAY, BATTERY, SOUND, PERFORMANCE..."]
+    NORM --> GROUP["Grouped Product Features<br/>DISPLAY, BATTERY, SOUND, PERFORMANCE..."]
     
-    GROUP --> BAYES["Confidence-Weighted Bayesian Scorer\nShrinkage toward Neutral Prior (λ = 3.0)"]
+    GROUP --> BAYES["Confidence-Weighted Bayesian Scorer<br/>Shrinkage toward Neutral Prior (lambda = 3.0)"]
     
-    BAYES --> RANK["Defect Impact Prioritization\nImpact = Volume × (1.0 - Score)"]
+    BAYES --> RANK["Defect Impact Prioritization<br/>Impact = Volume &times; (1.0 - Score)"]
     
-    RANK --> DEDUP["Evidence Diversity Filter\nPairwise Jaccard Distance >= 0.5"]
+    RANK --> DEDUP["Evidence Diversity Filter<br/>Pairwise Jaccard Distance &ge; 0.5"]
     
-    DEDUP --> OUT["Executive Product Scorecards\n(JSON Summaries & Visual Matrix)"]
+    DEDUP --> OUT["Executive Product Scorecards<br/>(JSON Summaries & Visual Matrix)"]
 
     style BAYES fill:#3c3836,stroke:#d8a657,stroke-width:2px,color:#d4be98
     style DEDUP fill:#3c3836,stroke:#a9b665,stroke-width:2px,color:#d4be98

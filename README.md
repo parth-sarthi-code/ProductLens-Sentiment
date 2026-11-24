@@ -51,35 +51,35 @@ ProductLens 3.0 integrates continuous-time dynamical neural modeling with determ
 ```mermaid
 flowchart TD
     subgraph S1 ["1. CLAUSE SEGMENTATION"]
-        RAW["Raw Customer Review\n(Multi-sentence / Unstructured)"]
-        SPLIT["Clause Boundary Segmenter\n(Splits along punctuation and line breaks)"]
+        RAW["Raw Customer Review<br/>(Multi-sentence / Unstructured)"]
+        SPLIT["Clause Boundary Segmenter<br/>(Splits along punctuation and line breaks)"]
         RAW --> SPLIT
     end
 
     subgraph S2 ["2. NEURAL INFERENCE (LFM3-1.7B)"]
-        SPLIT --> C1["Clause Segment 1\n(Atomic Sentence Span)"]
-        SPLIT --> C2["Clause Segment 2\n(Contrastive Clause Span)"]
-        SPLIT --> C3["Clause Segment 3\n(Concluding Attribute Span)"]
+        SPLIT --> C1["Clause Segment 1<br/>(Atomic Sentence Span)"]
+        SPLIT --> C2["Clause Segment 2<br/>(Contrastive Clause Span)"]
+        SPLIT --> C3["Clause Segment 3<br/>(Concluding Attribute Span)"]
         
-        C1 --> LFM["LiquidAI LFM3-1.7B Engine\n(Continuous-Time Dynamical State Space)"]
+        C1 --> LFM["LiquidAI LFM3-1.7B Engine<br/>(Continuous-Time Dynamical State Space)"]
         C2 --> LFM
         C3 --> LFM
         
-        LFM --> TOK["Candidate Quads Stream\naspect|category|sentiment|confidence|evidence"]
+        LFM --> TOK["Candidate Quads Stream<br/>aspect, category, sentiment, confidence, evidence"]
     end
 
     subgraph S3 ["3. DETERMINISTIC VERBATIM GROUNDING"]
-        TOK --> VAL["SubstringValidator Engine\n(5-Tier Progressive Snapping)"]
-        VAL --> PROJ["Coordinate Projection Matrix\n(Local Clause Offsets -> Global Document Spans)"]
-        PROJ --> VERIF["100% Validated AspectQuads\nGuaranteed text[start:end] == span"]
+        TOK --> VAL["SubstringValidator Engine<br/>(5-Tier Progressive Snapping)"]
+        VAL --> PROJ["Coordinate Projection Matrix<br/>(Local Clause Offsets to Global Document Spans)"]
+        PROJ --> VERIF["100% Validated AspectQuads<br/>Guaranteed exact verbatim span"]
     end
 
     subgraph S4 ["4. BAYESIAN AGGREGATION & INTERFACE"]
         VERIF --> NORM["Aspect Normalizer & Category Clustering"]
-        NORM --> BAYES["Confidence-Weighted Bayesian Scorer\n(Shrinkage toward Neutral Prior, λ = 3.0)"]
+        NORM --> BAYES["Confidence-Weighted Bayesian Scorer<br/>(Regularized Shrinkage, lambda = 3.0)"]
         BAYES --> RANK["Defect Impact Ranking & Jaccard Quote Filter"]
-        RANK --> REP["Executive Product Scorecards\n(JSON Summaries & Markdown Reports)"]
-        RANK --> UI["Gruvbox Material Workbench\n(Interactive Live Web UI)"]
+        RANK --> REP["Executive Product Scorecards<br/>(JSON Summaries & Markdown Reports)"]
+        RANK --> UI["Gruvbox Material Workbench<br/>(Interactive Live Web UI)"]
     end
 
     style LFM fill:#3c3836,stroke:#7daea3,stroke-width:2px,color:#d4be98
