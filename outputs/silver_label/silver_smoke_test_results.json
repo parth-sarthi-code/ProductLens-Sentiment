@@ -1,0 +1,16 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "smoke_test_reviews": 300,
+  "pass1_raw": 723,
+  "pass1_valid": 707,
+  "pass1_pass_rate": 97.79,
+  "pass2_raw": 790,
+  "pass2_valid": 756,
+  "pass2_pass_rate": 95.7,
+  "consensus_kept": 270,
+  "consensus_survival_rate": 38.19,
+  "total_inference_time_sec": 3683.55,
+  "seconds_per_500_reviews": 6139.24,
+  "batches_written": 3,
+  "output_dir": "/kaggle/working/stage2_silver_output"
+}

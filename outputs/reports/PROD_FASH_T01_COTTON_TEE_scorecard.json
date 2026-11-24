@@ -1,0 +1,372 @@
+{
+  "product_id": "PROD_FASH_T01_COTTON_TEE",
+  "vertical": "apparel_fashion",
+  "total_reviews_analyzed": 4,
+  "total_aspect_mentions": 8,
+  "overall_sentiment_score": -0.125,
+  "category_scores": {
+    "FABRIC_MATERIAL": 1.0,
+    "STITCHING_DURABILITY": -1.0,
+    "FIT_SIZING": 0.0,
+    "COLOR_PRINT": -0.5,
+    "OTHER": 0.0
+  },
+  "top_defects": [
+    {
+      "feature_name": "Color",
+      "category": "COLOR_PRINT",
+      "mention_count": 2,
+      "weighted_mentions": 2.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 1,
+      "mixed_count": 0,
+      "raw_sentiment_score": -0.5,
+      "shrunk_sentiment_score": -0.2,
+      "negativity_rate": 0.5,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_004",
+            "evidence": "Shrank two sizes in cold water wash. Terrible shrinkage and color bleed on white collars.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ],
+        "neutral": [
+          {
+            "review_id": "app_002",
+            "evidence": "Color bilkul same hai as pictured in the catalog, but sizing run thoda small around the chest.",
+            "sentiment": "neutral",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Stitching",
+      "category": "STITCHING_DURABILITY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_001",
+            "evidence": "The organic cotton fabric feels super soft and breathable, but the stitching around the neckline started fraying after the first wash.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Sizing",
+      "category": "FIT_SIZING",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_002",
+            "evidence": "Color bilkul same hai as pictured in the catalog, but sizing run thoda small around the chest.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Shrinkage",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_004",
+            "evidence": "Shrank two sizes in cold water wash. Terrible shrinkage and color bleed on white collars.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    }
+  ],
+  "top_strengths": [
+    {
+      "feature_name": "Organic Cotton Fabric",
+      "category": "FABRIC_MATERIAL",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "app_001",
+            "evidence": "The organic cotton fabric feels super soft and breathable, but the stitching around the neckline started fraying after the first wash.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Fit",
+      "category": "FIT_SIZING",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "app_003",
+            "evidence": "Perfect slim fit drape! Wore it to an evening party and received multiple compliments.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Drape",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "app_003",
+            "evidence": "Perfect slim fit drape! Wore it to an evening party and received multiple compliments.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    }
+  ],
+  "features": [
+    {
+      "feature_name": "Organic Cotton Fabric",
+      "category": "FABRIC_MATERIAL",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "app_001",
+            "evidence": "The organic cotton fabric feels super soft and breathable, but the stitching around the neckline started fraying after the first wash.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Stitching",
+      "category": "STITCHING_DURABILITY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_001",
+            "evidence": "The organic cotton fabric feels super soft and breathable, but the stitching around the neckline started fraying after the first wash.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Sizing",
+      "category": "FIT_SIZING",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_002",
+            "evidence": "Color bilkul same hai as pictured in the catalog, but sizing run thoda small around the chest.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Fit",
+      "category": "FIT_SIZING",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "app_003",
+            "evidence": "Perfect slim fit drape! Wore it to an evening party and received multiple compliments.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Color",
+      "category": "COLOR_PRINT",
+      "mention_count": 2,
+      "weighted_mentions": 2.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 1,
+      "mixed_count": 0,
+      "raw_sentiment_score": -0.5,
+      "shrunk_sentiment_score": -0.2,
+      "negativity_rate": 0.5,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_004",
+            "evidence": "Shrank two sizes in cold water wash. Terrible shrinkage and color bleed on white collars.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ],
+        "neutral": [
+          {
+            "review_id": "app_002",
+            "evidence": "Color bilkul same hai as pictured in the catalog, but sizing run thoda small around the chest.",
+            "sentiment": "neutral",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Drape",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "app_003",
+            "evidence": "Perfect slim fit drape! Wore it to an evening party and received multiple compliments.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Shrinkage",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "app_004",
+            "evidence": "Shrank two sizes in cold water wash. Terrible shrinkage and color bleed on white collars.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}

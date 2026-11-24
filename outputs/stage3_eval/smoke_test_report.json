@@ -1,0 +1,90 @@
+{
+  "smoke_test_passed": true,
+  "steps_completed": 10,
+  "initial_loss": 1.8085,
+  "final_loss": 0.15,
+  "peak_vram_gb": 3.446,
+  "vram_headroom_gb": 2.239,
+  "step_logs": [
+    {
+      "step": 2,
+      "loss": 1.8085,
+      "grad_norm": 8.278,
+      "lr": "2.00e-05",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 4,
+      "loss": 1.4003,
+      "grad_norm": 6.2037,
+      "lr": "6.00e-05",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 6,
+      "loss": 0.844,
+      "grad_norm": 2.8789,
+      "lr": "1.00e-04",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 8,
+      "loss": 0.4958,
+      "grad_norm": 1.8522,
+      "lr": "1.40e-04",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 10,
+      "loss": 0.3586,
+      "grad_norm": 1.549,
+      "lr": "1.80e-04",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 12,
+      "loss": 0.2402,
+      "grad_norm": 1.0872,
+      "lr": "1.95e-04",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 14,
+      "loss": 0.2149,
+      "grad_norm": 0.7585,
+      "lr": "1.59e-04",
+      "peak_vram_gb": 3.38,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 16,
+      "loss": 0.1543,
+      "grad_norm": 0.6914,
+      "lr": "1.00e-04",
+      "peak_vram_gb": 3.394,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 18,
+      "loss": 0.1685,
+      "grad_norm": 0.433,
+      "lr": "4.12e-05",
+      "peak_vram_gb": 3.394,
+      "current_vram_gb": 1.781
+    },
+    {
+      "step": 20,
+      "loss": 0.15,
+      "grad_norm": 0.5859,
+      "lr": "4.89e-06",
+      "peak_vram_gb": 3.446,
+      "current_vram_gb": 1.781
+    }
+  ]
+}

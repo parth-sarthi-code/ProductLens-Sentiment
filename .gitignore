@@ -3,7 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.egg-info/
-
+build/
+dist/
 
 # Environments
 .venv/
@@ -16,16 +17,23 @@ env/
 .coverage
 htmlcov/
 
-# Model Checkpoints (>100MB blocked by GitHub without LFS)
+# Model Checkpoints and Weights (>50MB)
+*.safetensors
 *.pt
 *.bin
-*.safetensors
-models/checkpoints/
-models/category_experts/*/*.pt
-models/category_experts_deberta/*/*.pt
-models/comparison/*/*.pt
-release/*.pt
+*.gguf
+outputs/stage3_lfm3_lora/checkpoint-*/
+outputs/stage3_lfm3_lora/*.safetensors
+outputs/stage3_lfm3_merged/*.safetensors
 
-# Logs & temp
+# Environment variables & secrets
+.env
+.env.*
+
+# Internal agent logs & tooling
+.gemini/
+.agents/
+
+# Logs & temporary files
 *.log
 .DS_Store

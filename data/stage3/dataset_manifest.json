@@ -1,0 +1,16 @@
+{
+  "total_reviews": 7718,
+  "train_reviews": 6947,
+  "val_reviews": 771,
+  "total_quads": 9887,
+  "train_verticals": {
+    "electronics_tech": 5434,
+    "apparel_fashion": 1513
+  },
+  "val_verticals": {
+    "electronics_tech": 601,
+    "apparel_fashion": 170
+  },
+  "forbidden_texts_checked": 3186,
+  "zero_leakage_verified": true
+}

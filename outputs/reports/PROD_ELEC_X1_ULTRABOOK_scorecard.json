@@ -1,0 +1,500 @@
+{
+  "product_id": "PROD_ELEC_X1_ULTRABOOK",
+  "vertical": "electronics_tech",
+  "total_reviews_analyzed": 5,
+  "total_aspect_mentions": 10,
+  "overall_sentiment_score": 0.0,
+  "category_scores": {
+    "DISPLAY": 1.0,
+    "BATTERY": -1.0,
+    "BUILD_QUALITY": 1.0,
+    "OTHER": -0.2,
+    "SOUND": -1.0
+  },
+  "top_defects": [
+    {
+      "feature_name": "Battery Life",
+      "category": "BATTERY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_001",
+            "evidence": "The OLED screen is absolutely gorgeous with deep blacks, but the battery life barely lasts 4 hours on medium brightness.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Thermal Fan",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_002",
+            "evidence": "Trackpad is smooth and responsive. Build quality feels premium aluminum, though the thermal fan gets loud under load.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Charger",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_004",
+            "evidence": "Oh wonderful, the charger stopped working completely after just one week! Great engineering.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Delivers",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_005",
+            "evidence": "Ridiculously overpriced for what it delivers, though customer service replaced the missing cable overnight.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Speaker Sound Quality",
+      "category": "SOUND",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_003",
+            "evidence": "Keyboard travel to bohot achha hai lekin speaker sound quality bilkul bakwaas hai.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    }
+  ],
+  "top_strengths": [
+    {
+      "feature_name": "OLED Screen",
+      "category": "DISPLAY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_001",
+            "evidence": "The OLED screen is absolutely gorgeous with deep blacks, but the battery life barely lasts 4 hours on medium brightness.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Trackpad",
+      "category": "BUILD_QUALITY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_002",
+            "evidence": "Trackpad is smooth and responsive. Build quality feels premium aluminum, though the thermal fan gets loud under load.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Keyboard Travel",
+      "category": "BUILD_QUALITY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_003",
+            "evidence": "Keyboard travel to bohot achha hai lekin speaker sound quality bilkul bakwaas hai.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Build Quality",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_002",
+            "evidence": "Trackpad is smooth and responsive. Build quality feels premium aluminum, though the thermal fan gets loud under load.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Customer Service",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_005",
+            "evidence": "Ridiculously overpriced for what it delivers, though customer service replaced the missing cable overnight.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    }
+  ],
+  "features": [
+    {
+      "feature_name": "OLED Screen",
+      "category": "DISPLAY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_001",
+            "evidence": "The OLED screen is absolutely gorgeous with deep blacks, but the battery life barely lasts 4 hours on medium brightness.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Battery Life",
+      "category": "BATTERY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_001",
+            "evidence": "The OLED screen is absolutely gorgeous with deep blacks, but the battery life barely lasts 4 hours on medium brightness.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Trackpad",
+      "category": "BUILD_QUALITY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_002",
+            "evidence": "Trackpad is smooth and responsive. Build quality feels premium aluminum, though the thermal fan gets loud under load.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Keyboard Travel",
+      "category": "BUILD_QUALITY",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_003",
+            "evidence": "Keyboard travel to bohot achha hai lekin speaker sound quality bilkul bakwaas hai.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Build Quality",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_002",
+            "evidence": "Trackpad is smooth and responsive. Build quality feels premium aluminum, though the thermal fan gets loud under load.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Thermal Fan",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_002",
+            "evidence": "Trackpad is smooth and responsive. Build quality feels premium aluminum, though the thermal fan gets loud under load.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Charger",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_004",
+            "evidence": "Oh wonderful, the charger stopped working completely after just one week! Great engineering.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Customer Service",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 1,
+      "negative_count": 0,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": 1.0,
+      "shrunk_sentiment_score": 0.25,
+      "negativity_rate": 0.0,
+      "impact_score": 0.0,
+      "evidence": {
+        "positive": [
+          {
+            "review_id": "elec_005",
+            "evidence": "Ridiculously overpriced for what it delivers, though customer service replaced the missing cable overnight.",
+            "sentiment": "positive",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Delivers",
+      "category": "OTHER",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_005",
+            "evidence": "Ridiculously overpriced for what it delivers, though customer service replaced the missing cable overnight.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "feature_name": "Speaker Sound Quality",
+      "category": "SOUND",
+      "mention_count": 1,
+      "weighted_mentions": 1.0,
+      "positive_count": 0,
+      "negative_count": 1,
+      "neutral_count": 0,
+      "mixed_count": 0,
+      "raw_sentiment_score": -1.0,
+      "shrunk_sentiment_score": -0.25,
+      "negativity_rate": 1.0,
+      "impact_score": 1.0,
+      "evidence": {
+        "negative": [
+          {
+            "review_id": "elec_003",
+            "evidence": "Keyboard travel to bohot achha hai lekin speaker sound quality bilkul bakwaas hai.",
+            "sentiment": "negative",
+            "confidence": 1.0
+          }
+        ]
+      }
+    }
+  ]
+}
